@@ -1,0 +1,30 @@
+#whatsapp{
+    color: black;
+    font-size: 60px;
+}
+
+#whatsapp:hover{
+    color: rgb(15, 207, 15);
+}
+
+#instagram{
+    color: black;
+    font-size: 60px;
+}
+
+#instagram:hover{
+    color: red;
+}
+
+#facebook{
+    color: black;
+    font-size: 60px;
+}
+
+#facebook:hover{
+    color: blue;
+}
+
+#divFooter{
+    box-shadow: 0px 1px 17px;
+}
