@@ -1,0 +1,69 @@
+
+
+  .button-container {
+    display: inline-block; /* Puedes cambiar a block o flex dependiendo de cómo quieras que se comporte */
+    position: relative;
+  }
+  
+  .wrapper {
+    position: relative;
+  }
+  
+  .link_wrapper {
+    position: relative;
+  }
+  
+  #requestButton {
+    display: block;
+    width: 230px;
+    height: 50px;
+    line-height: 50px;
+    font-weight: bold;
+    text-decoration: none;
+    /* background: #333; */
+    background: #4b33ac;
+    text-align: center;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    /* border: 3px solid #333; */
+    border: 3px solid #4b33ac;
+    transition: all .35s;
+  }
+  
+  .icon {
+    width: 50px;
+    height: 50px;
+    border: 3px solid transparent;
+    position: absolute;
+    transform: rotate(45deg);
+    right: 0;
+    top: 0;
+    z-index: -1;
+    transition: all .35s;
+  }
+  
+  .icon svg {
+    width: 30px;
+    position: absolute;
+    top: calc(50% - 15px);
+    left: calc(50% - 15px);
+    transform: rotate(-45deg);
+    /* fill: #2ecc71; */
+    fill: #07d611;
+    transition: all .35s;
+  }
+  
+  #requestButton:hover {
+    width: 200px;
+    /* border: 3px solid #2ecc71; */
+    border: 3px solid #07d611;
+    background: transparent;
+    color: #2ecc71;
+  }
+  
+  #requestButton:hover + .icon {
+    /* border: 3px solid #2ecc71; */
+    border: 3px solid #07d611;
+    right: -25%;
+  }
