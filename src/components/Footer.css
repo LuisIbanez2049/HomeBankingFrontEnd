@@ -1,6 +1,6 @@
 #whatsapp{
     color: black;
-    font-size: 60px;
+    font-size: 55px;
 }
 
 #whatsapp:hover{
@@ -9,7 +9,7 @@
 
 #instagram{
     color: black;
-    font-size: 60px;
+    font-size: 55px;
 }
 
 #instagram:hover{
@@ -18,7 +18,7 @@
 
 #facebook{
     color: black;
-    font-size: 60px;
+    font-size: 55px;
 }
 
 #facebook:hover{
@@ -26,5 +26,6 @@
 }
 
 #divFooter{
-    box-shadow: 0px 1px 17px;
+    box-shadow: 0px 2px 8px black;
+    background-color:azure;
 }

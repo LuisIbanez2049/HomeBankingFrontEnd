@@ -51,7 +51,7 @@ function AccountComponent() {
             </div>
           </div>
 
-          <div className="w-full flex flex-row justify-center relative z-20 mt-8">
+          <div className="w-full flex flex-row justify-center relative z-20 my-12">
             <div className=" w-[70%] flex flex-row flex-wrap justify-between">
               <RequestAccountButton/>
             </div>

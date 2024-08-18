@@ -1,0 +1,32 @@
+
+#containerLogo-Buttons-LogoLeave{
+    box-shadow: 0px -2px 8px black;
+    background-color:azure;
+    
+
+}
+#logo{
+    width: 90px; /* Ancho del div */
+    height: 90px; /* Alto del div */
+    background-image: url('../assets/Logo.png'); /* Ruta de la imagen de fondo */
+    background-size: 111% 111%; /* Ajusta el tamaño de la imagen */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+}
+
+
+#logOut{
+    width: 60px; /* Ancho del div */
+    height: 65px; /* Alto del div */
+    background-image: url('../assets/LogOutBody.png'); /* Ruta de la imagen de fondo */
+    background-size: 111% 111%; /* Ajusta el tamaño de la imagen */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+}
+
+#arrow{
+    transition: transform 0.3s ease;
+}
+#arrow:hover{
+    transform: scale(1.1) translateX(15px) skewX(10deg);
+}

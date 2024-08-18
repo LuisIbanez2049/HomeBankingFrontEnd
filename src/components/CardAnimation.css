@@ -1,0 +1,17 @@
+#levitating-image {
+    display: inline-block;
+    animation: levitate 3s ease-in-out infinite;
+}
+
+@keyframes levitate {
+    0%, 100% {
+        transform: translateY(0); /* Punto de partida y final */
+    }
+    50% {
+        transform: translateY(20px); /* Punto medio de la animación */
+    }
+}
+
+#cardBlack{
+    transform: rotate(3deg) translateX(18px) translateY(-70px);
+}

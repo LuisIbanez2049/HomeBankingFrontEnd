@@ -1,0 +1,4 @@
+#divForm{
+    box-shadow: -2px 6px 10px black;
+    background: radial-gradient(circle farthest-corner at 100% 0%, #0085a3ed 0%, #009459ed 50%, #1d1affed 100%), radial-gradient(circle farthest-corner at 0% 100%, #ffc8c6ff 0%, #ffc6e6ff 50%, #fff7c6ff 100%), radial-gradient(circle farthest-side at 0% 0%, #a166ffff 0%, #6685ffff 50%, #ff66deff 100%);
+}
