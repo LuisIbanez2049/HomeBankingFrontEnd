@@ -4,7 +4,7 @@ import "./Footer.css"
 
 function Footer() {
   return (
-    <footer className='relative z-20 z-20'>
+    <footer className='relative z-20'>
       <div id="divFooter" className="w-full h-[110px] flex flex-col items-center">
         <div className="w-[300px]  h-[110px]">
          {/* <h1 className="text-[30px] text-[blue] font-bold" >Footer</h1> */}
