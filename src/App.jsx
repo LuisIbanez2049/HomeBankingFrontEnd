@@ -9,6 +9,7 @@ import ApplyCard from './pages/ApplyCard'
 import Home from './pages/Home'
 import MainLayout from './layouts/MainLayout'
 import Account from './pages/Account'
+import Register from './pages/Register'
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
          En este caso si pongo en la url: /applyCard --> Outlet va a renderizar "ApplyCard"*/}
          <Route path='/applyCard' element={<ApplyCard/>}></Route>
          <Route path='/account' element={<Account/>}></Route>
+         <Route path='/register' element={<Register/>}></Route>
 
        </Route>
      </Routes>
