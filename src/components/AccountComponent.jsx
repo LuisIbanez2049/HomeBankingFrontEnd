@@ -13,16 +13,19 @@ function AccountComponent() {
       creationDate: "25/05/23",
     },
     {
+      name: "-",
       account: "VIN-00002",
       amount: "$150,000.0",
       creationDate: "26/05/23",
     },
     {
+      name: "-",
       account: "VIN-00003",
       amount: "$300,000.0",
       creationDate: "27/05/23",
     },
     {
+      name: "-",
       account: "VIN-00004",
       amount: "$100,000.0",
       creationDate: "28/05/23",
@@ -42,6 +45,7 @@ function AccountComponent() {
               {clients.map((client) => {
                 return (
                   <Card
+                    key={client.account} // ------------------------------------------------Preguntaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaarrrrrrrrrrrrrrrr-------------------
                     account={client.account}
                     amount={client.amount}
                     creationDate={client.creationDate}

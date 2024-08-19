@@ -20,8 +20,8 @@ function Nav() {
             <ButtonNav path="/" title="Home"/>
             <ButtonNav path="/account" title="Account"/>
             <ButtonNav path="" title="Cards"/>
-            <ButtonNav path="" title="Loans"/>
-            <ButtonNav path="" title="Transaction"/>
+            <ButtonNav path="/loan" title="Loans"/>
+            <ButtonNav path="/transaction" title="Transaction"/>
             </div>
           </div>
   

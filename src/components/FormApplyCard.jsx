@@ -8,7 +8,7 @@ function FormApplyCard() {
         <form>
           <div className="flex flex-col justify-center">
             <div className="my-[40px]">
-              <label for="cardType" className="block text-white font-bold mb-2">
+              <label htmlFor="cardType" className="block text-white font-bold mb-2">
                 Card Type
               </label>
               <select id="cardType" name="cardType" className="block w-full p-2 border border-gray-300 rounded-lg">
@@ -19,7 +19,7 @@ function FormApplyCard() {
             </div>
 
             <div className="my-[40px]">
-              <label for="cardTier" className="block text-white font-bold mb-2">
+              <label htmlFor="cardTier" className="block text-white font-bold mb-2">
                 Card Tier
               </label>
               <select id="cardTier" name="cardTier" className="block w-full p-2 border border-gray-300 rounded-lg">

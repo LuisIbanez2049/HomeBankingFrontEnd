@@ -10,6 +10,9 @@ import Home from './pages/Home'
 import MainLayout from './layouts/MainLayout'
 import Account from './pages/Account'
 import Register from './pages/Register'
+import Login from './pages/Login'
+import Transaction from './pages/Transaction'
+import Loan from './pages/Loan'
 
 
 function App() {
@@ -30,6 +33,9 @@ function App() {
          <Route path='/applyCard' element={<ApplyCard/>}></Route>
          <Route path='/account' element={<Account/>}></Route>
          <Route path='/register' element={<Register/>}></Route>
+         <Route path='/login' element={<Login/>}></Route>
+         <Route path='/transaction' element={<Transaction/>}></Route>
+         <Route path='/loan' element={<Loan/>}></Route>
 
        </Route>
      </Routes>

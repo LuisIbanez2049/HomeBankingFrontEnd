@@ -3,22 +3,26 @@ import "./Register.css";
 import { Link } from "react-router-dom";
 import ButtonRegisterForm from "../components/ButtonRegisterForm";
 import InputPassword from "../components/InputPassword";
+import SpinOrbit from "../assets/SpinOrbit.png"
+import SpinCenter from "../assets/SpinCenter.png"
+
 
 function Register() {
   return (
     <div>
-      <div id="body" className="flex flex-col min-h-screen">
-        <div id="main" className=""></div>
+      <div id="bodyRegister" className="flex flex-col min-h-screen">
         <div id="containerAll" className="w-full flex flex-col justify-center">
-          <div id="containerLogo-Form-Button" className="border border-black ml-[150px] mt-[50px] w-[700px]">
-            <div id="containerLogo" className="w-full flex flex-row justify-center items-center">
+
+          <div id="containerLogo-Form-Button" className="border-b-4 border-[#07d611] ml-[150px] mt-[50px] w-[700px]">
+
+            <div id="containerLogo" className="w-full flex flex-row justify-center items-center mb-[20px]">
               <div id="logo" className="border border-black w-[120px] h-[120px]">
 
               </div>
             </div>
 
-            <div id="containerForm" className="w-full border border-black flex flex-row justify-center">
-              <div id="divForm" className="w-[600px] p-8 rounded-lg shadow-md text-[20px]">
+            <div id="containerForm" className="w-full flex flex-row justify-center ">
+              <div id="divFormRegister" className="w-[600px] p-8 rounded-lg text-[20px] relative z-10 mb-[30px]">
                 <form>
                   <div className="mb-4">
                     <label htmlFor="firstName" className="block text-white font-bold mb-2">
@@ -48,12 +52,17 @@ function Register() {
 
                 <div id="containerLinkLogIn" className="w-full flex flex-col items-center mt-[30px]">
                   <h1 className="text-white text-center">o</h1>
-                  <Link id="loginButton" to="/login"> <h1 id="h1Login" className=" inline-block text-[25px] font-semibold text-white text-center  hover:text-[#07d611] hover:scale-110">Login</h1> </Link>
+                  <Link id="loginButton" to="/login"> <h1 id="h1Register" className=" inline-block text-[25px] font-semibold text-white text-center  hover:text-[#07d611] hover:scale-110">Login</h1> </Link>
                 </div>
 
               </div>
+
+              <img id="spinImg" src={SpinOrbit} className="absolute w-[591px] left-[490px] bottom-[31px] z-0" alt="" />
+              <img src={SpinCenter} className="absolute w-[390px] left-[635px] bottom-[130px] z-0" alt="" />
             </div>
+            
           </div>
+
         </div>
       </div>
     </div>
