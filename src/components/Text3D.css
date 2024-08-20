@@ -1,7 +1,7 @@
-.h13D {
+#text3d {
     display: inline-block;
     font-family: 'Lato', sans-serif;
-    font-size: 40px;
+    /* font-size: 40px; */
     text-align: center;
     text-rendering: optimizeLegibility;
   }
@@ -13,7 +13,8 @@
   ========================
   */
   #text3d {
-      color: #70869d;
+      /* color: #70869d; */
+      color: #6a727a;
       letter-spacing: .15em;
       text-shadow: 
       -1px -1px 1px #efede3, 

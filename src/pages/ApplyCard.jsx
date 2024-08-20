@@ -7,7 +7,7 @@ function ApplyCard() {
   return (
     <div>
       <div id="body" className="flex flex-col min-h-screen">
-        <div id="main" className="relative flex-1">
+        {/* <div id="main" className="relative flex-1"> */}
           <div id="containerAll" className="w-full flex flex-row justify-center mt-12">
             <div className="w-[80%]">
               <h1 className="text-[45px]">Apply for a <span className="text-[#07d611] font-semibold">CARD</span></h1>
@@ -25,7 +25,7 @@ function ApplyCard() {
               </div>
             </div>
           </div>
-        </div>
+        {/* </div> */}
       </div>
     </div>
   );

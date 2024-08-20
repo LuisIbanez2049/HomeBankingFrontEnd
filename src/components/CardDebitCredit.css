@@ -1,0 +1,57 @@
+#CardDebitCreditGold{
+    background-image: url(../assets/goldCard.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: -2px 2px 5px black;
+}
+#CardDebitCreditSilver{
+    background-image: url(../assets/silverCard.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: -2px 2px 5px black;
+}
+#CardDebitCreditTitanium{
+    background-image: url(../assets/titaniumCard.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: -2px 2px 5px black;
+}
+
+
+
+#chip{
+    box-shadow: -2px 2px 5px black;
+}
+#holograma{
+    background-image: url(../assets/hologramaCards.png);
+    background-size: 114% 109%; /* Cambia el tamaño de la imagen */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    box-shadow: -1px 2px 3px black;
+
+}
+
+
+
+#granuladoGold{
+    background-image: url('../assets/backGroundGold.png');
+    background-size: cover; /* Asegura que la imagen cubra todo el elemento */
+    opacity: 0.27; /* Controla la opacidad del fondo para suavizar el efecto */
+
+}
+#granuladoSilver{
+    background-image: url('../assets/backGroundSilver.png');
+    background-size: cover; /* Asegura que la imagen cubra todo el elemento */
+    opacity: 0.20; /* Controla la opacidad del fondo para suavizar el efecto */
+
+}
+#granuladoTitanium{
+    background-image: url('../assets/backGroundTitanium.png');
+    background-size: cover; /* Asegura que la imagen cubra todo el elemento */
+    opacity: 0.15; /* Controla la opacidad del fondo para suavizar el efecto */
+
+}
+

@@ -1,12 +1,12 @@
 #divFormTransaction{
     background: radial-gradient(circle farthest-corner at 100% 0%, #0085a3ed 0%, #009459ed 50%, #1d1affed 100%), radial-gradient(circle farthest-corner at 0% 100%, #ffc8c6ff 0%, #ffc6e6ff 50%, #fff7c6ff 100%), radial-gradient(circle farthest-side at 0% 0%, #a166ffff 0%, #6685ffff 50%, #ff66deff 100%);
-
+    box-shadow: -3px 6px 12px black;
 }
 
-#bodyTransaction{
+#divBackGroundTransaction{
     background-image: url(../assets/BackGroundTransaction.jpg);
-    background-size: 60% 90%;
-    background-position-x: 100%;
-    background-position-y:150%;
+    background-size: 120% 100%;
+    background-position-x: -60px;
+    background-position-y: 45px;
     background-repeat: no-repeat
 }

@@ -19,7 +19,7 @@ function Nav() {
             <div className='flex flex-row w-full '>
             <ButtonNav path="/" title="Home"/>
             <ButtonNav path="/account" title="Account"/>
-            <ButtonNav path="" title="Cards"/>
+            <ButtonNav path="/cards" title="Cards"/>
             <ButtonNav path="/loan" title="Loans"/>
             <ButtonNav path="/transaction" title="Transaction"/>
             </div>

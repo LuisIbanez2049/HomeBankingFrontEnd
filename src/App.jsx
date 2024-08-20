@@ -13,6 +13,7 @@ import Register from './pages/Register'
 import Login from './pages/Login'
 import Transaction from './pages/Transaction'
 import Loan from './pages/Loan'
+import Cards from './pages/Cards'
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
          <Route path='/login' element={<Login/>}></Route>
          <Route path='/transaction' element={<Transaction/>}></Route>
          <Route path='/loan' element={<Loan/>}></Route>
+         <Route path='/cards' element={<Cards/>}></Route>
 
        </Route>
      </Routes>
