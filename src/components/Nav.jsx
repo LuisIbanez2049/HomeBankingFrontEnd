@@ -18,7 +18,7 @@ function Nav() {
           <div className='w-[60%] h-full flex flex-col justify-center'>
             <div className='flex flex-row w-full '>
             <ButtonNav path="/" title="Home"/>
-            <ButtonNav path="/account" title="Account"/>
+            <ButtonNav path="/accounts" title="Accounts"/>
             <ButtonNav path="/cards" title="Cards"/>
             <ButtonNav path="/loan" title="Loans"/>
             <ButtonNav path="/transaction" title="Transaction"/>
@@ -27,7 +27,7 @@ function Nav() {
   
           <div id="contenedor-logOut" className="w-[20%] flex flex-row justify-center items-center">
             <div>
-              <Link to=""> <div id="logOut" className=""> <img id="arrow" className="w-[66px] h-[66px] relative top-[-1px] left-2" src={LogOutArrow} alt="" /> </div> </Link>
+              <Link to="/login"> <div id="logOut" className=""> <img id="arrow" className="w-[66px] h-[66px] relative top-[-1px] left-2" src={LogOutArrow} alt="" /> </div> </Link>
             </div>
           </div>
         </div>

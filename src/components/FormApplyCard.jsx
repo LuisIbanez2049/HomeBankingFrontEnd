@@ -1,10 +1,12 @@
 import React from "react";
 import "./FormApplyCard.css";
+import ButtonRegisterForm from '../components/ButtonRegisterForm'
+import { Link } from 'react-router-dom'
 
 function FormApplyCard() {
   return (
     <div>
-      <div id="divForm" className="p-6 rounded-lg w-[590px] h-[570px] text-[30px]">
+      <div id="divForm" className="p-6 rounded-lg w-[600px] h-[600px] text-[30px] relative">
         <form>
           <div className="flex flex-col justify-center">
             <div className="my-[40px]">
@@ -30,17 +32,15 @@ function FormApplyCard() {
               </select>
             </div>
 
-            <div className="flex justify-between">
-              <button type="submit" className="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-[#72cb10]">
-                APPLY
-              </button>
-              <button type="button" className="bg-gray-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-[#d50000]">
-                CANCEL
-              </button>
+            <div className="flex justify-center mt-[20px]">
+              <ButtonRegisterForm title="Apply"/>
+            </div>
+            <div className="flex justify-center mt-[40px]">
+              <Link id="loginButton" to="/"> <h1 id="h1Apply" className=" inline-block text-[22px] font-semibold text-white text-center  hover:text-[red] hover:scale-110">CANCEL</h1> </Link>
             </div>
           </div>
         </form>
-      </div>
+      </div>      
     </div>
   );
 }

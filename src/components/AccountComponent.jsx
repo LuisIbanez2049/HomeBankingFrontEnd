@@ -15,21 +15,15 @@ function AccountComponent() {
     {
       name: "-",
       account: "VIN-00002",
-      amount: "$150,000.0",
+      amount: "$150,000.00",
       creationDate: "26/05/23",
     },
     {
       name: "-",
       account: "VIN-00003",
-      amount: "$300,000.0",
+      amount: "$300,000.00",
       creationDate: "27/05/23",
-    },
-    {
-      name: "-",
-      account: "VIN-00004",
-      amount: "$100,000.0",
-      creationDate: "28/05/23",
-    },
+    }
   ];
 
   return (
@@ -41,7 +35,8 @@ function AccountComponent() {
             <WelcomeMessaje userName={clients[0].name} />
           </div>
           <div className="w-full flex flex-row justify-center relative z-20">
-            <div className="border-t-4 border-[#72cb10] w-[70%] flex flex-row flex-wrap justify-between">
+            <div className="border-t-4 border-[#72cb10] w-[70%] flex flex-col">
+              <div className="w-full flex flex-col mt-[30px] ml-[25px]">
               {clients.map((client) => {
                 return (
                   <Card
@@ -52,12 +47,13 @@ function AccountComponent() {
                   />
                 );
               })}
-            </div>
-          </div>
 
-          <div className="w-full flex flex-row justify-center relative z-20 my-12">
-            <div className=" w-[70%] flex flex-row flex-wrap justify-between">
-              <RequestAccountButton/>
+              <div className="my-[60px]">
+                <RequestAccountButton title="REQUEST ACCOUNT" path = ""/>
+              </div>
+              
+              </div>
+              
             </div>
           </div>
 

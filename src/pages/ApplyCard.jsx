@@ -13,7 +13,7 @@ function ApplyCard() {
               <h1 className="text-[45px]">Apply for a <span className="text-[#07d611] font-semibold">CARD</span></h1>
               <div id="containerFormAndImg" className="w-full border-b-4 border-[#07d611] flex flex-row">
 
-                <div id="conatainerForm" className="w-[50%] h-[620px]  flex flex-row justify-center items-center">
+                <div id="conatainerForm" className="w-[50%] h-[700px]  flex flex-row justify-center items-center">
                   <FormApplyCard/>
                 </div>
 

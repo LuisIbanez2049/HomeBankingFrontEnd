@@ -8,7 +8,7 @@ import Main from './components/AccountComponent'
 import ApplyCard from './pages/ApplyCard'
 import Home from './pages/Home'
 import MainLayout from './layouts/MainLayout'
-import Account from './pages/Account'
+import Accounts from './pages/Accounts'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import Transaction from './pages/Transaction'
@@ -32,7 +32,7 @@ function App() {
          {/* Aqui abajo agrego el nombre que va a recibir la url para renderizar una determinada vista y agrego el elemento que se va a renderizar. 
          En este caso si pongo en la url: /applyCard --> Outlet va a renderizar "ApplyCard"*/}
          <Route path='/applyCard' element={<ApplyCard/>}></Route>
-         <Route path='/account' element={<Account/>}></Route>
+         <Route path='/accounts' element={<Accounts/>}></Route>
          <Route path='/register' element={<Register/>}></Route>
          <Route path='/login' element={<Login/>}></Route>
          <Route path='/transaction' element={<Transaction/>}></Route>
