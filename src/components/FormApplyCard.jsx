@@ -36,7 +36,7 @@ function FormApplyCard() {
               <ButtonRegisterForm title="Apply"/>
             </div>
             <div className="flex justify-center mt-[40px]">
-              <Link id="loginButton" to="/"> <h1 id="h1Apply" className=" inline-block text-[22px] font-semibold text-white text-center  hover:text-[red] hover:scale-110">CANCEL</h1> </Link>
+              <Link id="loginButton" to="/cards"> <h1 id="h1Apply" className=" inline-block text-[22px] font-semibold text-white text-center  hover:text-[red] hover:scale-110">CANCEL</h1> </Link>
             </div>
           </div>
         </form>

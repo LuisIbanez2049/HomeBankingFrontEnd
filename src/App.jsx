@@ -14,6 +14,7 @@ import Login from './pages/Login'
 import Transaction from './pages/Transaction'
 import Loan from './pages/Loan'
 import Cards from './pages/Cards'
+import Account from './pages/Account'
 
 
 function App() {
@@ -38,6 +39,8 @@ function App() {
          <Route path='/transaction' element={<Transaction/>}></Route>
          <Route path='/loan' element={<Loan/>}></Route>
          <Route path='/cards' element={<Cards/>}></Route>
+         {/* ":id"  con los dos puntos indico que  "id" es una variable de ruta*/}
+         <Route path='/account/:id' element={<Account/>}></Route> 
 
        </Route>
      </Routes>

@@ -1,10 +1,14 @@
 import React from 'react'
 import "./Loan.css"
 import ButtonRegisterForm from '../components/ButtonRegisterForm'
+import ButtonNav from '../components/ButtonNav'
 function Loan() {
     return (
         <div>
+            
             <div id="bodyLoan" className="flex flex-col min-h-screen">
+                
+                <div className='border border-[#72cb10] w-[180px] absolute top-[31px] left-[1088px]'></div> {/* ----------------------------------------------------------- */}
                 <div id='containerAllLoan' className='w-full flex flex-row justify-center'>
                     <div id='containerLoanForm-BackGround' className='w-[85%] border-b-4 border-[#07d611] flex flex-row justify-between flex-wrap mt-[30px]'>
                         <div id="containerLoanTitle-Form-Button" className="w-[700px] h-[800px]">

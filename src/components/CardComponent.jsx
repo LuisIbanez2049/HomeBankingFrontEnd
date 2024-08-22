@@ -143,12 +143,22 @@ function CardComponent() {
       "id": 5,
       "cardHolader": "Luis Ibanez",
       "type": "CREDIT",
-      "color": "GOLD",
+      "color": "SILVER",
       "number": "3010-2477-9216-6991",
       "cvv": 407,
       "fromDate": "2024-08-19",
       "thruDate": "2029-08-19"
-  }
+  },
+  {
+    "id": 6,
+    "cardHolader": "Luis Ibanez",
+    "type": "CREDIT",
+    "color": "TITANIUM",
+    "number": "3010-2477-9216-6991",
+    "cvv": 407,
+    "fromDate": "2024-08-19",
+    "thruDate": "2029-08-19"
+}
       ]
     }
   ]

@@ -7,7 +7,7 @@ function ApplyCard() {
   return (
     <div>
       <div id="body" className="flex flex-col min-h-screen">
-        {/* <div id="main" className="relative flex-1"> */}
+        <div className='border border-[#72cb10] w-[180px] absolute top-[31px] left-[860px]'></div>
           <div id="containerAll" className="w-full flex flex-row justify-center mt-12">
             <div className="w-[80%]">
               <h1 className="text-[45px]">Apply for a <span className="text-[#07d611] font-semibold">CARD</span></h1>
@@ -19,7 +19,6 @@ function ApplyCard() {
 
                 <div id="containerImg" className="w-[50%] h-[620px]  flex flex-row justify-center">
                     <CardAnimation/>
-                    {/* <Text3D/> */}
                 </div>
 
               </div>
