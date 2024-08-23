@@ -1,6 +1,5 @@
 import React from "react";
 import CardAnimation from "../components/CardAnimation";
-import Text3D from "../components/Text3D";
 import FormApplyCard from "../components/FormApplyCard";
 
 function ApplyCard() {

@@ -17,20 +17,30 @@ import Cards from './pages/Cards'
 import Account from './pages/Account'
 
 
-function App() {
+// El componente App define la estructura de navegación de tu aplicación. Usa BrowserRouter para manejar la historia de navegación, 
+// y Routes junto con Route para definir qué componente se muestra en cada URL. Las rutas anidadas y los parámetros dinámicos permiten 
+// crear una navegación compleja y flexible.
 
+function App() {
   return (
     <>
-
+    {/* Componente de react Router, Es el contenedor principal para las rutas. Permite la navegación entre diferentes vistas sin recargar la página. */}
     <BrowserRouter>
+
+    {/* Contiene todas las rutas que la aplicación manejará. Cada ruta está definida por un componente Route. */}
      <Routes>
-      {/* Indico que la ruta base va a ser un layout, un elemento que engloba al resto el cual debe tener un outlet que va a renderizar lo que le pase por la ruta url*/}
+
+     {/* Cada Route define una ruta URL específica y el componente React que se renderizará cuando la URL coincida. */}
+      {/* Indico que la ruta base va a ser MainLayout que es un contenedor para otras vistas 
+          Dentro de MainLayput las rutas estan anidadas y ependiendo de la ruta específica el Outlet definido en MainLayOut renderizará el 
+          componente correspondiente*/}
        <Route path='/' element={<MainLayout/>}>
 
-       {/* Con "index" indico que Home va a ser mi elemento principal */}
+       {/* Con "index" indico que Home va a ser mi elemento principal. Es decir si no defino una ruta especifica en la url. MainLayout va a renderizar 
+           el componente Home*/}
          <Route index element={<Home/>} className="main"></Route>
 
-         {/* Aqui abajo agrego el nombre que va a recibir la url para renderizar una determinada vista y agrego el elemento que se va a renderizar. 
+         {/* Aqui abajo agrego la ruta específica que va a recibir la url para renderizar una determinada vista y agrego el componente que se va a renderizar. 
          En este caso si pongo en la url: /applyCard --> Outlet va a renderizar "ApplyCard"*/}
          <Route path='/applyCard' element={<ApplyCard/>}></Route>
          <Route path='/accounts' element={<Accounts/>}></Route>
@@ -39,16 +49,13 @@ function App() {
          <Route path='/transaction' element={<Transaction/>}></Route>
          <Route path='/loan' element={<Loan/>}></Route>
          <Route path='/cards' element={<Cards/>}></Route>
-         {/* ":id"  con los dos puntos indico que  "id" es una variable de ruta*/}
+         {/* con ":id" defino un parametro de ruta. propiedad "id" va a almacenar la variable que le pase por la url*/}
          <Route path='/account/:id' element={<Account/>}></Route> 
 
        </Route>
      </Routes>
     </BrowserRouter>
 
-    {/* <Header/>
-    <Main/>
-    <Footer/> */}
     </>
   )
 }

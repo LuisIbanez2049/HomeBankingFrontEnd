@@ -1,0 +1,14 @@
+#text3DHome{
+    font: bold 92px / 1 verdana;
+    text-align: center;
+    color: #515355;
+    text-shadow: 0 2px 0 #515355d3, 0 4px 0 #515355b6, 0 6px 0 #8ca0b2, 0 8px 0 #778fa4, 3px 8px 15px rgba(0, 0, 0, 0.1), 3px 8px 5px rgba(0, 0, 0, 0.3);
+    text-transform: uppercase;
+}
+#text3DAmerica{
+    font: bold 95px / 1 verdana;
+    text-align: center;
+    color: #00b109;
+    text-shadow: 0 2px 0 #068f0df8, 0 4px 0 #046308, 0 6px 0 #09700ee8, 0 8px 0 #033605e8, 3px 8px 15px rgba(0, 0, 0, 0.1), 3px 8px 5px rgba(0, 0, 0, 0.3);
+    text-transform: uppercase;
+}

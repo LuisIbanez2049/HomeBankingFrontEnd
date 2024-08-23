@@ -13,12 +13,18 @@ function Account() {
 
   // useParams es un hook que me va a retornar un objeto y utilizo desestrcturin para que me devuelva el valor de la propiedad "id" de ese objeto
   const { id } = useParams()
+
+  // useState es un hook que me permite añadir un estado a un componente. En este caso defino el estado de "account". Que inicialmente es un array vacio
+  // setAccount es la funcion que me permite actualizar el estado de account
+  // Ademas con useState indico que esto va a ser lo primero que se va a renderizar  
   const [account, setAccount] = useState([])
 
 
+  // Me diante axios hago una peticion GET a la API que desarrollé con intellij 
   const requesAccountById = () => {
     axios.get(`http://localhost:8080/api/accounts/${id}`)
       .then(response => {
+        // Si la respuesta es exitosa actualiza el estado de "account" con los datos que me trae la peticion 
         setAccount(response.data)
 
       })
@@ -28,6 +34,11 @@ function Account() {
   }
 
   console.log(account)
+
+  // useEffect es un hook que me permite ejecutar efectos secundarios. se ejecuta cuando el componente se monta (por primera vez) y cada vez que el array de dependencia cambia, el id 
+  // En este caso va a renderizar ejecutar la funcion "requesAccountById()" el cual hace la solicitud http y me va a mostrar por consola la id que obtine de la ruta
+  // useEffect tambien tiene un array de dependencia, el cual me indica que cada vez que el array se actualice, se va a renderizar de nuevo lo que hay dentro de use effect
+  // En este caso depende de la id, que si cambia se ejecuta de nuevo    
   useEffect(() => {
 
     console.log(id) // Verificar la id que recibo por la ruta

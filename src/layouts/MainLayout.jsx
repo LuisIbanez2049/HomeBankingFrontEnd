@@ -4,6 +4,9 @@ import Footer from '../components/Footer'
 import { Outlet } from 'react-router-dom'
 import Nav from '../components/Nav'
 
+// Es mi contenedor principal que va a renderizar las diferentes vistas de mi aplicacion 
+// Donde el header y el footer se mantienen constantes, es decir,  se renderiza una sola vez
+// Mientras que el contenido principal que se renderiza cambia segun la ruta seleccionada 
 function MainLayout() {
   return (
     <div>
