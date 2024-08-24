@@ -7,10 +7,6 @@ function Home() {
     <div>
       <div id="body" className="flex flex-col min-h-screen">
         <div id="main" className="relative flex-1">
-          
-          <div className='border border-[#72cb10] w-[180px] absolute top-[-74px] left-[405px]'></div>
-
-
           <div className='w-full h-[910px]  flex flex-row justify-center items-center'>
             <div className='w-[600px] h-[90%] flex flex-row justify-center items-center'>
               <img className='w-[560px]' src={Logo} alt="" />

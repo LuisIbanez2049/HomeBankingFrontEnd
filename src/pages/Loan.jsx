@@ -26,7 +26,6 @@ function Loan() {
   return (
     <div>
       <div id="bodyLoan" className="flex flex-col min-h-screen">
-        <div className="border border-[#72cb10] w-[180px] absolute top-[31px] left-[1088px]"></div>{" "}
         {/* ----------------------------------------------------------- */}
         <div
           id="containerAllLoan"

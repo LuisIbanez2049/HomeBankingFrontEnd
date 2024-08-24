@@ -37,7 +37,6 @@ function Transaction() {
     return (
         <div>
             <div id="bodyTransaction" className="flex flex-col min-h-screen">
-                <div className='border border-[#72cb10] w-[180px] absolute top-[31px] left-[1316px]'></div> {/* -------------------------------------------------------- */}
                 <div id='containerAllTransaction' className='w-full flex flex-row justify-center'>
                     <div id='containerTransactionForm-Background' className='w-[85%] border-b-4 border-[#07d611] flex flex-row justify-between flex-wrap mt-[30px]'>
 

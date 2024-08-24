@@ -17,7 +17,12 @@ function Account() {
   // useState es un hook que me permite añadir un estado a un componente. En este caso defino el estado de "account". Que inicialmente es un array vacio
   // setAccount es la funcion que me permite actualizar el estado de account
   // Ademas con useState indico que esto va a ser lo primero que se va a renderizar  
-  const [account, setAccount] = useState([])
+  const [account, setAccount] = useState({})
+
+  // useState es un hook que me permite añadir un estado a un componente. Este estado va a controlar que el componente se renderice cada vez que se actualice account 
+  // Aca tengo un estado, y defino que ese estado inicialmente va a tener como valor un objeto vacio. El nombre de ese estado va a ser "account", y va a tener un metodo 
+  // que me permite actualizar ese estado. Cada vez que se llama a ese estado React vuelve a renderizar el componente con el estado actualizado 
+
 
 
   // Me diante axios hago una peticion GET a la API que desarrollé con intellij 
@@ -49,7 +54,6 @@ function Account() {
   return (
     <div>
       <div id="body" className="flex flex-col min-h-screen">
-      <div className='border border-[#72cb10] w-[180px] absolute top-[31px] left-[633px]'></div> {/* ------------------------------ */}
         <div id='containerAllAccount' className='w-full flex flex-row justify-center'>
           <div id='containerH1&div' className='w-[80%] mt-[40px]'>
             <h1 className="text-[45px] text-center">Your selected <span className="text-[#07d611] font-semibold">ACCOUNT</span></h1>
