@@ -24,8 +24,9 @@
     background-repeat: no-repeat; /* Evita que la imagen se repita */
 }
 
+
 #arrow{
-    transition: transform 0.3s ease;
+    transition: transform 0.4s ease;
 }
 #arrow:hover{
     transform: scale(1.1) translateX(15px) skewX(10deg);

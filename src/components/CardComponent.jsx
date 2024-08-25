@@ -128,126 +128,128 @@ function CardComponent() {
           "cvv": 407,
           "fromDate": "2024-08-19",
           "thruDate": "2029-08-19"
-      },
-      {
-        "id": 4,
-        "cardHolader": "Luis Ibanez",
-        "type": "CREDIT",
-        "color": "GOLD",
-        "number": "3010-2477-9216-6991",
-        "cvv": 407,
-        "fromDate": "2024-08-19",
-        "thruDate": "2029-08-19"
-    },
-    {
-      "id": 5,
-      "cardHolader": "Luis Ibanez",
-      "type": "CREDIT",
-      "color": "SILVER",
-      "number": "3010-2477-9216-6991",
-      "cvv": 407,
-      "fromDate": "2024-08-19",
-      "thruDate": "2029-08-19"
-  },
-  {
-    "id": 6,
-    "cardHolader": "Luis Ibanez",
-    "type": "CREDIT",
-    "color": "TITANIUM",
-    "number": "3010-2477-9216-6991",
-    "cvv": 407,
-    "fromDate": "2024-08-19",
-    "thruDate": "2029-08-19"
-}
+        },
+        {
+          "id": 4,
+          "cardHolader": "Luis Ibanez",
+          "type": "CREDIT",
+          "color": "GOLD",
+          "number": "3010-2477-9216-6991",
+          "cvv": 407,
+          "fromDate": "2024-08-19",
+          "thruDate": "2029-08-19"
+        },
+        {
+          "id": 5,
+          "cardHolader": "Luis Ibanez",
+          "type": "CREDIT",
+          "color": "SILVER",
+          "number": "3010-2477-9216-6991",
+          "cvv": 407,
+          "fromDate": "2024-08-19",
+          "thruDate": "2029-08-19"
+        },
+        {
+          "id": 6,
+          "cardHolader": "Luis Ibanez",
+          "type": "CREDIT",
+          "color": "TITANIUM",
+          "number": "3010-2477-9216-6991",
+          "cvv": 407,
+          "fromDate": "2024-08-19",
+          "thruDate": "2029-08-19"
+        }
       ]
     }
   ]
 
-    // Filtrando las tarjetas de tipo DEBIT
-    const debitCards = client[0].cards.filter(debitCard => debitCard.type === "DEBIT");
-    console.log(debitCards);
-    // Filtrando las tarjetas de tipo DEBIT
-    const creditCards = client[0].cards.filter(card => card.type === "CREDIT");
-    console.log(creditCards);
+  // Filtrando las tarjetas de tipo DEBIT
+  const debitCards = client[0].cards.filter(debitCard => debitCard.type === "DEBIT");
+  console.log(debitCards);
+  // Filtrando las tarjetas de tipo DEBIT
+  const creditCards = client[0].cards.filter(card => card.type === "CREDIT");
+  console.log(creditCards);
 
-    // Determinando si mostrar u ocultar el título
-    const showOrHideTitleDebit = debitCards.length === 0 ? "text-[0px]" : "text-[45px]";
-    const showOrHideTitleCredit = creditCards.length === 0 ? "text-[0px]" : "text-[45px]";
+  // Determinando si mostrar u ocultar el título
+  const showOrHideTitleDebit = debitCards.length === 0 ? "text-[0px]" : "text-[45px]";
+  const showOrHideTitleCredit = creditCards.length === 0 ? "text-[0px]" : "text-[45px]";
 
-    
+
 
   return (
     <div>
       <div id="body" className="flex flex-col min-h-screen">
-      <h1 className="text-[45px] text-center">Your <span className="text-[#07d611] font-semibold">CARDS</span></h1>
+        <h1 className="text-[45px] text-center">Your <span className="text-[#07d611] font-semibold">CARDS</span></h1>
         <div className="w-full flex flex-row justify-center">
           <div className="border-t-4 border-[#72cb10] w-[70%]">
 
             <h1 className={showOrHideTitleDebit}>DEBIT</h1>
             <div id='containerDebitCards' className='w-full flex flex-row flex-wrap justify-between'>
-            {debitCards.map(debitCard => {
-              let color = ""
-              let blur = ""
-              if (debitCard.color == "GOLD") {
-                color = "CardDebitCreditGold"
-                blur = "granuladoGold"
-              }
-              if (debitCard.color == "SILVER") {
-                color = "CardDebitCreditSilver"
-                blur = "granuladoSilver"
-              }
-              else if(debitCard.color == "TITANIUM"){
-                color = "CardDebitCreditTitanium"
-                blur = "granuladoTitanium"
-              }
-              return ( <CardDebitCredit
-                key = {debitCard.id} 
-                backGroundCard = {color}
-                typeSubBackGround = {blur}
-                typeCard = "Debit Card"
-                numbers = {debitCard.number}
-                fromDate = {debitCard.fromDate.slice(0,7)} //con slice indico cuantas letras quiero que se vea de un string, en este caso quiero que se sea las primeras 7
-                thruDate = {debitCard.thruDate.slice(0,7)}
-                fullName = {debitCard.cardHolader}
-                cvv = {debitCard.cvv}
-                        /> )
-            })}
+              {debitCards.map(debitCard => {
+                let color = ""
+                let blur = ""
+                if (debitCard.color == "GOLD") {
+                  color = "CardDebitCreditGold"
+                  blur = "granuladoGold"
+                }
+                if (debitCard.color == "SILVER") {
+                  color = "CardDebitCreditSilver"
+                  blur = "granuladoSilver"
+                }
+                else if (debitCard.color == "TITANIUM") {
+                  color = "CardDebitCreditTitanium"
+                  blur = "granuladoTitanium"
+                }
+                return (
+                  <CardDebitCredit
+                  key={debitCard.id}
+                  backGroundCard={color}
+                  typeSubBackGround={blur}
+                  typeCard="Debit Card"
+                  numbers={debitCard.number}
+                  fromDate={debitCard.fromDate.slice(0, 7)} //con slice indico cuantas letras quiero que se vea de un string, en este caso quiero que se sea las primeras 7
+                  thruDate={debitCard.thruDate.slice(0, 7)}
+                  fullName={debitCard.cardHolader}
+                  cvv={debitCard.cvv}
+                />
+              )
+              })}
             </div>
 
             <h1 className={showOrHideTitleCredit}>CREDIT</h1>
             <div id='containerCreditCards' className='w-full flex flex-row flex-wrap justify-between'>
-            {/* <CardDebitCredit /> */}
-            {creditCards.map(card => {
-              let colorCredit = ""
-              let blurCredit = ""
-              if (card.color == "GOLD") {
-                colorCredit = "CardDebitCreditGold"
-                blurCredit = "granuladoGold"
-              }
-              if (card.color == "SILVER") {
-                colorCredit = "CardDebitCreditSilver"
-                blurCredit = "granuladoSilver"
-              }
-              else if(card.color == "TITANIUM"){
-                colorCredit = "CardDebitCreditTitanium"
-                blurCredit = "granuladoTitanium"
-              }
-              return ( <CardDebitCredit 
-                key = {card.id}
-                backGroundCard = {colorCredit}
-                typeSubBackGround = {blurCredit}
-                typeCard = "Credit Card"
-                numbers = {card.number}
-                fromDate = {card.fromDate.slice(0,7)}
-                thruDate = {card.thruDate.slice(0,7)}
-                fullName = {card.cardHolader}
-                cvv = {card.cvv}
-                        /> )
-            })}
+              {/* <CardDebitCredit /> */}
+              {creditCards.map(card => {
+                let colorCredit = ""
+                let blurCredit = ""
+                if (card.color == "GOLD") {
+                  colorCredit = "CardDebitCreditGold"
+                  blurCredit = "granuladoGold"
+                }
+                if (card.color == "SILVER") {
+                  colorCredit = "CardDebitCreditSilver"
+                  blurCredit = "granuladoSilver"
+                }
+                else if (card.color == "TITANIUM") {
+                  colorCredit = "CardDebitCreditTitanium"
+                  blurCredit = "granuladoTitanium"
+                }
+                return (<CardDebitCredit
+                  key={card.id}
+                  backGroundCard={colorCredit}
+                  typeSubBackGround={blurCredit}
+                  typeCard="Credit Card"
+                  numbers={card.number}
+                  fromDate={card.fromDate.slice(0, 7)}
+                  thruDate={card.thruDate.slice(0, 7)}
+                  fullName={card.cardHolader}
+                  cvv={card.cvv}
+                />)
+              })}
             </div>
             <div className="my-[60px]">
-                <RequestAccountButton title= "REQUEST CARD" path= "/applyCard"/>
-              </div>
+              <RequestAccountButton title="REQUEST CARD" path="/applyCard" />
+            </div>
           </div>
         </div>
       </div>

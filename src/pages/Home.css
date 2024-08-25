@@ -1,5 +1,5 @@
 #text3DHome{
-    font: bold 92px / 1 verdana;
+    font: bold 95px / 1 verdana;
     text-align: center;
     color: #515355;
     text-shadow: 0 2px 0 #515355d3, 0 4px 0 #515355b6, 0 6px 0 #8ca0b2, 0 8px 0 #778fa4, 3px 8px 15px rgba(0, 0, 0, 0.1), 3px 8px 5px rgba(0, 0, 0, 0.3);
@@ -12,3 +12,77 @@
     text-shadow: 0 2px 0 #068f0df8, 0 4px 0 #046308, 0 6px 0 #09700ee8, 0 8px 0 #033605e8, 3px 8px 15px rgba(0, 0, 0, 0.1), 3px 8px 5px rgba(0, 0, 0, 0.3);
     text-transform: uppercase;
 }
+
+#bg1div{
+    background-image: url('../assets/InvestIllustrationPNG.png'); /* Ruta de la imagen */
+    background-size: 95% 120%; /* Cambia el tamaño de la imagen */
+    background-position: 30px; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+}
+#bg2div{
+    background-image: url('../assets/TransferIllustration.png'); /* Ruta de la imagen */
+    background-size: 150% 120%; /* Cambia el tamaño de la imagen */
+    background-position: -144px; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+}
+#bg3div{
+    background-image: url('../assets/LoanIllustrationHomePNG.png'); /* Ruta de la imagen */
+    background-size: 90% 127%; /* Cambia el tamaño de la imagen */
+    background-position: 50px; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+}
+#bg4div{
+    background-image: url('../assets/securityIllustrationPNG.png'); /* Ruta de la imagen */
+    background-size: 110% 150%; /* Cambia el tamaño de la imagen */
+    background-position: -10px -100px; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+}
+#bg5div{
+    background-image: url('../assets/SupportIllustrationPNG.png'); /* Ruta de la imagen */
+    background-size: 95% 132%; /* Cambia el tamaño de la imagen */
+    background-position: 40px -60px; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+}
+
+#textGray{
+    font: bold 60px / 1 verdana;
+    color: #515355;
+    text-shadow: 0 2px 0 #515355d3, 0 4px 0 #515355b6, 0 6px 0 #8ca0b2, 0 8px 0 #778fa4, 3px 8px 15px rgba(0, 0, 0, 0.1), 3px 8px 5px rgba(0, 0, 0, 0.3);
+    text-transform: uppercase;
+}
+#textGreen{
+    font: bold 60px / 1 verdana;
+    color: #00b109;
+    text-shadow: 0 2px 0 #068f0df8, 0 4px 0 #046308, 0 6px 0 #09700ee8, 0 8px 0 #033605e8, 3px 8px 15px rgba(0, 0, 0, 0.1), 3px 8px 5px rgba(0, 0, 0, 0.3);
+    text-transform: uppercase;
+}
+
+
+#contentDiv1{
+    box-shadow: -4px 4px 8px rgba(0, 0, 0, 0.623);
+}
+#contentDiv2{
+    box-shadow: 5px 4px 6px rgba(0, 0, 0, 0.623);
+}
+#contentDiv3{
+    box-shadow: -4px 4px 8px rgba(0, 0, 0, 0.623);
+}
+#contentDiv4{
+    box-shadow: 5px 4px 6px rgba(0, 0, 0, 0.623);
+}
+#contentDiv5{
+    box-shadow: -4px 4px 8px rgba(0, 0, 0, 0.623);
+}
+
+
+
+.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  
+  .visible {
+    opacity: 1;
+    transform: translateY(0);
+  }

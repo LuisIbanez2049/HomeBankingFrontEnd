@@ -95,3 +95,54 @@
                  0 3px 20px rgb(0, 0, 0);
     color: #fff;
 }
+
+#blackBackGround{
+  background-image: url(../assets/BlackTextured.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+#whiteBackGround{
+  background-image: url(../assets/WhiteTextured.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
+/* --------------------------------------------------------------------------------------- */
+/* Contenedor de la tarjeta */
+.card-container {
+  perspective: 1000px; /* Añade perspectiva para el efecto 3D */
+  width: 480px; /* Tamaño ajustado según el contenido de la tarjeta */
+  height: 290px;
+}
+
+/* Estilo de la tarjeta para efecto de giro */
+.card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 0.8s; /* Duración del giro */
+  transform-style: preserve-3d; /* Mantiene la parte frontal y trasera en su lugar durante el giro */
+  cursor: pointer; /* Cambia el cursor al pasar sobre la tarjeta */
+}
+
+/* Efecto de giro al pasar el mouse sobre el contenedor de la tarjeta */
+.card-container:hover .card {
+  transform: rotateY(180deg); /* Gira la tarjeta 180 grados en el eje Y */
+}
+
+/* Parte delantera de la tarjeta */
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden; /* Oculta la cara trasera cuando no está frente a la cámara */
+  border-radius: 30px; /* Bordes redondeados para la tarjeta */
+}
+
+/* Parte trasera de la tarjeta */
+.card-back {
+  transform: rotateY(180deg); /* Gira la parte trasera para que esté boca abajo inicialmente */
+}
