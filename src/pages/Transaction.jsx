@@ -8,6 +8,8 @@ function Transaction() {
 
 
     const [client, setClient] = useState({ accounts: [] })
+    const [selectedAccountNumber, setSelectedAccountNumber] = useState(""); // Estado para almacenar el nombre del préstamo seleccionado
+    const [disponibleAccounts, setDisponibleAccounts] = useState([])
 
     useEffect(() => {
         axios.get("http://localhost:8080/api/clients/1")
@@ -30,8 +32,31 @@ function Transaction() {
     // Maneja el cambio del radio button
     const handleTransactionTypeChange = (event) => {
         setSelectedTransactionType(event.target.value); // Actualiza el estado con el valor seleccionado
+        if (selectedTransactionType !== "Others") {
+            console.log("Others")
+            setSelectedAccountNumber("")
+            setDisponibleAccounts(client.accounts)
+
+        }
     };
     //-------------------------------------------------------------------------------------------------------------------------------------
+
+
+      // Manejador para el cambio de selección de préstamo
+      const handleAccountChange = (event) => {
+        const accountNumber = event.target.value;
+        console.log(accountNumber)
+        setSelectedAccountNumber(accountNumber);
+    
+        // Filtrar el préstamo seleccionado
+        const selectedAccount = client.accounts.filter((account) => account.number !== accountNumber);
+        if (selectedAccount) {
+            setDisponibleAccounts(selectedAccount)
+          console.log(selectedAccount); // Actualizar el maxAmount basado en la selección
+        } else {
+            setDisponibleAccounts([])
+        }
+      };
 
 
     return (
@@ -85,13 +110,17 @@ function Transaction() {
                                                     id="destinyAccount"
                                                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                                     required
+                                                    value={selectedAccountNumber} // Valor controlado
+                                                    onChange={handleAccountChange} // Manejador de cambio
                                                 >
                                                     <option value="">Select destiny account</option>
                                                     {/* You can add more options here if needed */}
-                                                    {client.accounts && client.accounts.length > 0 && client.accounts.map((account) => {
+                                                    {
+                                                        
+                                                     client.accounts && client.accounts.length > 0 && client.accounts.map((account) => {
                                                         // console.log(account.number)
                                                         return (
-                                                            <OptionInputSelect key={account.id} optionName={account.number} />
+                                                            <OptionInputSelect key={account.id} value={account.number} optionName={account.number} />
                                                         )
                                                     })}
                                                 </select>
@@ -128,7 +157,7 @@ function Transaction() {
                                                 >
                                                     <option value="">Select an account</option>
                                                     {/* You can add more options here if needed */}
-                                                    {client.accounts && client.accounts.length > 0 && client.accounts.map((account) => {
+                                                    {disponibleAccounts.length > 0 && disponibleAccounts.map((account) => {
                                                         // console.log(account.number)
                                                         return (
                                                             <OptionInputSelect key={account.id} optionName={account.number} />

@@ -13,8 +13,11 @@ function Home() {
             <div className='w-[600px] h-[90%] flex flex-row justify-center items-center'>
               <img className='w-[560px]' src={Logo} alt="" />
             </div>
-            <div className='flex flex-row justify-center items-center'>
-              <h1 id='text3DHome' className='inline-block mr-[25px]' >BANK OF </h1> <h1 id='text3DAmerica' className='inline-block'> AMERICA</h1>
+            <div className='flex flex-col justify-center items-center'>
+              <div>
+                <h1 id='text3DHome' className='inline-block mr-[25px] bg-white h-[115px] relative z-20' >BANK OF </h1> <h1 id='text3DAmerica' className='inline-block relative z-10'> AMERICA</h1>
+              </div>
+              <h1 id='fade-in' className='text-[40px] font-thin mt-[20px]'>Your Trust, Our Commitment</h1>
             </div>
           </div>
         </div>

@@ -15,7 +15,9 @@ function Nav() {
           <div id="contenedor-logo" className="w-[20%] h-full flex flex-row justify-center items-center">
             <div>
               <Link to="/"> <div id="logo" className=""></div> </Link>
+              
             </div>
+            <h1 className='ml-[12px]'>BANK OF <br /><span className='text-[green]'>AMERICA</span></h1>
           </div>
           <div className='w-[60%] h-full flex flex-col justify-center'>
             <div className='flex flex-row w-full justify-between flex-wrap'>

@@ -14,9 +14,8 @@ function Account() {
   // useParams es un hook que me va a retornar un objeto y utilizo desestrcturin para que me devuelva el valor de la propiedad "id" de ese objeto
   const { id } = useParams()
 
-  // useState es un hook que me permite añadir un estado a un componente. En este caso defino el estado de "account". Que inicialmente es un array vacio
-  // setAccount es la funcion que me permite actualizar el estado de account
-  // Ademas con useState indico que esto va a ser lo primero que se va a renderizar  
+  // useState es un hook que me permite añadir un estado a un componente. En este caso inicializo el estado "account" y digo que inicialmente su valor es un array vacio
+  // Este estado va a controlar que el componente se vuelva a renderizar cada vez que se llama a la funcion "setAccount" para actualizar el estado 
   const [account, setAccount] = useState({})
 
   // useState es un hook que me permite añadir un estado a un componente. Este estado va a controlar que el componente se renderice cada vez que se actualice account 
@@ -40,14 +39,20 @@ function Account() {
 
   console.log(account)
 
-  // useEffect es un hook que me permite ejecutar efectos secundarios. se ejecuta cuando el componente se monta (por primera vez) y cada vez que el array de dependencia cambia, el id 
+  // useEffect es un hook que me permite gestionar efectos secundarios. se ejecuta cuando el componente se monta (por primera vez) y cada vez que el array de dependencia cambia, el id 
   // En este caso va a renderizar ejecutar la funcion "requesAccountById()" el cual hace la solicitud http y me va a mostrar por consola la id que obtine de la ruta
-  // useEffect tambien tiene un array de dependencia, el cual me indica que cada vez que el array se actualice, se va a renderizar de nuevo lo que hay dentro de use effect
-  // En este caso depende de la id, que si cambia se ejecuta de nuevo    
+  // useEffect tambien tiene un array de dependencia basado en la id, el cual me indica que cada vez que la id cambie o se actualice, se va a renderizar de nuevo lo que hay dentro de use effect    
+
+  // Este hook te permite ejecutar código después de que el componente se haya renderizado y también realizar limpieza cuando el componente se desmonte o se actualice.
+  // Tambien me permite ver cuando el componente se destruye.
   useEffect(() => {
 
     console.log(id) // Verificar la id que recibo por la ruta
     requesAccountById()
+    console.log("Inicio por primera vez");
+    return () => {
+      console.log("Me destruyo");
+    };
 
   }, [id])
 
@@ -114,9 +119,6 @@ function Account() {
             </div>
           </div>
         </div>
-
-
-
       </div>
     </div>
   )

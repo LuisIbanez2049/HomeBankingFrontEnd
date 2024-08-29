@@ -1,8 +1,8 @@
 import React from 'react'
 
-function OptionInputSelect({optionName}) {
+function OptionInputSelect({optionName, value}) {
   return (
-    <option value="">{optionName}</option>
+    <option value={value}>{optionName}</option>
   )
 }
 

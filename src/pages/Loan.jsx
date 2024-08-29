@@ -11,6 +11,10 @@ function Loan() {
   // tenga las propiedades loans y accounts, incluso antes de que se complete la petición GET. Esto ayuda a evitar errores al intentar mapear o acceder
   // a estas propiedades antes de que los datos sean cargados.
   const [client, setClient] = useState({ loans: [], accounts: [] });
+  const [loans , setLoans] = useState([])
+  const [selectedLoanName, setSelectedLoanName] = useState(""); // Estado para almacenar el nombre del préstamo seleccionado
+  const [maxAmount, setMaxAmount] = useState(0); // Estado para almacenar el maxAmount
+  const [payments, setPayments] = useState([])
 
   useEffect(() => {
     axios.get("http://localhost:8080/api/clients/1")
@@ -21,12 +25,40 @@ function Loan() {
       .catch((error) => {
         console.log(error);
       });
+
+
+      axios.get("http://localhost:8080/api/loans/")
+      .then((response) => {
+        setLoans(response.data)
+        console.log(response.data)
+      })
+      .catch((error) =>{
+        console.log(error)
+      })
   }, []);
+
+    // Manejador para el cambio de selección de préstamo
+    const handleLoanChange = (event) => {
+      const loanName = event.target.value;
+      console.log(loanName)
+      setSelectedLoanName(loanName);
+  
+      // Filtrar el préstamo seleccionado
+      const selectedLoan = loans.find((loan) => loan.name === loanName);
+      if (selectedLoan) {
+        setMaxAmount(selectedLoan.maxAmount)
+        setPayments(selectedLoan.payments)
+        console.log(selectedLoan.name); // Actualizar el maxAmount basado en la selección
+      } else {
+        setMaxAmount(0); // Reiniciar maxAmount si no hay coincidencia
+        setPayments([])
+      }
+    };
+
 
   return (
     <div>
       <div id="bodyLoan" className="flex flex-col min-h-screen">
-        {/* ----------------------------------------------------------- */}
         <div
           id="containerAllLoan"
           className="w-full flex flex-row justify-center"
@@ -57,27 +89,25 @@ function Loan() {
                   <div className="w-full h-full flex flex-col justify-center">
                     <form>
                       <div className="mb-4">
-                        <label
-                          htmlFor="loan"
-                          className="block text-white font-bold mb-2"
-                        >
+                        <label htmlFor="loan" className="block text-white font-bold mb-2">
                           Loan
                         </label>
                         <select
                           id="loan"
                           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                           required
+                          value={selectedLoanName} // Valor controlado
+                          onChange={handleLoanChange} // Manejador de cambio
                         >
                           <option value="">Select a loan</option>
-                          {/* Con "client.loans && client.loans.length > 0 && client.loans" lo que hago es verificar que client.loans
+                          {/* Con "loans && loans.length > 0" lo que hago es verificar que loans
                               exista antes de realizar el mapeo. De lo contrario podria intentar mapear algo vacio dando error*/}
-                          {client.loans &&
-                            client.loans.length > 0 &&
-                            client.loans.map((loan) => {
-                              // console.log(loan.name)
+                          {loans.length > 0 &&
+                            loans.map((loan) => {
                               return (
                                 <OptionInputSelect
                                   key={loan.id}
+                                  value={loan.name}
                                   optionName={loan.name}
                                 />
                               );
@@ -106,6 +136,7 @@ function Loan() {
                               return (
                                 <OptionInputSelect
                                   key={account.id}
+                                  value={account.number}
                                   optionName={account.number}
                                 />
                               );
@@ -113,7 +144,8 @@ function Loan() {
                         </select>
                       </div>
 
-                      <InputTypeRange maxAmount={500000}/>
+                      {/* Aqui va la logica */}
+                      <InputTypeRange maxAmount={maxAmount}/>
 
                       <div className="mb-4">
                         <label
@@ -129,13 +161,12 @@ function Loan() {
                         >
                           <option value="">Select payment</option>
                           {/* Add more options here */}
-                          {client.loans &&
-                            client.loans.length > 0 &&
-                            client.loans.map((loan) => {
+                          {payments.length > 0 &&
+                            payments.map((payment) => {
                               return (
                                 <OptionInputSelect
-                                  key={loan.id}
-                                  optionName={loan.payments}
+                                  value={payment}
+                                  optionName={payment}
                                 />
                               );
                             })}

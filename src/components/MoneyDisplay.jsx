@@ -7,7 +7,7 @@ function MoneyDisplay({amount}) {
       }).format(amount);
 
   return (
-    <div>{formattedAmount}</div>
+    <p>{formattedAmount}</p>
   )
 }
 
