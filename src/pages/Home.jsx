@@ -23,21 +23,21 @@ function Home() {
         </div>
 
 
-        <div className='w-full flex flex-col items-center mt-[160px]'>
+        <div className='w-full flex flex-col items-center mt-[200px]'>
           <div className='w-[90%]'>
-              <div id='contentDiv1' className='w-full h-[300px] rounded-bl-[300px] rounded-tr-[300px] flex flex-row bg-[#19cf19]'>
-                <div id='bg1div' className=' w-[30%] h-[440PX] relative bottom-[140px] rounded-bl-[300px]'>
-                </div>
-                <div>
-                  <div className='h-full flex flex-col justify-center'>
-                    <div className=''>
-                      <h1 id='textGray'>Grow Your Wealth</h1>
-                      <p className='text-[30px] text-[#000000d7] mt-[20px]'>Explore diverse investment opportunities with us <br /> to build a brighter financial future tailored <br /> to your goals</p>
-                    </div>
+            <div id='contentDiv1' className='w-full h-[300px] rounded-bl-[300px] rounded-tr-[300px] flex flex-row bg-[#19cf19] mb-[250px] '>
+              <div id='bg1div' className=' w-[30%] h-[440PX] relative bottom-[140px] rounded-bl-[300px]'>
+              </div>
+              <div>
+                <div className='h-full flex flex-col justify-center'>
+                  <div className=''>
+                    <h1 id='textGray'>Grow Your Wealth</h1>
+                    <p className='text-[30px] text-[#000000d7] mt-[20px]'>Explore diverse investment opportunities with us <br /> to build a brighter financial future tailored <br /> to your goals</p>
                   </div>
                 </div>
               </div>
-            <div id='contentDiv2' className='w-full h-[300px]  rounded-br-[300px] rounded-tl-[300px] flex justify-end'>
+            </div>
+            <div id='contentDiv2' className='w-full h-[300px]  rounded-br-[300px] rounded-tl-[300px] flex justify-end mb-[250px]'>
               <div className='h-full flex flex-col justify-center'>
                 <div className='mr-[40px]'>
                   <h1 id='textGreen' className='text-end'> Easy Transfers </h1>
@@ -48,7 +48,7 @@ function Home() {
 
               </div>
             </div>
-            <div id='contentDiv3' className='w-full h-[300px] rounded-bl-[300px] rounded-tr-[300px] flex flex-row bg-[#19cf19e3] mt-[200px]'>
+            <div id='contentDiv3' className='w-full h-[300px] rounded-bl-[300px] rounded-tr-[300px] flex flex-row bg-[#19cf19e3] mb-[250px]'>
               <div id='bg3div' className=' w-[30%] h-[440PX] relative bottom-[140px] rounded-bl-[300px]'>
 
               </div>
@@ -70,7 +70,7 @@ function Home() {
 
               </div>
             </div>
-            <div id='contentDiv5' className='w-full h-[300px] rounded-bl-[300px] rounded-tr-[300px] flex flex-row bg-[#19cf19e3] mt-[200px] mb-[200px]'>
+            <div id='contentDiv5' className='w-full h-[300px] rounded-bl-[300px] rounded-tr-[300px] flex flex-row bg-[#19cf19e3] mt-[250px] mb-[200px]'>
               <div id='bg5div' className=' w-[30%] h-[440PX] relative bottom-[140px] rounded-bl-[300px]'>
 
               </div>

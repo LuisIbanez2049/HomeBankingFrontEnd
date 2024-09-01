@@ -61,19 +61,78 @@
 
 #contentDiv1{
     box-shadow: -4px 4px 8px rgba(0, 0, 0, 0.623);
+
+    view-timeline-name: --image;
+    view-timeline-axis: block;
+
+    animation-timeline: --image;
+    animation-name: show;
+
+    animation-range: entry 25% cover 45%;
+    animation-fill-mode: both;
 }
 #contentDiv2{
     box-shadow: 5px 4px 6px rgba(0, 0, 0, 0.623);
+
+    view-timeline-name: --image;
+    view-timeline-axis: block;
+
+    animation-timeline: --image;
+    animation-name: show;
+
+    animation-range: entry 25% cover 45%;
+    animation-fill-mode: both;
 }
 #contentDiv3{
     box-shadow: -4px 4px 8px rgba(0, 0, 0, 0.623);
+
+    view-timeline-name: --image;
+    view-timeline-axis: block;
+
+    animation-timeline: --image;
+    animation-name: show;
+
+    animation-range: entry 25% cover 45%;
+    animation-fill-mode: both;
 }
 #contentDiv4{
     box-shadow: 5px 4px 6px rgba(0, 0, 0, 0.623);
+
+    view-timeline-name: --image;
+    view-timeline-axis: block;
+
+    animation-timeline: --image;
+    animation-name: show;
+
+    animation-range: entry 25% cover 45%;
+    animation-fill-mode: both;
 }
 #contentDiv5{
     box-shadow: -4px 4px 8px rgba(0, 0, 0, 0.623);
+
+    view-timeline-name: --image;
+    view-timeline-axis: block;
+
+    animation-timeline: --image;
+    animation-name: show;
+
+    animation-range: entry 25% cover 45%;
+    animation-fill-mode: both;
 }
+
+
+@keyframes show {
+    from {
+        opacity: 0;
+        scale: 25%;
+    }
+    to {
+        opacity: 1;
+        scale: 100%;
+    }
+}
+
+
 
 
 
