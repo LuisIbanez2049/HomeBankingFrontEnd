@@ -25,7 +25,7 @@ function Home() {
 
         <div className='w-full flex flex-col items-center mt-[200px]'>
           <div className='w-[90%]'>
-            <div id='contentDiv1' className='w-full h-[300px] rounded-bl-[300px] rounded-tr-[300px] flex flex-row bg-[#19cf19] mb-[250px] '>
+            <div id='contentDiv1' className='w-full h-[300px] rounded-bl-[300px] rounded-tr-[300px] flex flex-row bg-[#19cf19] mb-[250px] hidden'>
               <div id='bg1div' className=' w-[30%] h-[440PX] relative bottom-[140px] rounded-bl-[300px]'>
               </div>
               <div>
