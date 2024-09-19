@@ -19,3 +19,5 @@ const authenticationReducer = createReducer(initialState, (builder) => {
         }
     })
 }) 
+
+export default authenticationReducer

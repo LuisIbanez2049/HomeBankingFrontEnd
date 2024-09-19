@@ -7,15 +7,20 @@ import { useEffect } from "react";
 import axios from "axios";
 import MoneyDisplay from "./MoneyDisplay";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import store from "../redux/store";
 
 function AccountComponent() {
+
+  const user = useSelector(store => store.authenticationReducer)
 
    // Definir estado para almacenar los datos de clients
    const [clientAccounts, setClientAccounts] = useState([]);
 
   useEffect(()=>{
 
-    const token = `eyJhbGciOiJIUzI1NiJ9.eyJyb2wiOiJST0xFX0NMSUVOVCIsInN1YiI6Im1lbGJhQG1pbmRodWIuY29tIiwiaWF0IjoxNzI2NjkxOTkzLCJleHAiOjE3MjY2OTU1OTN9.RqrRVI3yMLupmou6iTevtQEsrY5SNp9BbbyV4c6plls`;
+    const token = user.token;
+    console.log(token)
     axios.get("http://localhost:8080/api/clients/current/accounts", {
       headers: {
         Authorization: `Bearer ${token}`

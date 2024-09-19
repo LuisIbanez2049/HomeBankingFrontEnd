@@ -4,7 +4,7 @@ export const loginAction = createAction('login', (data) => {
     let usuario = {
         email: data.email,
         name: data.fisrstName + ' ' + data.lastName,
-        token: data.token,
+        token: data,
         isLoggedIn: true
     }
 

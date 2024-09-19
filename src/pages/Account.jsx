@@ -6,6 +6,8 @@ import { useParams } from 'react-router-dom'
 import Card from '../components/Card'
 import MoneyDisplay from '../components/MoneyDisplay'
 import TableRowAccountView from '../components/TableRowAccountView'
+import { useSelector } from 'react-redux'
+import store from '../redux/store'
 
 
 
@@ -22,11 +24,12 @@ function Account() {
   // Aca tengo un estado, y defino que ese estado inicialmente va a tener como valor un objeto vacio. El nombre de ese estado va a ser "account", y va a tener un metodo 
   // que me permite actualizar ese estado. Cada vez que se llama a ese estado React vuelve a renderizar el componente con el estado actualizado 
 
+  const user = useSelector(store => store.authenticationReducer)
 
 
   // Me diante axios hago una peticion GET a la API que desarrollé con intellij 
   const requesAccountById = () => {
-    const token = `eyJhbGciOiJIUzI1NiJ9.eyJyb2wiOiJST0xFX0NMSUVOVCIsInN1YiI6Im1lbGJhQG1pbmRodWIuY29tIiwiaWF0IjoxNzI2NjkxOTkzLCJleHAiOjE3MjY2OTU1OTN9.RqrRVI3yMLupmou6iTevtQEsrY5SNp9BbbyV4c6plls`;
+    const token = user.token;
     axios.get(`http://localhost:8080/api/clients/accounts/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`
