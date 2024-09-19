@@ -5,9 +5,9 @@ function TableRowAccountView({type, typeColor, amount, amountColor, date, hour, 
     <tr>
       <td className={`border border-[#000000ad] p-[10px] font-bold  ${typeColor}`}>{type}</td>
       <td className={`border border-[#000000ad] p-[10px] font-semibold ${amountColor}`}>{amount}</td>
-      <td className='border border-[#000000ad] p-[10px]'>{date}</td>
-      <td className='border border-[#000000ad] p-[10px]'>{hour}</td>
-      <td className='border border-[#000000ad] p-[10px]'>{description}</td>
+      <td className='border border-[#000000ad] p-[10px] text-[25px]'>{date}</td>
+      <td className='border border-[#000000ad] p-[10px] text-[25px]'>{hour}</td>
+      <td className='border border-[#000000ad] p-[10px] text-[25px] w-[440px]'>{description}</td>
     </tr>
   )
 }

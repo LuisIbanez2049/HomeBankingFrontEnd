@@ -16,7 +16,7 @@ function Account() {
 
   // useState es un hook que me permite añadir un estado a un componente. En este caso inicializo el estado "account" y digo que inicialmente su valor es un array vacio
   // Este estado va a controlar que el componente se vuelva a renderizar cada vez que se llama a la funcion "setAccount" para actualizar el estado 
-  const [account, setAccount] = useState({})
+  const [account, setAccount] = useState([])
 
   // useState es un hook que me permite añadir un estado a un componente. Este estado va a controlar que el componente se renderice cada vez que se actualice account 
   // Aca tengo un estado, y defino que ese estado inicialmente va a tener como valor un objeto vacio. El nombre de ese estado va a ser "account", y va a tener un metodo 
@@ -26,7 +26,12 @@ function Account() {
 
   // Me diante axios hago una peticion GET a la API que desarrollé con intellij 
   const requesAccountById = () => {
-    axios.get(`http://localhost:8080/api/accounts/${id}`)
+    const token = `eyJhbGciOiJIUzI1NiJ9.eyJyb2wiOiJST0xFX0NMSUVOVCIsInN1YiI6Im1lbGJhQG1pbmRodWIuY29tIiwiaWF0IjoxNzI2NjkxOTkzLCJleHAiOjE3MjY2OTU1OTN9.RqrRVI3yMLupmou6iTevtQEsrY5SNp9BbbyV4c6plls`;
+    axios.get(`http://localhost:8080/api/clients/accounts/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
       .then(response => {
         // Si la respuesta es exitosa actualiza el estado de "account" con los datos que me trae la peticion 
         setAccount(response.data)
@@ -37,7 +42,7 @@ function Account() {
       });
   }
 
-  console.log(account)
+  console.log("holaaaaaaaaaaaaa"+account)
 
   // useEffect es un hook que me permite gestionar efectos secundarios. se ejecuta cuando el componente se monta (por primera vez) y cada vez que el array de dependencia cambia, el id 
   // En este caso va a renderizar ejecutar la funcion "requesAccountById()" el cual hace la solicitud http y me va a mostrar por consola la id que obtine de la ruta
