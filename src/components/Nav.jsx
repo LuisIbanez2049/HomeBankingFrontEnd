@@ -34,7 +34,7 @@ function Nav() {
              <ButtonNav path="/loan" title="Loans"/>
             </div>
             <div className={`${isActive("/transaction") ? "border-t-[1px] border-[#07d611]" : ""}`}>
-             <ButtonNav path="/transaction" title="Transaction"/>
+             <ButtonNav path="/transaction" title="Transactions"/>
             </div>
             </div>
           </div>

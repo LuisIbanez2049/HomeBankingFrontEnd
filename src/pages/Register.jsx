@@ -1,13 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Register.css";
 import { Link } from "react-router-dom";
 import ButtonRegisterForm from "../components/ButtonRegisterForm";
 import InputPassword from "../components/InputPassword";
 import SpinOrbit from "../assets/SpinOrbit.png"
 import SpinCenter from "../assets/SpinCenter.png"
+import axios from "axios";
 
 
 function Register() {
+
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  
+  const handleRegister = async (event) => {
+    event.preventDefault();
+    const user = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password
+    } 
+    console.log(user)
+    console.log("-----------------" + firstName);
+    console.log("-----------------" + lastName);
+    console.log("-----------------" + email);
+    console.log("-----------------" + password);
+
+    try{
+      const response = await axios.post('http://localhost:8080/api/auth/register', user)
+      console.log(response)
+
+    } catch (error) {
+      console.error("Error en el registro:", error.response ? error.response.data : error.message);
+    }
+  }
   return (
     <div>
       <div id="bodyRegister" className="flex flex-col min-h-screen">
@@ -25,27 +54,36 @@ function Register() {
 
               <div id="containerRegisterForm" className="w-full flex flex-row justify-center ">
                 <div id="divFormRegister" className="w-[600px] p-8 rounded-lg text-[20px] relative z-10 mb-[30px]">
-                  <form>
+                  <form onSubmit={handleRegister}>
                     <div className="mb-4">
                       <label htmlFor="firstName" className="block text-white font-bold mb-2">
                         First Name
                       </label>
-                      <input type="text" id="firstName" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your first name" required />
+                      <input type="text" id="firstName" 
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your first name" required />
                     </div>
                     <div className="mb-4">
                       <label htmlFor="lastName" className="block text-white font-bold mb-2">
                         Last Name
                       </label>
-                      <input type="text" id="lastName" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your last name" required />
+                      <input type="text" id="lastName" 
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your last name" required />
                     </div>
                     <div className="mb-4">
                       <label htmlFor="email" className="block text-white font-bold mb-2">
                         Email
                       </label>
-                      <input type="email" id="email" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your email" required />
+                      <input type="email" id="email" 
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your email" required />
                     </div>
                     <div>
-                      <InputPassword />
+                      <InputPassword value={password} onChange={setPassword}/>
                     </div>
                     <div id="buttonResgister" className="mt-[60px]">
                       <ButtonRegisterForm title="Register" />

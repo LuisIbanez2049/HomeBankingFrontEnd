@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./CardComponent.css"
 import CardDebitCredit from './CardDebitCredit'
 import RequestAccountButton from "./RequestAccountButton";
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 {/*       
           props.backGroundCard (fondo de la tarjeta  {CardDebitCreditGold, CardDebitCreditSilver, CardDebitCreditTitanium})  
@@ -15,159 +17,180 @@ import RequestAccountButton from "./RequestAccountButton";
       */}
 
 function CardComponent() {
+  
+  const user = useSelector(store => store.authenticationReducer)
+  const [clientCards, setClientCards] = useState([]);
 
-  let client = [
-    {
-      "id": 1,
-      "firstName": "Melba",
-      "lastName": "Morel",
-      "email": "melba@mindhub.com",
-      "accounts": [
-        {
-          "id": 1,
-          "number": "VIN001",
-          "creationDate": "2024-08-19T23:52:27.260649",
-          "balance": 5000.0,
-          "transactios": [
-            {
-              "id": 1,
-              "amount": 2000.0,
-              "description": "Rent",
-              "dateTime": "2024-08-19T23:52:27.260649",
-              "type": "CREDIT"
-            },
-            {
-              "id": 2,
-              "amount": 500.0,
-              "description": "Groceries",
-              "dateTime": "2024-08-18T23:52:27.260649",
-              "type": "DEBIT"
-            },
-            {
-              "id": 3,
-              "amount": 1500.0,
-              "description": "Salary",
-              "dateTime": "2024-08-17T23:52:27.260649",
-              "type": "CREDIT"
-            }
-          ]
-        },
-        {
-          "id": 2,
-          "number": "VIN002",
-          "creationDate": "2024-08-20T23:52:27.260649",
-          "balance": 7500.0,
-          "transactios": [
-            {
-              "id": 6,
-              "amount": 700.0,
-              "description": "Internet Bill",
-              "dateTime": "2024-08-15T23:52:27.260649",
-              "type": "DEBIT"
-            },
-            {
-              "id": 5,
-              "amount": 2500.0,
-              "description": "Freelance Work",
-              "dateTime": "2024-08-16T23:52:27.260649",
-              "type": "CREDIT"
-            },
-            {
-              "id": 4,
-              "amount": 800.0,
-              "description": "Electricity Bill",
-              "dateTime": "2024-08-19T23:52:27.260649",
-              "type": "DEBIT"
-            }
-          ]
-        }
-      ],
-      "loans": [
-        {
-          "id": 1,
-          "loanId": 1,
-          "payments": 60,
-          "name": "Mortgage",
-          "amount": 400000.0
-        },
-        {
-          "id": 2,
-          "loanId": 2,
-          "payments": 12,
-          "name": "Personal",
-          "amount": 50000.0
-        }
-      ],
-      "cards": [
-        {
-          "id": 1,
-          "cardHolader": "Melba Morel",
-          "type": "DEBIT",
-          "color": "GOLD",
-          "number": "5741-3936-3890-7471",
-          "cvv": 723,
-          "fromDate": "2024-08-19",
-          "thruDate": "2029-08-19"
-        },
-        {
-          "id": 2,
-          "cardHolader": "Antonio Guzman",
-          "type": "CREDIT",
-          "color": "TITANIUM",
-          "number": "2923-8134-8693-7624",
-          "cvv": 915,
-          "fromDate": "2024-08-19",
-          "thruDate": "2029-08-19"
-        },
-        {
-          "id": 3,
-          "cardHolader": "Luis Ibanez",
-          "type": "DEBIT",
-          "color": "SILVER",
-          "number": "3010-2477-9216-6991",
-          "cvv": 407,
-          "fromDate": "2024-08-19",
-          "thruDate": "2029-08-19"
-        },
-        {
-          "id": 4,
-          "cardHolader": "Luis Ibanez",
-          "type": "CREDIT",
-          "color": "GOLD",
-          "number": "3010-2477-9216-6991",
-          "cvv": 407,
-          "fromDate": "2024-08-19",
-          "thruDate": "2029-08-19"
-        },
-        {
-          "id": 5,
-          "cardHolader": "Luis Ibanez",
-          "type": "CREDIT",
-          "color": "SILVER",
-          "number": "3010-2477-9216-6991",
-          "cvv": 407,
-          "fromDate": "2024-08-19",
-          "thruDate": "2029-08-19"
-        },
-        {
-          "id": 6,
-          "cardHolader": "Luis Ibanez",
-          "type": "CREDIT",
-          "color": "TITANIUM",
-          "number": "3010-2477-9216-6991",
-          "cvv": 407,
-          "fromDate": "2024-08-19",
-          "thruDate": "2029-08-19"
-        }
-      ]
-    }
-  ]
+  useEffect(() => {
+    const token = user.token;
+    console.log(token)
+    axios.get('http://localhost:8080/api/clients/current/cards', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then((response) => {
+      setClientCards(response.data)
+      console.log(response.data)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }, [])
+
+
+  // let client = [
+  //   {
+  //     "id": 1,
+  //     "firstName": "Melba",
+  //     "lastName": "Morel",
+  //     "email": "melba@mindhub.com",
+  //     "accounts": [
+  //       {
+  //         "id": 1,
+  //         "number": "VIN001",
+  //         "creationDate": "2024-08-19T23:52:27.260649",
+  //         "balance": 5000.0,
+  //         "transactios": [
+  //           {
+  //             "id": 1,
+  //             "amount": 2000.0,
+  //             "description": "Rent",
+  //             "dateTime": "2024-08-19T23:52:27.260649",
+  //             "type": "CREDIT"
+  //           },
+  //           {
+  //             "id": 2,
+  //             "amount": 500.0,
+  //             "description": "Groceries",
+  //             "dateTime": "2024-08-18T23:52:27.260649",
+  //             "type": "DEBIT"
+  //           },
+  //           {
+  //             "id": 3,
+  //             "amount": 1500.0,
+  //             "description": "Salary",
+  //             "dateTime": "2024-08-17T23:52:27.260649",
+  //             "type": "CREDIT"
+  //           }
+  //         ]
+  //       },
+  //       {
+  //         "id": 2,
+  //         "number": "VIN002",
+  //         "creationDate": "2024-08-20T23:52:27.260649",
+  //         "balance": 7500.0,
+  //         "transactios": [
+  //           {
+  //             "id": 6,
+  //             "amount": 700.0,
+  //             "description": "Internet Bill",
+  //             "dateTime": "2024-08-15T23:52:27.260649",
+  //             "type": "DEBIT"
+  //           },
+  //           {
+  //             "id": 5,
+  //             "amount": 2500.0,
+  //             "description": "Freelance Work",
+  //             "dateTime": "2024-08-16T23:52:27.260649",
+  //             "type": "CREDIT"
+  //           },
+  //           {
+  //             "id": 4,
+  //             "amount": 800.0,
+  //             "description": "Electricity Bill",
+  //             "dateTime": "2024-08-19T23:52:27.260649",
+  //             "type": "DEBIT"
+  //           }
+  //         ]
+  //       }
+  //     ],
+  //     "loans": [
+  //       {
+  //         "id": 1,
+  //         "loanId": 1,
+  //         "payments": 60,
+  //         "name": "Mortgage",
+  //         "amount": 400000.0
+  //       },
+  //       {
+  //         "id": 2,
+  //         "loanId": 2,
+  //         "payments": 12,
+  //         "name": "Personal",
+  //         "amount": 50000.0
+  //       }
+  //     ],
+  //     "cards": [
+  //       {
+  //         "id": 1,
+  //         "cardHolader": "Melba Morel",
+  //         "type": "DEBIT",
+  //         "color": "GOLD",
+  //         "number": "5741-3936-3890-7471",
+  //         "cvv": 723,
+  //         "fromDate": "2024-08-19",
+  //         "thruDate": "2029-08-19"
+  //       },
+  //       {
+  //         "id": 2,
+  //         "cardHolader": "Antonio Guzman",
+  //         "type": "CREDIT",
+  //         "color": "TITANIUM",
+  //         "number": "2923-8134-8693-7624",
+  //         "cvv": 915,
+  //         "fromDate": "2024-08-19",
+  //         "thruDate": "2029-08-19"
+  //       },
+  //       {
+  //         "id": 3,
+  //         "cardHolader": "Luis Ibanez",
+  //         "type": "DEBIT",
+  //         "color": "SILVER",
+  //         "number": "3010-2477-9216-6991",
+  //         "cvv": 407,
+  //         "fromDate": "2024-08-19",
+  //         "thruDate": "2029-08-19"
+  //       },
+  //       {
+  //         "id": 4,
+  //         "cardHolader": "Luis Ibanez",
+  //         "type": "CREDIT",
+  //         "color": "GOLD",
+  //         "number": "3010-2477-9216-6991",
+  //         "cvv": 407,
+  //         "fromDate": "2024-08-19",
+  //         "thruDate": "2029-08-19"
+  //       },
+  //       {
+  //         "id": 5,
+  //         "cardHolader": "Luis Ibanez",
+  //         "type": "CREDIT",
+  //         "color": "SILVER",
+  //         "number": "3010-2477-9216-6991",
+  //         "cvv": 407,
+  //         "fromDate": "2024-08-19",
+  //         "thruDate": "2029-08-19"
+  //       },
+  //       {
+  //         "id": 6,
+  //         "cardHolader": "Luis Ibanez",
+  //         "type": "CREDIT",
+  //         "color": "TITANIUM",
+  //         "number": "3010-2477-9216-6991",
+  //         "cvv": 407,
+  //         "fromDate": "2024-08-19",
+  //         "thruDate": "2029-08-19"
+  //       }
+  //     ]
+  //   }
+  // ]
 
   // Filtrando las tarjetas de tipo DEBIT
-  const debitCards = client[0].cards.filter(debitCard => debitCard.type === "DEBIT");
+  const debitCards = clientCards.filter(debitCard => debitCard.type === "DEBIT");
   console.log(debitCards);
   // Filtrando las tarjetas de tipo DEBIT
-  const creditCards = client[0].cards.filter(card => card.type === "CREDIT");
+  const creditCards = clientCards.filter(card => card.type === "CREDIT");
   console.log(creditCards);
 
   // Determinando si mostrar u ocultar el título
@@ -207,7 +230,7 @@ function CardComponent() {
                   typeSubBackGround={blur}
                   typeCard="Debit Card"
                   numbers={debitCard.number}
-                  fromDate={debitCard.fromDate.slice(0, 7)} //con slice indico cuantas letras quiero que se vea de un string, en este caso quiero que se sea las primeras 7
+                  fromDate={debitCard.fromDate.slice(0, 7)} //con slice indico cuantas letras quiero que se vea de un string, en este caso quiero que se lea las primeras 7
                   thruDate={debitCard.thruDate.slice(0, 7)}
                   fullName={debitCard.cardHolader}
                   cvv={debitCard.cvv}

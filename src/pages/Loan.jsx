@@ -6,20 +6,62 @@ import { useEffect } from "react";
 import axios from "axios";
 import OptionInputSelect from "./OptionInputSelect";
 import InputTypeRange from "../components/InputTypeRange";
+import { useSelector } from "react-redux";
+import store from "../redux/store";
 function Loan() {
-  // Defino el estado inicial con las mismas propiedades que el objeto que me devuelve la solicitud "{ loans: [], accounts: [] }" para asegurarme de que client siempre
-  // tenga las propiedades loans y accounts, incluso antes de que se complete la petición GET. Esto ayuda a evitar errores al intentar mapear o acceder
-  // a estas propiedades antes de que los datos sean cargados.
-  const [client, setClient] = useState({ loans: [], accounts: [] });
+  const [clientAccounts, setClientAccounts] = useState([])
   const [loans , setLoans] = useState([])
   const [selectedLoanName, setSelectedLoanName] = useState(""); // Estado para almacenar el nombre del préstamo seleccionado
   const [maxAmount, setMaxAmount] = useState(0); // Estado para almacenar el maxAmount
   const [payments, setPayments] = useState([])
 
+  const user = useSelector(store => store.authenticationReducer)
+  const [id, setId] = useState(0)
+  const [amount, setAmmount] = useState(1000)
+  const [selectedInstallments, setSelectedInstallments] = useState(0)
+  const [destinyAccount, setDestinyAccount] = useState('')
+
+  const handleApplyLoanForm = async (event) => {
+    console.log("click on button submit" + loans)
+    event.preventDefault();
+    const applyLoanForm = {
+      id: id, 
+      amount: amount,
+      installment: selectedInstallments,
+      destinyAccount: destinyAccount
+    }
+    console.log("-----------"  + loans)
+    console.log('-----------------' + applyLoanForm)
+    console.log('-----------------' + id)
+    console.log('-----------------' + amount)
+    console.log('-----------------' + selectedInstallments)
+    console.log('-----------------' + destinyAccount)
+
+    try{
+      const token = user.token;
+      const response = await axios.post('http://localhost:8080/api/loans/', applyLoanForm, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(response)
+    } catch (error) {
+      console.error('Error al aplicar el prestamo:', error.response ? error.response.data : error.message);
+    }
+  }
   useEffect(() => {
-    axios.get("http://localhost:8080/api/clients/1")
+
+    const token = user.token;
+    console.log(token)
+
+
+    axios.get('http://localhost:8080/api/clients/current/accounts', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
       .then((response) => {
-        setClient(response.data); // Actualiza el estado con los datos recibidos
+        setClientAccounts(response.data); // Actualiza el estado con los datos recibidos
         console.log(response.data); // Para verificar
       })
       .catch((error) => {
@@ -27,23 +69,32 @@ function Loan() {
       });
 
 
-      axios.get("http://localhost:8080/api/loans/")
+      axios.get("http://localhost:8080/api/loans/", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
       .then((response) => {
         setLoans(response.data)
         console.log(response.data)
+        console.log('-----------------' +  selectedLoanName)
+        let filteredLoan = response.data.find(aLoan => aLoan.name === selectedLoanName); 
+        console.log('-----------------' + filteredLoan.id)
+        let obteinedID = filteredLoan.id;
+        setId(obteinedID) 
       })
       .catch((error) =>{
         console.log(error)
       })
   }, []);
 
-    // Manejador para el cambio de selección de préstamo
+    //Manejador para el cambio de selección de préstamo
     const handleLoanChange = (event) => {
       const loanName = event.target.value;
       console.log(loanName)
       setSelectedLoanName(loanName);
   
-      // Filtrar el préstamo seleccionado
+      //Filtrar el préstamo seleccionado
       const selectedLoan = loans.find((loan) => loan.name === loanName);
       if (selectedLoan) {
         setMaxAmount(selectedLoan.maxAmount)
@@ -87,7 +138,7 @@ function Loan() {
                   className="w-[600px] p-8 rounded-lg text-[20px] relative z-10 mb-[30px]"
                 >
                   <div className="w-full h-full flex flex-col justify-center">
-                    <form>
+                    <form onSubmit={handleApplyLoanForm}>
                       <div className="mb-4">
                         <label htmlFor="loan" className="block text-white font-bold mb-2">
                           Loan
@@ -98,7 +149,7 @@ function Loan() {
                           required
                           value={selectedLoanName} // Valor controlado
                           onChange={handleLoanChange} // Manejador de cambio
-                        >
+                          >
                           <option value="">Select a loan</option>
                           {/* Con "loans && loans.length > 0" lo que hago es verificar que loans
                               exista antes de realizar el mapeo. De lo contrario podria intentar mapear algo vacio dando error*/}
@@ -124,15 +175,17 @@ function Loan() {
                         </label>
                         <select
                           id="sourceAccount"
+                          value={destinyAccount}
+                          onChange={(e) => setDestinyAccount(e.target.value)}
                           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                           required
                         >
                           <option value="">Select an account</option>
                           {/* Con "client.accounts && client.accounts.length > 0 && client.accounts" lo que hago es verificar que client.accounts
                               exista antes de realizar el mapeo. De lo contrario podria intentar mapear algo vacio dando error*/}
-                          {client.accounts &&
-                            client.accounts.length > 0 &&
-                            client.accounts.map((account) => {
+                          { clientAccounts &&
+                            clientAccounts.length > 0 &&
+                            clientAccounts.map((account) => {
                               return (
                                 <OptionInputSelect
                                   key={account.id}
@@ -145,7 +198,7 @@ function Loan() {
                       </div>
 
                       {/* Aqui va la logica */}
-                      <InputTypeRange maxAmount={maxAmount}/>
+                      <InputTypeRange maxAmount={maxAmount} amount={amount} onChange={setAmmount}/>
 
                       <div className="mb-4">
                         <label
@@ -156,6 +209,8 @@ function Loan() {
                         </label>
                         <select
                           id="payment"
+                          value={selectedInstallments}
+                          onChange={(e) => setSelectedInstallments(e.target.value)}
                           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                           required
                         >
