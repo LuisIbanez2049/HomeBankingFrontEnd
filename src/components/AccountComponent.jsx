@@ -16,24 +16,54 @@ function AccountComponent() {
 
    // Definir estado para almacenar los datos de clients
    const [clientAccounts, setClientAccounts] = useState([]);
+   let [upDate, setUpDate] = useState(0)
+
+   const token = user.token;
+    console.log(token)
+    const getAccounts = () => {
+      axios.get("http://localhost:8080/api/clients/current/accounts", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then((response) =>{
+        setClientAccounts(response.data); // Actualiza el estado con los datos recibidos
+        console.log(response.data); // Para verificar
+      })
+      .catch((error)=>{
+        console.log(error)
+      })
+    } 
 
   useEffect(()=>{
+    console.log("Me ejecuto")
+    getAccounts()
+  }, [upDate])
 
-    const token = user.token;
-    console.log(token)
-    axios.get("http://localhost:8080/api/clients/current/accounts", {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-    .then((response) =>{
-      setClientAccounts(response.data); // Actualiza el estado con los datos recibidos
-      console.log(response.data); // Para verificar
-    })
-    .catch((error)=>{
-      console.log(error)
-    })
-  }, [])
+  const handelOnClick = async (e) => {
+    console.log("Hice click en el boton")
+    try {
+      const token = user.token;
+      const response = axios.post("http://localhost:8080/api/clients/current/accounts", {} ,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
+      console.log(response);
+      console.log("Post exitoso");
+      getAccounts()
+
+    // Incrementa el estado de upDate para forzar el efecto
+    setUpDate((prevUpDate) => prevUpDate + 1); // Usa el valor anterior y lo incrementa
+    } catch (error) {
+      console.error(
+        "Error:",
+        error.response ? error.response.data : error.message
+      );
+    }
+  }
 
   return (
     <div>
@@ -41,7 +71,7 @@ function AccountComponent() {
         <div id="main" className="relative flex-1">
           <img className="w-[900px] absolute right-[5%] top-[56px] z-10" src={Finance} alt=""/>
           <div className="w-full flex flex-row justify-center my-4 relative z-20">
-            { clientAccounts.length > 0 && <WelcomeMessaje userName={"Melva"} />}
+            { clientAccounts.length > 0 && <WelcomeMessaje userName={user.name} />}
           </div>
           <div className="w-full flex flex-row justify-center relative z-20">
             <div className="border-t-4 border-[#72cb10] w-[70%] flex flex-col">
@@ -59,7 +89,7 @@ function AccountComponent() {
                 );
               })}
               <div className="my-[60px]">
-                <RequestAccountButton title="REQUEST ACCOUNT" path = ""/>
+                <RequestAccountButton handelOnClick={handelOnClick} title="REQUEST ACCOUNT" path = ""/>
               </div>
               
               </div>

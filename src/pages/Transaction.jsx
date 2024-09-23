@@ -5,6 +5,7 @@ import { useState } from "react";
 import axios from "axios";
 import OptionInputSelect from "./OptionInputSelect";
 import { useSelector } from "react-redux";
+import MoneyDisplay from "../components/MoneyDisplay";
 function Transaction() {
   const user = useSelector((store) => store.authenticationReducer);
 
@@ -14,8 +15,9 @@ function Transaction() {
 
   const [sourceAccount, setSourceAccount] = useState("");
   const [destinyAccount, setDestinyAccount] = useState("");
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
+  const [showElement, setShowElement] = useState('hidden')
 
   const handleMakeATransactionForm = async (event) => {
     console.log("Click on button submit");
@@ -255,10 +257,10 @@ function Transaction() {
                         </select>
                       </div>
 
-                      <div className="mb-4">
+                      <div className="mb-4 flex flex-row flex-wrap">
                         <label
                           htmlFor="amount"
-                          className="block text-white font-bold mb-2"
+                          className="w-[400px] block text-white font-bold mb-2"
                         >
                           Amount
                         </label>
@@ -266,11 +268,22 @@ function Transaction() {
                           type="number"
                           id="amount"
                           value={amount}
-                          onChange={(e) => setAmount(e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                          placeholder="Enter amount"
+                          onChange={(e) => {
+                            setAmount(e.target.value)
+                            if(e.target.value != 0) {
+                              setShowElement('')
+                            }else{
+                              setShowElement('hidden')
+                            }
+                          }}
+                          className="w-[200px] px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          placeholder="$ 0.00"
                           required
                         />
+                        <span className={`text-white text-[30px] px-[15px] ${showElement}`}><i className="fa-solid fa-right-long"></i></span>
+                        <div className={`w-[250px] px-3 py-2 border border-gray-300 rounded-md bg-white ${showElement}`}>
+                          <MoneyDisplay amount={amount}/>
+                        </div>
                       </div>
 
                       <div className="mb-20">

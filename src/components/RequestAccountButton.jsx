@@ -2,13 +2,14 @@ import React from "react";
 import "./RequestAccountButton.css";
 import { Link } from "react-router-dom";
 
-function RequestAccountButton(props) {
+function RequestAccountButton({path, title, handelOnClick}) {
   return (
+    <button onClick={handelOnClick}>
       <div className="button-container">
         <div className="wrapper">
           <div className="link_wrapper">
-            <Link id="requestButton" to={props.path}>
-            {props.title}
+            <Link id="requestButton" to={path}>
+            {title}
             </Link>
             <div className="icon">
               <svg
@@ -21,6 +22,8 @@ function RequestAccountButton(props) {
           </div>
         </div>
       </div>
+    </button>
+      
   );
 }
 

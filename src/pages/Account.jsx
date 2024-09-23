@@ -70,8 +70,8 @@ function Account() {
         <div id='containerAllAccount' className='w-full flex flex-row justify-center'>
           <div id='containerH1&div' className='w-[80%] mt-[40px]'>
             <h1 className="text-[45px] text-center">Your selected <span className="text-[#07d611] font-semibold">ACCOUNT</span></h1>
-            <div id='containerDivCard&&DivForm' className='w-full flex flex-row justify-between border-t-4 border-[#07d611] flex-wrap'>
-              <div id='divCard' className='h-[500px] flex flex-col justify-center'>
+            <div id='containerDivCard&&DivForm' className='w-full flex flex-col border-t-4 border-[#07d611] flex-wrap'>
+              <div id='divCard' className='w-full h-[350px] flex flex-col justify-center items-center'>
                 <div id='card'>
                   {account && account.creationDate ? (
                     <Card
@@ -83,7 +83,7 @@ function Account() {
                   }
                 </div>
               </div>
-              <div id='divFormAccount'>
+              <div id='divFormAccount' className='w-full flex flex-row justify-center'>
                 <div className='h-full flex flex-col justify-center'>
                   <div>
                     <h1 className='text-[38px] font-bold mb-[15px]'>Transactions Resume:</h1>

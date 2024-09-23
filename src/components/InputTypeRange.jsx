@@ -11,7 +11,7 @@ function InputTypeRange({maxAmount, amount, onChange}) {
           Amount 
         </label>
         <div className='w-full flex flex-row justify-between text-white font-semibold'>
-          <span>Min {<MoneyDisplay amount={amount}/>}</span>
+          <span>Min {<MoneyDisplay amount={1000}/>}</span>
           <span>Max {<MoneyDisplay amount={maxAmount}/>}</span>
         </div>
         <input

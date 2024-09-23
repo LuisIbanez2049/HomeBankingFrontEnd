@@ -6,9 +6,11 @@ function MoneyDisplay({amount}) {
         currency: 'USD',
       }).format(amount);
 
-  return (
-    <p>{formattedAmount}</p>
-  )
+  // return (
+  //   <p>{formattedAmount}</p>
+  // )
+  return formattedAmount
+  
 }
 
 export default MoneyDisplay

@@ -20,6 +20,7 @@ function Loan() {
   const [amount, setAmmount] = useState(1000)
   const [selectedInstallments, setSelectedInstallments] = useState(0)
   const [destinyAccount, setDestinyAccount] = useState('')
+  const [showElement, setShowElement] = useState('hidden')
 
   const handleApplyLoanForm = async (event) => {
     console.log("click on button submit" + loans)
@@ -78,10 +79,6 @@ function Loan() {
         setLoans(response.data)
         console.log(response.data)
         console.log('-----------------' +  selectedLoanName)
-        let filteredLoan = response.data.find(aLoan => aLoan.name === selectedLoanName); 
-        console.log('-----------------' + filteredLoan.id)
-        let obteinedID = filteredLoan.id;
-        setId(obteinedID) 
       })
       .catch((error) =>{
         console.log(error)
@@ -92,7 +89,14 @@ function Loan() {
     const handleLoanChange = (event) => {
       const loanName = event.target.value;
       console.log(loanName)
+      if(loanName) {
+        setShowElement('')
+      }else{
+        setShowElement('hidden')
+      }
       setSelectedLoanName(loanName);
+      console.log('-----------------' +  selectedLoanName)
+      
   
       //Filtrar el préstamo seleccionado
       const selectedLoan = loans.find((loan) => loan.name === loanName);
@@ -100,6 +104,10 @@ function Loan() {
         setMaxAmount(selectedLoan.maxAmount)
         setPayments(selectedLoan.payments)
         console.log(selectedLoan.name); // Actualizar el maxAmount basado en la selección
+        let filteredLoan = selectedLoan; 
+        console.log('-----------------' + filteredLoan.id)
+        let obteinedID = filteredLoan.id;
+        setId(obteinedID) 
       } else {
         setMaxAmount(0); // Reiniciar maxAmount si no hay coincidencia
         setPayments([])
@@ -198,7 +206,9 @@ function Loan() {
                       </div>
 
                       {/* Aqui va la logica */}
-                      <InputTypeRange maxAmount={maxAmount} amount={amount} onChange={setAmmount}/>
+                      <div className={`${showElement}`}>
+                       <InputTypeRange maxAmount={maxAmount} amount={amount} onChange={setAmmount}/>
+                      </div>
 
                       <div className="mb-4">
                         <label
