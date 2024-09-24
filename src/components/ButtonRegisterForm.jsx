@@ -1,11 +1,11 @@
 import React from 'react'
 import "./ButtonRegisterForm.css"
 
-function ButtonRegisterForm(props) {
+function ButtonRegisterForm({title, handleOnClick}) {
   return (
     <div>
       <div className="wrap">
-        <button type="submit" className="button">{props.title}</button>
+        <button onClick={handleOnClick} type="submit" className="button">{title}</button>
       </div>
     </div>
   )

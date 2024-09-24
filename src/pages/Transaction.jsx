@@ -188,6 +188,14 @@ function Transaction() {
                             required
                             value={selectedAccountNumber} // Valor controlado
                             onChange={handleAccountChange} // Manejador de cambio
+                            onInvalid={(e) =>
+                              e.target.setCustomValidity(
+                                "Please select a destiny account."
+                              )
+                            }
+                            onInput={(e) =>
+                              e.target.setCustomValidity("")
+                            } // Restaura el mensaje predeterminado
                           >
                             <option value="">Select destiny account</option>
                             {/* You can add more options here if needed */}
@@ -224,6 +232,14 @@ function Transaction() {
                             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="Enter destiny account"
                             required
+                            onInvalid={(e) =>
+                              e.target.setCustomValidity(
+                                "Please select a destiny account."
+                              )
+                            }
+                            onInput={(e) =>
+                              e.target.setCustomValidity("")
+                            } // Restaura el mensaje predeterminado
                           />
                         </div>
                       )}
@@ -241,6 +257,14 @@ function Transaction() {
                           onChange={(e) => setSourceAccount(e.target.value)}
                           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                           required
+                          onInvalid={(e) =>
+                            e.target.setCustomValidity(
+                              "Please select a origin account."
+                            )
+                          }
+                          onInput={(e) =>
+                            e.target.setCustomValidity("")
+                          } // Restaura el mensaje predeterminado
                         >
                           <option value="">Select an account</option>
                           {/* You can add more options here if needed */}
@@ -279,6 +303,14 @@ function Transaction() {
                           className="w-[200px] px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                           placeholder="$ 0.00"
                           required
+                          onInvalid={(e) =>
+                            e.target.setCustomValidity(
+                              "Please enter an amount greater than 0."
+                            )
+                          }
+                          onInput={(e) =>
+                            e.target.setCustomValidity("")
+                          } // Restaura el mensaje predeterminado
                         />
                         <span className={`text-white text-[30px] px-[15px] ${showElement}`}><i className="fa-solid fa-right-long"></i></span>
                         <div className={`w-[250px] px-3 py-2 border border-gray-300 rounded-md bg-white ${showElement}`}>
@@ -302,6 +334,14 @@ function Transaction() {
                           className="w-full h-[70px] px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                           placeholder="Enter a brief description (max. 70 characters)"
                           required
+                          onInvalid={(e) =>
+                            e.target.setCustomValidity(
+                              "Please provide a description."
+                            )
+                          }
+                          onInput={(e) =>
+                            e.target.setCustomValidity("")
+                          } // Restaura el mensaje predeterminado
                         />
                       </div>
 

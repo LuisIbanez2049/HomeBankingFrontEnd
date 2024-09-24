@@ -157,6 +157,14 @@ function Loan() {
                           required
                           value={selectedLoanName} // Valor controlado
                           onChange={handleLoanChange} // Manejador de cambio
+                          onInvalid={(e) =>
+                            e.target.setCustomValidity(
+                              "Please select one element of the list."
+                            )
+                          }
+                          onInput={(e) =>
+                            e.target.setCustomValidity("")
+                          } // Restaura el mensaje predeterminado
                           >
                           <option value="">Select a loan</option>
                           {/* Con "loans && loans.length > 0" lo que hago es verificar que loans
@@ -187,6 +195,14 @@ function Loan() {
                           onChange={(e) => setDestinyAccount(e.target.value)}
                           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                           required
+                          onInvalid={(e) =>
+                            e.target.setCustomValidity(
+                              "Please select one element of the list."
+                            )
+                          }
+                          onInput={(e) =>
+                            e.target.setCustomValidity("")
+                          } // Restaura el mensaje predeterminado
                         >
                           <option value="">Select an account</option>
                           {/* Con "client.accounts && client.accounts.length > 0 && client.accounts" lo que hago es verificar que client.accounts
@@ -223,6 +239,14 @@ function Loan() {
                           onChange={(e) => setSelectedInstallments(e.target.value)}
                           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                           required
+                          onInvalid={(e) =>
+                            e.target.setCustomValidity(
+                              "Please select one element of the list."
+                            )
+                          }
+                          onInput={(e) =>
+                            e.target.setCustomValidity("")
+                          } // Restaura el mensaje predeterminado
                         >
                           <option value="">Select payment</option>
                           {/* Add more options here */}

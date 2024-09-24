@@ -58,8 +58,29 @@ function Login() {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)} // Actualiza el estado de email
                             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="Enter your email"
+                            placeholder="example@example.com"
                             required
+                            onInvalid={(e) => {
+                              if (e.target.value === "") {
+                                e.target.setCustomValidity(
+                                  "Please fill in this field."
+                                );
+                              }
+                              else if (!e.target.value.includes(".com") && !e.target.value.includes(".net") && !e.target.value.includes(".org") && !e.target.value.includes(".info") && !e.target.value.includes(".co")) {
+                                e.target.setCustomValidity(
+                                  "Please enter a valid domain extension."
+                                )
+                              }
+                              else if (!e.target.value.includes("@")){
+                                e.target.setCustomValidity("Please enter a valid email. Email must contain an '@' character.");
+                              } else {
+                                e.target.setCustomValidity("Please provide a valid domain since 'gmail', 'yahoo', etc.");
+                              }
+                            }
+                            }
+                            onInput={(e) =>
+                              e.target.setCustomValidity("")
+                            } // Restaura el mensaje predeterminado
                           />
                         </div>
                         <div>

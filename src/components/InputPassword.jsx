@@ -24,6 +24,14 @@ function InputPassword({ value, onChange}) {
           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="Enter your password"
           required
+          onInvalid={(e) => {
+            if (e.target.value === "") {
+              e.target.setCustomValidity(
+                "Please fill in this field."
+              );
+            }
+          }}
+          onInput={(e) => e.target.setCustomValidity("")} //Restaura el mensaje predeterminado
         />
         <button
           type="button"

@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from "react";
 import "./FormApplyCard.css";
 import ButtonRegisterForm from '../components/ButtonRegisterForm'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { useSelector } from "react-redux";
 import axios from "axios";
+import PopUpAlert from "./PopUpAlert";
+import checkGif from "../assets/checkGif.gif"
+import xGif from "../assets/xGif.gif"
 
 function FormApplyCard() {
   // Obtenemos el token del usuario logueado
   const user = useSelector((store) => store.authenticationReducer);
   const [typeCard, setTypeCard] = useState(''); // Estado para tipo de tarjeta
   const [colorCard, setColorCard] = useState(''); // Estado para el color de la tarjeta
+  const [showPopUpAlert, setShowUpAlert] = useState('hidden')
+  const [messageShowPopUpAlert, setMessageShowPopUpAlert] = useState('')
+  const [gif, setGif] = useState('')
+  const [link, setLink] = useState('')
 
   // Manejamos el envío del formulario
   const handleApplyCard = async (event) => {
@@ -20,7 +27,6 @@ function FormApplyCard() {
       color: colorCard,
     };
 
-    try {
       const token = user.token;
       const response = await axios.post(
         'http://localhost:8080/api/clients/current/cards',
@@ -30,12 +36,27 @@ function FormApplyCard() {
             Authorization: `Bearer ${token}`, // Enviar token en el header
           },
         }
-      );
-      console.log(response);
-    } catch (error) {
-      console.error('Error al aplicar la tarjeta:', error.response ? error.response.data : error.message);
-    }
+      )
+      .then((response) => {
+        console.log(response.data)
+        setMessageShowPopUpAlert(response.data)
+        setGif(checkGif)
+        setShowUpAlert('')
+        setLink('/cards')
+
+      })
+      .catch((error) => {
+        console.log(error.response.data)
+        setMessageShowPopUpAlert(error.response.data)
+        setGif(xGif)
+        setShowUpAlert('')
+      })
   };
+
+  const handleOnClickPopAupAlert = (e) => {
+    setShowUpAlert('hidden')
+  }
+
 
   return (
     <div>
@@ -49,11 +70,20 @@ function FormApplyCard() {
               <select
                 id="cardType"
                 name="cardType"
+                required
                 value={typeCard}
                 onChange={(e) => setTypeCard(e.target.value)}
                 className="block w-full p-2 border border-gray-300 rounded-lg"
+                onInvalid={(e) =>
+                  e.target.setCustomValidity(
+                    "Please select a card type."
+                  )
+                }
+                onInput={(e) =>
+                  e.target.setCustomValidity("")
+                } // Restaura el mensaje predeterminado
               >
-                <option value="None">None</option>
+                <option value="">None</option>
                 <option value="CREDIT">CREDIT</option>
                 <option value="DEBIT">DEBIT</option>
               </select>
@@ -66,11 +96,20 @@ function FormApplyCard() {
               <select
                 id="cardTier"
                 name="cardTier"
+                required
                 value={colorCard}
                 onChange={(e) => setColorCard(e.target.value)}
                 className="block w-full p-2 border border-gray-300 rounded-lg"
+                onInvalid={(e) =>
+                  e.target.setCustomValidity(
+                    "Please select one element of the list."
+                  )
+                }
+                onInput={(e) =>
+                  e.target.setCustomValidity("")
+                } // Restaura el mensaje predeterminado
               >
-                <option value="None">None</option>
+                <option value="">None</option>
                 <option value="GOLD">GOLD</option>
                 <option value="SILVER">SILVER</option>
                 <option value="TITANIUM">TITANIUM</option>
@@ -93,7 +132,11 @@ function FormApplyCard() {
           </div>
         </form>
       </div>
+      <div className={`${showPopUpAlert}`}>
+        <PopUpAlert gif={gif} message={messageShowPopUpAlert} handleOnClick={handleOnClickPopAupAlert} link={link}/>
+      </div>
     </div>
+    
   );
 }
 
