@@ -6,6 +6,9 @@ import axios from "axios";
 import OptionInputSelect from "./OptionInputSelect";
 import { useSelector } from "react-redux";
 import MoneyDisplay from "../components/MoneyDisplay";
+import PopUpAlert from "../components/PopUpAlert";
+import checkGif from "../assets/checkGif.gif"
+
 function Transaction() {
   const user = useSelector((store) => store.authenticationReducer);
 
@@ -18,6 +21,31 @@ function Transaction() {
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [showElement, setShowElement] = useState('hidden')
+
+
+  const [showPopUpAlert, setShowPopUpAlert] = useState('hidden')
+  const [messageShowPopUpAlert, setMessageShowPopUpAlert] = useState('')
+  const [gif, setGif] = useState('')
+  const [link, setLink] = useState('')
+
+  const [showInputDestinyAccountSelect, setShowInputDestinyAccountSelect] = useState('hidden')
+  const [showInputDestinyAccountText, setShowInputDestinyAccountText] = useState('hidden')
+  const [showInputOriginAccount, setShowInputOriginAccount] = useState('hidden')
+  const [showInputAmount, setShowInputAmount] = useState('hidden')
+  const [showInputDescription, setShowInputDescription] = useState('hidden')
+
+  const [colorErrorInputDestinyAccountSelect, setColorErrorInputDestinyAccountSelect] = useState('')
+  const [colorErrorInputDestinyAccountText, setColorErrorInputDestinyAccountText] = useState('')
+  const [colorErrorInputSourceAccount, setColorErrorInputSourceAccount] = useState('')
+  const [colorErrorInputAmount, setColorErrorInputAmount] = useState('')
+  const [colorErrorInputDescription, setColorErrorInputDescription] = useState('')
+
+  const [messageErrorInput, setMessageErrorInput] = useState('')
+
+
+  const handleOnClickPopAupAlert = (e) => {
+    setShowPopUpAlert('hidden')
+  }
 
   const handleMakeATransactionForm = async (event) => {
     console.log("Click on button submit");
@@ -45,12 +73,49 @@ function Transaction() {
           },
         }
       );
-      console.log(response);
+      console.log((await response).data);
+      setMessageShowPopUpAlert((await response).data)
+      setShowPopUpAlert('')
+      setGif(checkGif)
+      setLink('/accounts')
     } catch (error) {
-      console.error(
-        "Error al realizar la transacción:",
-        error.response ? error.response.data : error.message
-      );
+      if (amount == "" && sourceAccount != "" && destinyAccount != "") {
+        console.log("entraaaaa")
+         setMessageErrorInput("Please enter an amount.")
+         setColorErrorInputAmount("border-2  border-[red]")
+         setShowInputAmount('')
+      }
+      console.error(error.response ? error.response.data : error.message);
+      let errorMessage = error.response ? error.response.data : error.message;
+      if (errorMessage.includes("Destiny account") && selectedTransactionType == "Own") {
+        setMessageErrorInput(errorMessage)
+        setShowInputDestinyAccountSelect('')
+        setColorErrorInputDestinyAccountSelect('border-2  border-[red]')
+      }
+      if (selectedTransactionType == "Others") {
+        if (errorMessage.includes("Destiny account") || errorMessage.includes("same account")) {
+          setMessageErrorInput(errorMessage)
+          setShowInputDestinyAccountText('')
+          setColorErrorInputDestinyAccountText('border-2  border-[red]')
+          setShowInputAmount('hidden')
+          setColorErrorInputAmount('')
+        } 
+      }
+      if (errorMessage.includes("Source account")) {
+        setMessageErrorInput(errorMessage)
+        setShowInputOriginAccount('')
+        setColorErrorInputSourceAccount('border-2  border-[red]')
+      }
+      if (errorMessage.includes("Amount") || errorMessage.includes("enough funds")) {
+        setMessageErrorInput(errorMessage)
+        setShowInputAmount('')
+        setColorErrorInputAmount('border-2  border-[red]')
+      }
+      if (errorMessage.includes("Description")) {
+        setMessageErrorInput(errorMessage)
+        setShowInputDescription('')
+        setColorErrorInputDescription('border-2  border-[red]')
+      }
     }
   };
 
@@ -79,6 +144,7 @@ function Transaction() {
 
   // Maneja el cambio del radio button
   const handleTransactionTypeChange = (event) => {
+    setDestinyAccount('')
     setSelectedTransactionType(event.target.value); // Actualiza el estado con el valor seleccionado
     if (selectedTransactionType !== "Others") {
       console.log("Others");
@@ -90,6 +156,8 @@ function Transaction() {
 
   // Manejador para el cambio de selección de préstamo
   const handleAccountChange = (event) => {
+    setColorErrorInputDestinyAccountSelect('')
+    setShowInputDestinyAccountSelect('hidden')
     const accountNumber = event.target.value;
     console.log(accountNumber);
     setSelectedAccountNumber(accountNumber);
@@ -184,18 +252,10 @@ function Transaction() {
                           </label>
                           <select
                             id="destinyAccount"
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            required
+                            className={`w-full px-3 py-2 ${colorErrorInputDestinyAccountSelect} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                             value={selectedAccountNumber} // Valor controlado
                             onChange={handleAccountChange} // Manejador de cambio
-                            onInvalid={(e) =>
-                              e.target.setCustomValidity(
-                                "Please select a destiny account."
-                              )
-                            }
-                            onInput={(e) =>
-                              e.target.setCustomValidity("")
-                            } // Restaura el mensaje predeterminado
+                            
                           >
                             <option value="">Select destiny account</option>
                             {/* You can add more options here if needed */}
@@ -212,6 +272,7 @@ function Transaction() {
                                 );
                               })}
                           </select>
+                          <p className={`${showInputDestinyAccountSelect} text-[red] text-[17px] bg-white inline-block rounded-[10px] px-[8px] mt-[5px]`}>&#10071;{messageErrorInput}</p>
                         </div>
                       )}
 
@@ -228,19 +289,16 @@ function Transaction() {
                             type="text"
                             id="destinyAccountOther"
                             value={destinyAccount}
-                            onChange={(e) => setDestinyAccount(e.target.value)}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            onChange={(e) => {
+                              setDestinyAccount(e.target.value)
+                              setColorErrorInputDestinyAccountText('')
+                              setShowInputDestinyAccountText('hidden')
+                            }}
+                            className={`w-full px-3 py-2 ${colorErrorInputDestinyAccountText} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                             placeholder="Enter destiny account"
-                            required
-                            onInvalid={(e) =>
-                              e.target.setCustomValidity(
-                                "Please select a destiny account."
-                              )
-                            }
-                            onInput={(e) =>
-                              e.target.setCustomValidity("")
-                            } // Restaura el mensaje predeterminado
+
                           />
+                          <p className={`${showInputDestinyAccountText} text-[red] text-[17px] bg-white inline-block rounded-[10px] px-[8px] mt-[5px]`}>&#10071;{messageErrorInput}</p>
                         </div>
                       )}
 
@@ -254,17 +312,12 @@ function Transaction() {
                         <select
                           id="originAccount"
                           value={sourceAccount}
-                          onChange={(e) => setSourceAccount(e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                          required
-                          onInvalid={(e) =>
-                            e.target.setCustomValidity(
-                              "Please select a origin account."
-                            )
-                          }
-                          onInput={(e) =>
-                            e.target.setCustomValidity("")
-                          } // Restaura el mensaje predeterminado
+                          onChange={(e) => {
+                            setSourceAccount(e.target.value)
+                            setColorErrorInputSourceAccount('')
+                            setShowInputOriginAccount('hidden')
+                          }}
+                          className={`w-full px-3 py-2 ${colorErrorInputSourceAccount} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                         >
                           <option value="">Select an account</option>
                           {/* You can add more options here if needed */}
@@ -279,9 +332,10 @@ function Transaction() {
                               );
                             })}
                         </select>
+                        <p className={`${showInputOriginAccount} text-[red] text-[17px] bg-white inline-block rounded-[10px] px-[8px] mt-[5px]`}>&#10071;{messageErrorInput}</p>
                       </div>
 
-                      <div className="mb-4 flex flex-row flex-wrap">
+                      <div className="mb-1 flex flex-row flex-wrap">
                         <label
                           htmlFor="amount"
                           className="w-[400px] block text-white font-bold mb-2"
@@ -299,26 +353,25 @@ function Transaction() {
                             }else{
                               setShowElement('hidden')
                             }
+                            setColorErrorInputAmount('')
+                            setShowInputAmount('hidden')
+                            setMessageErrorInput('')
                           }}
-                          className="w-[200px] px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className={`w-[200px] px-3 py-2 ${colorErrorInputAmount} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                           placeholder="$ 0.00"
-                          required
-                          onInvalid={(e) =>
-                            e.target.setCustomValidity(
-                              "Please enter an amount greater than 0."
-                            )
-                          }
-                          onInput={(e) =>
-                            e.target.setCustomValidity("")
-                          } // Restaura el mensaje predeterminado
+                         
+                              // setMessageErrorInput("Please enter an amount. border-2  border-[red]")
+                              // setColorErrorInputAmount("border-2  border-[red]")
+                              // setShowInputAmount('')
                         />
                         <span className={`text-white text-[30px] px-[15px] ${showElement}`}><i className="fa-solid fa-right-long"></i></span>
                         <div className={`w-[250px] px-3 py-2 border border-gray-300 rounded-md bg-white ${showElement}`}>
                           <MoneyDisplay amount={amount}/>
                         </div>
                       </div>
+                      <p className={`${showInputAmount} text-[red] text-[17px] bg-white inline-block rounded-[10px] px-[8px] mt-[5px]`}>&#10071;{messageErrorInput}</p>
 
-                      <div className="mb-20">
+                      <div className="mb-[20px] mt-[15px]">
                         <label
                           htmlFor="description"
                           className="block text-white font-bold mb-2"
@@ -330,19 +383,16 @@ function Transaction() {
                           id="description"
                           maxLength="70"
                           value={description}
-                          onChange={(e) => setDescription(e.target.value)}
-                          className="w-full h-[70px] px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          onChange={(e) => {
+                            setDescription(e.target.value)
+                            setColorErrorInputDescription('')
+                            setShowInputDescription('hidden')
+                          }}
+                          className={`w-full h-[70px] px-3 py-2 ${colorErrorInputDescription} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                           placeholder="Enter a brief description (max. 70 characters)"
-                          required
-                          onInvalid={(e) =>
-                            e.target.setCustomValidity(
-                              "Please provide a description."
-                            )
-                          }
-                          onInput={(e) =>
-                            e.target.setCustomValidity("")
-                          } // Restaura el mensaje predeterminado
+                          
                         />
+                        <p className={`${showInputDescription} text-[red] text-[17px] bg-white inline-block rounded-[10px] px-[8px] mt-[5px]`}>&#10071;{messageErrorInput}</p>
                       </div>
 
                       <div id="buttonSubmitTransaction" className="mt-[60px]">
@@ -357,6 +407,9 @@ function Transaction() {
             <div id="divBackGroundTransaction" className="w-[850px]"></div>
           </div>
         </div>
+      </div>
+      <div className={`${showPopUpAlert}`}>
+        <PopUpAlert gif={gif} message={messageShowPopUpAlert} link={link} handleOnClick={handleOnClickPopAupAlert}/>
       </div>
     </div>
   );

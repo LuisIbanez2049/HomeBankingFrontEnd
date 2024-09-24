@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 
-function InputPassword({ value, onChange}) {
+function InputPassword({ value, onChange, borderColor, setColorErrorInputPassword, setShowInputPassword}) {
 
     const [passwordVisible, setPasswordVisible] = useState(false);
 
@@ -19,19 +19,13 @@ function InputPassword({ value, onChange}) {
           id="password"
 
           value={value}
-          onChange={(e) => onChange(e.target.value)}
-
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Enter your password"
-          required
-          onInvalid={(e) => {
-            if (e.target.value === "") {
-              e.target.setCustomValidity(
-                "Please fill in this field."
-              );
-            }
+          onChange={(e) => {
+            onChange(e.target.value)
+            setColorErrorInputPassword('')
+            setShowInputPassword('hidden')
           }}
-          onInput={(e) => e.target.setCustomValidity("")} //Restaura el mensaje predeterminado
+          className={`w-full px-3 py-2 ${borderColor} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
+          placeholder="Enter your password"
         />
         <button
           type="button"
