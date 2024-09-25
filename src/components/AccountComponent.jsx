@@ -89,6 +89,20 @@ function AccountComponent() {
     setShowConfirmationPopUpAlert("");
   };
 
+ // Dentro de tu componente:
+const [showIsLoged, setShowIsLoged] = useState('hidden');
+
+// Usa un useEffect para actualizar el estado cuando `user.isLoggedIn` cambie.
+useEffect(() => {
+  if (user.isLoggedIn) {
+    setShowIsLoged(''); // Si el usuario está logueado, mostrar el texto
+  } else {
+    setShowIsLoged('hidden'); // Si no, ocultarlo
+  }
+}, [user.isLoggedIn]); // Este efecto depende de `user.isLoggedIn`
+
+
+
   return (
     <div>
       <div id="body" className="flex flex-col min-h-screen">
@@ -127,6 +141,13 @@ function AccountComponent() {
                     path=""
                   />
                 </div>
+                
+
+                <div className={`${showIsLoged}`}>
+                 <p className="text-[30px] font-extrabold">ESTAMOS LOGEADOS</p>
+                </div>
+
+
               </div>
             </div>
           </div>

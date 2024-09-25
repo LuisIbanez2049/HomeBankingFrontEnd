@@ -1,6 +1,6 @@
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Footer from './components/Footer'
 import Header from './components/Header'
@@ -15,6 +15,8 @@ import Transaction from './pages/Transaction'
 import Loan from './pages/Loan'
 import Cards from './pages/Cards'
 import Account from './pages/Account'
+import { useSelector } from 'react-redux'
+import store from './redux/store'
 
 
 // El componente App define la estructura de navegación de tu aplicación. Usa BrowserRouter para manejar la historia de navegación, 
@@ -22,6 +24,12 @@ import Account from './pages/Account'
 // crear una navegación compleja y flexible.
 
 function App() {
+
+
+
+  const isLoggedIn = useSelector(store => store.authenticationReducer.isLoggedIn)
+
+
   return (
     <>
     {/* Componente de react Router, Es el contenedor principal para las rutas. Permite la navegación entre diferentes vistas sin recargar la página. */}
@@ -42,15 +50,22 @@ function App() {
 
          {/* Aqui abajo agrego la ruta específica que va a recibir la url para renderizar una determinada vista y agrego el componente que se va a renderizar. 
          En este caso si pongo en la url: /applyCard --> Outlet va a renderizar "ApplyCard"*/}
-         <Route path='/applyCard' element={<ApplyCard/>}></Route>
-         <Route path='/accounts' element={<Accounts/>}></Route>
-         <Route path='/register' element={<Register/>}></Route>
-         <Route path='/login' element={<Login/>}></Route>
-         <Route path='/transaction' element={<Transaction/>}></Route>
+
+         {
+          isLoggedIn ? <>
+          <Route path='/applyCard' element={<ApplyCard/>}></Route>
+          <Route path='/accounts' element={<Accounts/>}></Route>
+          <Route path='/transaction' element={<Transaction/>}></Route>
          <Route path='/loan' element={<Loan/>}></Route>
          <Route path='/cards' element={<Cards/>}></Route>
          {/* con ":id" defino un parametro de ruta. propiedad "id" va a almacenar la variable que le pase por la url*/}
          <Route path='/account/:id' element={<Account/>}></Route> 
+          </> : <>
+          <Route path='/register' element={<Register/>}></Route>
+          <Route path='/login' element={<Login/>}></Route>
+          </>
+         }
+         <Route path='*' element={<Navigate to={'/'} />} />
 
        </Route>
      </Routes>
