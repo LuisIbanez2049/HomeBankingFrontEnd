@@ -79,15 +79,26 @@ function Transaction() {
       setGif(checkGif)
       setLink('/accounts')
     } catch (error) {
+      setMessageErrorInput('')
+        setColorErrorInputAmount('')
+        setShowInputAmount('hidden')
+        setColorErrorInputDescription('')
+        setShowInputDescription('hidden')
+        setColorErrorInputDestinyAccountSelect('')
+        setShowInputDestinyAccountSelect('hidden')
+        setColorErrorInputDestinyAccountText('')
+        setShowInputDestinyAccountText('hidden')
+        setColorErrorInputSourceAccount('')
+        setShowInputOriginAccount('hidden')
       if (amount == "" && sourceAccount != "" && destinyAccount != "") {
-        console.log("entraaaaa")
-         setMessageErrorInput("Please enter an amount.")
-         setColorErrorInputAmount("border-2  border-[red]")
-         setShowInputAmount('')
+        setMessageErrorInput("Please enter an amount.")
+        setColorErrorInputAmount("border-2  border-[red]")
+        setShowInputAmount('')
       }
       console.error(error.response ? error.response.data : error.message);
       let errorMessage = error.response ? error.response.data : error.message;
       if (errorMessage.includes("Destiny account") && selectedTransactionType == "Own") {
+        
         setMessageErrorInput(errorMessage)
         setShowInputDestinyAccountSelect('')
         setColorErrorInputDestinyAccountSelect('border-2  border-[red]')

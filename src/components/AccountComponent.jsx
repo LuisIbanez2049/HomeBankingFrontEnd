@@ -62,14 +62,14 @@ function AccountComponent() {
       )
       .then((response) => {
         console.log(response.data)
-        setMessageShowPopUpAlert(response.data)
+        setMessageShowPopUpAlert(<><span className="font-extrabold">{response.data}</span></>)
         setGif(checkGif)
         setShowPopUpAlert('')
         getAccounts();
       })
       .catch((error) => {
         console.log(error.response.data)
-        setMessageShowPopUpAlert(error.response.data)
+        setMessageShowPopUpAlert(<><span className="font-extrabold">{error.response.data}</span></>)
         setShowPopUpAlert('')
         setGif(xGif)
       })
@@ -133,7 +133,7 @@ function AccountComponent() {
         </div>
       </div>
       <div className={`${showConfirmationPopUpAlert}`}>
-        <ConfirmationPopUpAlert message={"ARE YOU SURE TO CREATE A NEW ACCOUNT?"} handleOnClickAccept={handelOnClickConfirmation} handleOnClickCancel={handelOnClickCancel}/>
+        <ConfirmationPopUpAlert message={"ARE YOU SURE YOU WANT TO CREATE A NEW ACCOUNT?"} handleOnClickAccept={handelOnClickConfirmation} handleOnClickCancel={handelOnClickCancel}/>
       </div>
       <div className={`${showPopUpAlert}`}>
         <PopUpAlert gif={gif} message={messageShowPopUpAlert} handleOnClick={handleOnClickPopAupAlert}/>

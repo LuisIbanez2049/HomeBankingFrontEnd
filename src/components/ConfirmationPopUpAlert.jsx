@@ -1,7 +1,8 @@
 import React from 'react'
 import './ConfirmationPopUpAlert.css'
+import { Link } from 'react-router-dom'
 
-function ConfirmationPopUpAlert({message, handleOnClickAccept, handleOnClickCancel}) {
+function ConfirmationPopUpAlert({message, handleOnClickAccept, handleOnClickCancel, link}) {
   return (
     <div>
         <div className='w-full h-full absolute top-0 flex flex-row justify-center items-center z-30'>
@@ -10,9 +11,11 @@ function ConfirmationPopUpAlert({message, handleOnClickAccept, handleOnClickCanc
                 <p className=' text-center text-[25px] px-[15px] font-extrabold'>{message}</p>
             </div>
             <div className='w-full flex flex-row justify-around my-[30px]'>
-                <button onClick={handleOnClickAccept} id='buttomAccept'>
+                <Link to={link}>
+                  <button onClick={handleOnClickAccept} id='buttomAccept'>
                     <p className=' p-[10px] text-[20px] text-[#424242] font-bold bg-[#26d126]'>ACCEPT</p>
-                </button>
+                  </button>
+                </Link>
                 <button onClick={handleOnClickCancel} id='buttomCancel'>
                     <p className=' p-[10px] text-[20px] text-white font-bold bg-[#5f20d4]'>CANCEL</p>
                 </button>

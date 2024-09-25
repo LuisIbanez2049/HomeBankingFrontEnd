@@ -54,10 +54,9 @@ function Login() {
       dispatch(loginAction(response.data)); // Maneja el login con Redux
       setMessageShowPopUpAlert(
         <>
-          Login successful <br /> Welcome{" "}
-          <p className="text-[#26a026] font-semibold inline-block">
-            {response.data[1]}
-          </p>{" "}
+          <span className="font-extrabold">
+            LOGIN SUCCESSFUL <br /> Welcome{" "}<p className="text-[#26a026] font-extrabold inline-block">{response.data[1]}</p>
+          </span>
         </>
       );
       setGif(checkGif);

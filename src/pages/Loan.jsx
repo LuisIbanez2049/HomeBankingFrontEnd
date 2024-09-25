@@ -8,6 +8,10 @@ import OptionInputSelect from "./OptionInputSelect";
 import InputTypeRange from "../components/InputTypeRange";
 import { useSelector } from "react-redux";
 import store from "../redux/store";
+import PopUpAlert from "../components/PopUpAlert";
+import checkGif from "../assets/checkGif.gif"
+import xGif from "../assets/xGif.gif"
+
 function Loan() {
   const [clientAccounts, setClientAccounts] = useState([])
   const [loans , setLoans] = useState([])
@@ -21,6 +25,26 @@ function Loan() {
   const [selectedInstallments, setSelectedInstallments] = useState(0)
   const [destinyAccount, setDestinyAccount] = useState('')
   const [showElement, setShowElement] = useState('hidden')
+
+
+  const [showPopUpAlert, setShowPopUpAlert] = useState('hidden')
+  const [messageShowPopUpAlert, setMessageShowPopUpAlert] = useState('')
+  const [gif, setGif] = useState('')
+  const [link, setLink] = useState('/accounts')
+
+  const [showInputLoan, setShowInputLoan] = useState('hidden')
+  const [showInputOriginAccount, setShowInputOriginAccount] = useState('hidden')
+  const [showInputPayment, setShowInputPayment] = useState('hidden')
+
+  const [colorErrorInputLoan, setColorErrorInputLoan] = useState('')
+  const [colorErrorInputOriginAccount, setColorErrorInputOriginAccount] = useState('')
+  const [colorErrorInputPayment, setColorErrorInputPayment] = useState('')
+
+  const [messageErrorInput, setMessageErrorInput] = useState('')
+
+  const handleOnClickPopAupAlert = () => {
+    setShowPopUpAlert('hidden')
+  }
 
   const handleApplyLoanForm = async (event) => {
     console.log("click on button submit" + loans)
@@ -45,9 +69,35 @@ function Loan() {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(response)
+      console.log(response.data)
+      setMessageShowPopUpAlert(<><span className="font-semibold">{response.data}</span></>)
+      setGif(checkGif)
+      setShowPopUpAlert('')
     } catch (error) {
-      console.error('Error al aplicar el prestamo:', error.response ? error.response.data : error.message);
+      setMessageErrorInput('')
+      setShowInputLoan('hidden')
+      setColorErrorInputLoan('')
+      setShowInputOriginAccount('hidden')
+      setColorErrorInputOriginAccount('')
+      setShowInputPayment('hidden')
+      setColorErrorInputPayment('')
+      console.error(error.response ? error.response.data : error.message);
+      let errorMessage = error.response ? error.response.data : error.message
+      if (errorMessage.includes('Loan not')) {
+        setMessageErrorInput('Please select one element of the list.')
+        setShowInputLoan('')
+        setColorErrorInputLoan('border-2  border-[red]')
+      }
+      if (errorMessage.includes('Destiny account')) {
+        setMessageErrorInput('Please select an account.')
+        setShowInputOriginAccount('')
+        setColorErrorInputOriginAccount('border-2  border-[red]')
+      }
+      if (errorMessage.includes('Installments')) {
+        setMessageErrorInput(errorMessage + '.')
+        setShowInputPayment('')
+        setColorErrorInputPayment('border-2  border-[red]')
+      }
     }
   }
   useEffect(() => {
@@ -66,7 +116,7 @@ function Loan() {
         console.log(response.data); // Para verificar
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response.data);
       });
 
 
@@ -81,12 +131,19 @@ function Loan() {
         console.log('-----------------' +  selectedLoanName)
       })
       .catch((error) =>{
-        console.log(error)
+        console.log(error.response.data)
+        if (error.response.data.includes('You have already')) {
+          setMessageShowPopUpAlert(<><span className="font-semibold text-red-400">{error.response.data}</span></>)
+          setGif(xGif)
+          setShowPopUpAlert('') 
+        }
       })
   }, []);
 
     //Manejador para el cambio de selección de préstamo
     const handleLoanChange = (event) => {
+      setColorErrorInputLoan('')
+      setShowInputLoan('hidden')
       const loanName = event.target.value;
       console.log(loanName)
       if(loanName) {
@@ -153,18 +210,10 @@ function Loan() {
                         </label>
                         <select
                           id="loan"
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                          required
+                          // className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className={`w-full px-3 py-2 ${colorErrorInputLoan} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                           value={selectedLoanName} // Valor controlado
                           onChange={handleLoanChange} // Manejador de cambio
-                          onInvalid={(e) =>
-                            e.target.setCustomValidity(
-                              "Please select one element of the list."
-                            )
-                          }
-                          onInput={(e) =>
-                            e.target.setCustomValidity("")
-                          } // Restaura el mensaje predeterminado
                           >
                           <option value="">Select a loan</option>
                           {/* Con "loans && loans.length > 0" lo que hago es verificar que loans
@@ -180,6 +229,7 @@ function Loan() {
                               );
                             })}
                         </select>
+                        <p className={`${showInputLoan} text-[red] text-[17px] bg-white inline-block rounded-[10px] px-[8px] mt-[5px]`}>&#10071;{messageErrorInput}</p>
                       </div>
 
                       <div className="mb-4">
@@ -192,17 +242,13 @@ function Loan() {
                         <select
                           id="sourceAccount"
                           value={destinyAccount}
-                          onChange={(e) => setDestinyAccount(e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                          required
-                          onInvalid={(e) =>
-                            e.target.setCustomValidity(
-                              "Please select one element of the list."
-                            )
-                          }
-                          onInput={(e) =>
-                            e.target.setCustomValidity("")
-                          } // Restaura el mensaje predeterminado
+                          onChange={(e) => {
+                            setDestinyAccount(e.target.value)
+                            setColorErrorInputOriginAccount('')
+                            setShowInputOriginAccount('hidden')
+                          }}
+                          // className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className={`w-full px-3 py-2 ${colorErrorInputOriginAccount} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                         >
                           <option value="">Select an account</option>
                           {/* Con "client.accounts && client.accounts.length > 0 && client.accounts" lo que hago es verificar que client.accounts
@@ -219,6 +265,7 @@ function Loan() {
                               );
                             })}
                         </select>
+                        <p className={`${showInputOriginAccount} text-[red] text-[17px] bg-white inline-block rounded-[10px] px-[8px] mt-[5px]`}>&#10071;{messageErrorInput}</p>
                       </div>
 
                       {/* Aqui va la logica */}
@@ -236,17 +283,13 @@ function Loan() {
                         <select
                           id="payment"
                           value={selectedInstallments}
-                          onChange={(e) => setSelectedInstallments(e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                          required
-                          onInvalid={(e) =>
-                            e.target.setCustomValidity(
-                              "Please select one element of the list."
-                            )
-                          }
-                          onInput={(e) =>
-                            e.target.setCustomValidity("")
-                          } // Restaura el mensaje predeterminado
+                          onChange={(e) => {
+                            setSelectedInstallments(e.target.value)
+                            setColorErrorInputPayment('')
+                            setShowInputPayment('hidden')
+                          }}
+                          // className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className={`w-full px-3 py-2 ${colorErrorInputPayment} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                         >
                           <option value="">Select payment</option>
                           {/* Add more options here */}
@@ -260,6 +303,7 @@ function Loan() {
                               );
                             })}
                         </select>
+                        <p className={`${showInputPayment} text-[red] text-[17px] bg-white inline-block rounded-[10px] px-[8px] mt-[5px]`}>&#10071;{messageErrorInput}</p>
                       </div>
                       <div id="buttonSubmitLoan" className="mt-[60px]">
                         <ButtonRegisterForm title="Submit" />
@@ -273,6 +317,9 @@ function Loan() {
             <div id="divBackGroundLoan" className="w-[850px]  z-20"></div>
           </div>
         </div>
+      </div>
+      <div className={`${showPopUpAlert}`}>
+        <PopUpAlert gif={gif} message={messageShowPopUpAlert} link={link} handleOnClick={handleOnClickPopAupAlert}/>
       </div>
     </div>
   );

@@ -32,7 +32,6 @@ function Register() {
 
   const [messageErrorInput, setMessageErrorInput] = useState('')
 
-
   const handleOnClickPopAupAlert = (e) => {
     setShowPopUpAlert('hidden')
   }
@@ -62,6 +61,15 @@ function Register() {
       setShowPopUpAlert('')
       setLink('/login')
     } catch (error) {
+      setMessageErrorInput('')
+      setShowInputFirstName('hidden')
+      setColorErrorInputFirstName('')
+      setShowInputLastName('hidden')
+      setColorErrorInputLastName('')
+      setShowInputEmail('hidden')
+      setColorErrorInputEmail('')
+      setShowInputPassword('hidden')
+      setColorErrorInputPassword('')
       console.error(error.response ? error.response.data : error.message);
       let errorMessage = error.response ? error.response.data : error.message;
       if (errorMessage.includes("First name") || errorMessage.includes("first name")) {

@@ -4,6 +4,10 @@ import CardDebitCredit from './CardDebitCredit'
 import RequestAccountButton from "./RequestAccountButton";
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import ConfirmationPopUpAlert from "./ConfirmationPopUpAlert";
+import PopUpAlert from "./PopUpAlert";
+import xGif from "../assets/xGif.gif"
+import "./CardComponent.css"
 
 {/*       
           props.backGroundCard (fondo de la tarjeta  {CardDebitCreditGold, CardDebitCreditSilver, CardDebitCreditTitanium})  
@@ -20,6 +24,37 @@ function CardComponent() {
   
   const user = useSelector(store => store.authenticationReducer)
   const [clientCards, setClientCards] = useState([]);
+  const [messageNoCards, setMessageNoCards] = useState('')
+  const [showDivNoCards, setShowDivNoCards] = useState('hidden')
+
+
+  const [showPopUpAlert, setShowPopUpAlert] = useState('hidden')
+  const [messageShowPopUpAlert, setMessageShowPopUpAlert] = useState('')
+  const [gif, setGif] = useState('')
+
+  const [showConfirmationPopUpAlert, setShowConfirmationPopUpAlert] =useState("hidden");
+  const [link, setLink] = useState('/applyCard')
+  
+  const handleRequestCardButton = () => {
+    setShowConfirmationPopUpAlert('')
+    if (debitCards.length == 3 && creditCards.length == 3) {
+      setMessageShowPopUpAlert(<><span className=' font-extrabold text-[25px]'>YOU CAN NOT HAVE MORE CARDS</span> <br /> <span className='text-[15px]'>YOU CAN ONLY HAVE 3 CREDIT CARDS AND 3 DEBIT CARDS</span></>)
+      setGif(xGif)
+      setLink('')
+    }
+  }
+  const handelOnClickConfirmation = () => {
+    setShowConfirmationPopUpAlert('hidden')
+    if (debitCards.length == 3 && creditCards.length == 3) {
+      setShowPopUpAlert('')
+    }
+  }
+  const handelOnClickCancel = () => {
+    setShowConfirmationPopUpAlert('hidden');
+  }
+  const handleOnClickPopAupAlert = () => {
+    setShowPopUpAlert('hidden')
+  }
 
   useEffect(() => {
     const token = user.token;
@@ -34,157 +69,14 @@ function CardComponent() {
       console.log(response.data)
     })
     .catch((error) => {
-      console.log(error)
+      console.log(error.response.data)
+      let errorMessage = error.response.data
+      if (errorMessage.includes("YOU DONT'T HAVE CARDS")) {
+        setMessageNoCards(errorMessage)
+        setShowDivNoCards('')
+      }
     })
   }, [])
-
-
-  // let client = [
-  //   {
-  //     "id": 1,
-  //     "firstName": "Melba",
-  //     "lastName": "Morel",
-  //     "email": "melba@mindhub.com",
-  //     "accounts": [
-  //       {
-  //         "id": 1,
-  //         "number": "VIN001",
-  //         "creationDate": "2024-08-19T23:52:27.260649",
-  //         "balance": 5000.0,
-  //         "transactios": [
-  //           {
-  //             "id": 1,
-  //             "amount": 2000.0,
-  //             "description": "Rent",
-  //             "dateTime": "2024-08-19T23:52:27.260649",
-  //             "type": "CREDIT"
-  //           },
-  //           {
-  //             "id": 2,
-  //             "amount": 500.0,
-  //             "description": "Groceries",
-  //             "dateTime": "2024-08-18T23:52:27.260649",
-  //             "type": "DEBIT"
-  //           },
-  //           {
-  //             "id": 3,
-  //             "amount": 1500.0,
-  //             "description": "Salary",
-  //             "dateTime": "2024-08-17T23:52:27.260649",
-  //             "type": "CREDIT"
-  //           }
-  //         ]
-  //       },
-  //       {
-  //         "id": 2,
-  //         "number": "VIN002",
-  //         "creationDate": "2024-08-20T23:52:27.260649",
-  //         "balance": 7500.0,
-  //         "transactios": [
-  //           {
-  //             "id": 6,
-  //             "amount": 700.0,
-  //             "description": "Internet Bill",
-  //             "dateTime": "2024-08-15T23:52:27.260649",
-  //             "type": "DEBIT"
-  //           },
-  //           {
-  //             "id": 5,
-  //             "amount": 2500.0,
-  //             "description": "Freelance Work",
-  //             "dateTime": "2024-08-16T23:52:27.260649",
-  //             "type": "CREDIT"
-  //           },
-  //           {
-  //             "id": 4,
-  //             "amount": 800.0,
-  //             "description": "Electricity Bill",
-  //             "dateTime": "2024-08-19T23:52:27.260649",
-  //             "type": "DEBIT"
-  //           }
-  //         ]
-  //       }
-  //     ],
-  //     "loans": [
-  //       {
-  //         "id": 1,
-  //         "loanId": 1,
-  //         "payments": 60,
-  //         "name": "Mortgage",
-  //         "amount": 400000.0
-  //       },
-  //       {
-  //         "id": 2,
-  //         "loanId": 2,
-  //         "payments": 12,
-  //         "name": "Personal",
-  //         "amount": 50000.0
-  //       }
-  //     ],
-  //     "cards": [
-  //       {
-  //         "id": 1,
-  //         "cardHolader": "Melba Morel",
-  //         "type": "DEBIT",
-  //         "color": "GOLD",
-  //         "number": "5741-3936-3890-7471",
-  //         "cvv": 723,
-  //         "fromDate": "2024-08-19",
-  //         "thruDate": "2029-08-19"
-  //       },
-  //       {
-  //         "id": 2,
-  //         "cardHolader": "Antonio Guzman",
-  //         "type": "CREDIT",
-  //         "color": "TITANIUM",
-  //         "number": "2923-8134-8693-7624",
-  //         "cvv": 915,
-  //         "fromDate": "2024-08-19",
-  //         "thruDate": "2029-08-19"
-  //       },
-  //       {
-  //         "id": 3,
-  //         "cardHolader": "Luis Ibanez",
-  //         "type": "DEBIT",
-  //         "color": "SILVER",
-  //         "number": "3010-2477-9216-6991",
-  //         "cvv": 407,
-  //         "fromDate": "2024-08-19",
-  //         "thruDate": "2029-08-19"
-  //       },
-  //       {
-  //         "id": 4,
-  //         "cardHolader": "Luis Ibanez",
-  //         "type": "CREDIT",
-  //         "color": "GOLD",
-  //         "number": "3010-2477-9216-6991",
-  //         "cvv": 407,
-  //         "fromDate": "2024-08-19",
-  //         "thruDate": "2029-08-19"
-  //       },
-  //       {
-  //         "id": 5,
-  //         "cardHolader": "Luis Ibanez",
-  //         "type": "CREDIT",
-  //         "color": "SILVER",
-  //         "number": "3010-2477-9216-6991",
-  //         "cvv": 407,
-  //         "fromDate": "2024-08-19",
-  //         "thruDate": "2029-08-19"
-  //       },
-  //       {
-  //         "id": 6,
-  //         "cardHolader": "Luis Ibanez",
-  //         "type": "CREDIT",
-  //         "color": "TITANIUM",
-  //         "number": "3010-2477-9216-6991",
-  //         "cvv": 407,
-  //         "fromDate": "2024-08-19",
-  //         "thruDate": "2029-08-19"
-  //       }
-  //     ]
-  //   }
-  // ]
 
   // Filtrando las tarjetas de tipo DEBIT
   const debitCards = clientCards.filter(debitCard => debitCard.type === "DEBIT");
@@ -205,7 +97,9 @@ function CardComponent() {
         <h1 className="text-[45px] text-center">Your <span className="text-[#07d611] font-semibold">CARDS</span></h1>
         <div className="w-full flex flex-row justify-center">
           <div className="border-t-4 border-[#72cb10] w-[70%]">
-
+            <div id='divNoCards' className={`${showDivNoCards} mt-[40px] p-[17px] rounded-[30px]`}>
+              <h1 id='h1NoCards' className='text-center text-[45px] font-extrabold rounded-[25px]'>{messageNoCards}</h1>
+            </div>
             <h1 className={showOrHideTitleDebit}>DEBIT</h1>
             <div id='containerDebitCards' className='w-full flex flex-row flex-wrap justify-between'>
               {debitCards.map(debitCard => {
@@ -271,10 +165,16 @@ function CardComponent() {
               })}
             </div>
             <div className="my-[60px]">
-              <RequestAccountButton title="REQUEST CARD" path="/applyCard" />
+              <RequestAccountButton handelOnClick={handleRequestCardButton} title="REQUEST CARD" path={""} />
             </div>
           </div>
         </div>
+      </div>
+      <div className={`${showConfirmationPopUpAlert}`}>
+        <ConfirmationPopUpAlert message={"ARE YOU SURE YOU WANT TO APPLY FOR A NEW CARD?"} link={link} handleOnClickAccept={handelOnClickConfirmation} handleOnClickCancel={handelOnClickCancel}/>
+      </div>
+      <div className={`${showPopUpAlert}`}>
+        <PopUpAlert gif={gif} message={messageShowPopUpAlert} handleOnClick={handleOnClickPopAupAlert}/>
       </div>
     </div>
   )

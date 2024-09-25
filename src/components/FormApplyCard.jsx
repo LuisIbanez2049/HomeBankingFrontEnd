@@ -13,10 +13,19 @@ function FormApplyCard() {
   const user = useSelector((store) => store.authenticationReducer);
   const [typeCard, setTypeCard] = useState(''); // Estado para tipo de tarjeta
   const [colorCard, setColorCard] = useState(''); // Estado para el color de la tarjeta
+
   const [showPopUpAlert, setShowUpAlert] = useState('hidden')
   const [messageShowPopUpAlert, setMessageShowPopUpAlert] = useState('')
   const [gif, setGif] = useState('')
   const [link, setLink] = useState('')
+
+  const [showInputCardType, setShowInputCardType] = useState('hidden')
+  const [showInputCardColor, setShowInputCardColor] = useState('hidden')
+
+  const [colorErrorInputCardType, setColorErrorInputCardType] = useState('')
+  const [colorErrorInputCardColor, setColorErrorInputCardColor] = useState('')
+
+  const [messageErrorInput, setMessageErrorInput] = useState('')
 
   // Manejamos el envío del formulario
   const handleApplyCard = async (event) => {
@@ -39,17 +48,41 @@ function FormApplyCard() {
       )
       .then((response) => {
         console.log(response.data)
-        setMessageShowPopUpAlert(response.data)
+        setMessageShowPopUpAlert(<><span className="font-extrabold">{response.data}</span></>)
         setGif(checkGif)
         setShowUpAlert('')
         setLink('/cards')
 
       })
       .catch((error) => {
+        setMessageErrorInput('')
+        setShowInputCardType('hidden')
+        setColorErrorInputCardType('')
+        setShowInputCardColor('hidden')
+        setColorErrorInputCardColor('')
         console.log(error.response.data)
-        setMessageShowPopUpAlert(error.response.data)
-        setGif(xGif)
-        setShowUpAlert('')
+        let errorMessage = error.response.data
+        if (errorMessage.includes("THAN 3")) {
+          setMessageShowPopUpAlert(<><span className="font-extrabold">{error.response.data}</span></>)
+          setGif(xGif)
+          setShowUpAlert('') 
+        }
+        if (errorMessage.includes('YOU ALREADY HAVE A')) {
+          setMessageShowPopUpAlert(<><span className="font-extrabold">{error.response.data}</span></>)
+          setGif(xGif)
+          setShowUpAlert('') 
+        }
+        if (errorMessage.includes('Card TYPE')) {
+          setMessageErrorInput(errorMessage)
+          setShowInputCardType('')
+          setColorErrorInputCardType('border-2  border-[red]')
+        }
+        if (errorMessage.includes('Card COLOR')) {
+          setMessageErrorInput(errorMessage)
+          setShowInputCardColor('')
+          setColorErrorInputCardColor('border-2  border-[red]')
+        }
+
       })
   };
 
@@ -63,57 +96,49 @@ function FormApplyCard() {
       <div id="divForm" className="p-6 rounded-lg w-[600px] h-[600px] text-[30px] relative">
         <form onSubmit={handleApplyCard}>
           <div className="flex flex-col justify-center">
-            <div className="my-[40px]">
+            <div className="mt-[40px] mb-[15px]">
               <label htmlFor="cardType" className="block text-white font-bold mb-2">
                 Card Type
               </label>
               <select
                 id="cardType"
                 name="cardType"
-                required
                 value={typeCard}
-                onChange={(e) => setTypeCard(e.target.value)}
-                className="block w-full p-2 border border-gray-300 rounded-lg"
-                onInvalid={(e) =>
-                  e.target.setCustomValidity(
-                    "Please select a card type."
-                  )
-                }
-                onInput={(e) =>
-                  e.target.setCustomValidity("")
-                } // Restaura el mensaje predeterminado
+                onChange={(e) => {
+                  setTypeCard(e.target.value)
+                  setColorErrorInputCardType('')
+                  setShowInputCardType('hidden')
+                }}
+                className={`${colorErrorInputCardType} block w-full p-2 border border-gray-300 rounded-lg`}
               >
                 <option value="">None</option>
                 <option value="CREDIT">CREDIT</option>
                 <option value="DEBIT">DEBIT</option>
               </select>
+              <p className={`${showInputCardType} text-[red] text-[17px] bg-white inline-block rounded-[10px] px-[8px] mt-[5px]`}>&#10071;{messageErrorInput}</p>
             </div>
 
-            <div className="my-[40px]">
+            <div className="mb-[40px]">
               <label htmlFor="cardTier" className="block text-white font-bold mb-2">
                 Card Tier
               </label>
               <select
                 id="cardTier"
                 name="cardTier"
-                required
                 value={colorCard}
-                onChange={(e) => setColorCard(e.target.value)}
-                className="block w-full p-2 border border-gray-300 rounded-lg"
-                onInvalid={(e) =>
-                  e.target.setCustomValidity(
-                    "Please select one element of the list."
-                  )
-                }
-                onInput={(e) =>
-                  e.target.setCustomValidity("")
-                } // Restaura el mensaje predeterminado
+                onChange={(e) => {
+                  setColorCard(e.target.value)
+                  setColorErrorInputCardColor('')
+                  setShowInputCardColor('hidden')
+                }}
+                className={`${colorErrorInputCardColor} block w-full p-2 border border-gray-300 rounded-lg`}
               >
                 <option value="">None</option>
                 <option value="GOLD">GOLD</option>
                 <option value="SILVER">SILVER</option>
                 <option value="TITANIUM">TITANIUM</option>
               </select>
+              <p className={`${showInputCardColor} text-[red] text-[17px] bg-white inline-block rounded-[10px] px-[8px] mt-[5px]`}>&#10071;{messageErrorInput}</p>
             </div>
 
             <div className="flex justify-center mt-[20px]">
