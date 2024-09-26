@@ -62,6 +62,7 @@ function Loan() {
     formRef.current.reset(); // Resetea el formulario
     setDestinyAccount('')
     setSelectedLoanName('')
+    setId(0)
     setShowElement('hidden')
     setSelectedInstallments(0)
     setAmmount(1000)
