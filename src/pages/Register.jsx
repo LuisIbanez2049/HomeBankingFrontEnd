@@ -224,7 +224,7 @@ function Register() {
                 />
                 <img
                   src={SpinCenter}
-                  className="absolute w-[390px] left-[635px] bottom-[160px] z-0"
+                  className="absolute w-[390px] left-[635px] bottom-[10px] z-0"
                   alt=""
                 />
               </div>
