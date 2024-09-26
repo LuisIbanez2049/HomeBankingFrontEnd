@@ -34,7 +34,7 @@ function Account() {
   // Me diante axios hago una peticion GET a la API que desarrollé con intellij 
   const requesAccountById = () => {
     const token = user.token;
-    axios.get(`http://localhost:8080/api/clients/accounts/${id}`, {
+    axios.get(`https://homebanking-luisibanez-deply-back.onrender.com/api/clients/accounts/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }

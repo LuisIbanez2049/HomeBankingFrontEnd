@@ -64,7 +64,7 @@ function CardComponent() {
   useEffect(() => {
     const token = user.token;
     console.log(token)
-    axios.get('http://localhost:8080/api/clients/current/cards', {
+    axios.get('https://homebanking-luisibanez-deply-back.onrender.com/api/clients/current/cards', {
       headers: {
         Authorization: `Bearer ${token}`
       }

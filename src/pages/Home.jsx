@@ -88,5 +88,4 @@ function Home() {
     </div>
   )
 }
-// componentes, use useEffect, node, react
 export default Home

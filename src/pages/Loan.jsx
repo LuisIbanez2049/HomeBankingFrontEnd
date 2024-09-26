@@ -86,7 +86,7 @@ function Loan() {
 
     try {
       const token = user.token;
-      const response = await axios.post('http://localhost:8080/api/loans/', applyLoanForm, {
+      const response = await axios.post('https://homebanking-luisibanez-deply-back.onrender.com/api/loans/', applyLoanForm, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -128,7 +128,7 @@ function Loan() {
     console.log(token)
 
 
-    axios.get('http://localhost:8080/api/clients/current/accounts', {
+    axios.get('https://homebanking-luisibanez-deply-back.onrender.com/api/clients/current/accounts', {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -142,7 +142,7 @@ function Loan() {
       });
 
 
-    axios.get("http://localhost:8080/api/loans/", {
+    axios.get("https://homebanking-luisibanez-deply-back.onrender.com/api/loans/", {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -159,7 +159,7 @@ function Loan() {
         setShowForm('hidden')
       })
 
-    axios.get("http://localhost:8080/api/loans/currentClient", {
+    axios.get("https://homebanking-luisibanez-deply-back.onrender.com/api/loans/currentClient", {
       headers: {
         Authorization: `Bearer ${token}`
       }

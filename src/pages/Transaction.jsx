@@ -65,7 +65,7 @@ function Transaction() {
     try {
       const token = user.token;
       const response = axios.post(
-        "http://localhost:8080/api/transactions",
+        "https://homebanking-luisibanez-deply-back.onrender.com/api/transactions",
         transactionForm,
         {
           headers: {
@@ -134,7 +134,7 @@ function Transaction() {
     const token = user.token;
     console.log(token);
     axios
-      .get("http://localhost:8080/api/clients/current/accounts", {
+      .get("https://homebanking-luisibanez-deply-back.onrender.com/api/clients/current/accounts", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -28,7 +28,7 @@ function AccountComponent() {
   const token = user.token;
   console.log(token);
   const getAccounts = () => {
-    axios.get("http://localhost:8080/api/clients/current/accounts", {
+    axios.get("https://homebanking-luisibanez-deply-back.onrender.com/api/clients/current/accounts", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -52,7 +52,7 @@ function AccountComponent() {
     console.log("Click on confirmation");
     const token = user.token;
     axios.post(
-      "http://localhost:8080/api/clients/current/accounts",
+      "https://homebanking-luisibanez-deply-back.onrender.com/api/clients/current/accounts",
       {},
       {
         headers: {

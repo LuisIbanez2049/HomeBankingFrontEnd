@@ -10,8 +10,6 @@ function Accounts() {
   return (
     <div>
         <AccountComponent/>
-        {/* <PopUpAlert gif={checkGif} message={"ACCOUNT CREATED"}/> */}
-        {/* <ConfirmationPopUpAlert gif={checkGif} message={"ARE YOU SURE TO OPEN A NEW ACCOUNT?"}/> */}
     </div>
   )
 }
