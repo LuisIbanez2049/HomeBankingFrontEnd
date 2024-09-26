@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit"
-import { loginAction } from "../actions/authenticationAction"
+import { loginAction, logoutAction } from "../actions/authenticationAction"
 
 const initialState = {
     isLoggedIn: false,
@@ -17,6 +17,9 @@ const authenticationReducer = createReducer(initialState, (builder) => {
             email: action.payload.email,
             name: action.payload.name
         }
+    })
+    .addCase(logoutAction, (state, action) => {
+        return initialState
     })
 }) 
 

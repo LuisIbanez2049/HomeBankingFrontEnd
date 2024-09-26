@@ -12,3 +12,5 @@ export const loginAction = createAction('login', (data) => {
         payload: usuario
     }
 })
+
+export const logoutAction = createAction('logout')

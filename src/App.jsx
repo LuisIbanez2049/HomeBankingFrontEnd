@@ -46,7 +46,7 @@ function App() {
 
        {/* Con "index" indico que Home va a ser mi elemento principal. Es decir si no defino una ruta especifica en la url. MainLayout va a renderizar 
            el componente Home*/}
-         <Route index element={<Home/>} className="main"></Route>
+         {/* <Route index element={<Home/>} className="main"></Route> */}
 
          {/* Aqui abajo agrego la ruta específica que va a recibir la url para renderizar una determinada vista y agrego el componente que se va a renderizar. 
          En este caso si pongo en la url: /applyCard --> Outlet va a renderizar "ApplyCard"*/}
@@ -61,11 +61,12 @@ function App() {
          {/* con ":id" defino un parametro de ruta. propiedad "id" va a almacenar la variable que le pase por la url*/}
          <Route path='/account/:id' element={<Account/>}></Route> 
           </> : <>
+          <Route index element={<Home/>} className="main"></Route>
           <Route path='/register' element={<Register/>}></Route>
           <Route path='/login' element={<Login/>}></Route>
           </>
          }
-         <Route path='*' element={<Navigate to={'/'} />} />
+         <Route path='*' element={<Navigate to={'/accounts'} />} />
 
        </Route>
      </Routes>

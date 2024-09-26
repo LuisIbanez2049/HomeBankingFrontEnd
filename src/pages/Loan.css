@@ -10,3 +10,7 @@
     background-position-y: -107px;
     background-repeat: no-repeat
 }
+
+#divNoLoans{
+    box-shadow: 0px 0px 9px rgba(245, 2, 2, 0.897);
+}

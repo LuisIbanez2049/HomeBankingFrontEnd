@@ -110,10 +110,12 @@ function Register() {
                 id="containerLogo"
                 className="w-full flex flex-row justify-center items-center mb-[20px]"
               >
-                <div
-                  id="logo"
-                  className="border border-black w-[120px] h-[120px]"
-                ></div>
+                <Link to={"/"}>
+                  <div
+                    id="logo"
+                    className=" w-[120px] h-[120px]"
+                  ></div>
+                </Link>
               </div>
 
               <div

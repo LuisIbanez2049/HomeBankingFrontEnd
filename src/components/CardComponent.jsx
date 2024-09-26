@@ -21,7 +21,7 @@ import "./CardComponent.css"
       */}
 
 function CardComponent() {
-  
+
   const user = useSelector(store => store.authenticationReducer)
   const [clientCards, setClientCards] = useState([]);
   const [messageNoCards, setMessageNoCards] = useState('')
@@ -32,10 +32,15 @@ function CardComponent() {
   const [messageShowPopUpAlert, setMessageShowPopUpAlert] = useState('')
   const [gif, setGif] = useState('')
 
-  const [showConfirmationPopUpAlert, setShowConfirmationPopUpAlert] =useState("hidden");
+  const [showConfirmationPopUpAlert, setShowConfirmationPopUpAlert] = useState("hidden");
   const [link, setLink] = useState('/applyCard')
-  
+
   const handleRequestCardButton = () => {
+    // Desplazar hasta el principio de la página
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // Desplazamiento suave
+    });
     setShowConfirmationPopUpAlert('')
     if (debitCards.length == 3 && creditCards.length == 3) {
       setMessageShowPopUpAlert(<><span className=' font-extrabold text-[25px]'>YOU CAN NOT HAVE MORE CARDS</span> <br /> <span className='text-[15px]'>YOU CAN ONLY HAVE 3 CREDIT CARDS AND 3 DEBIT CARDS</span></>)
@@ -64,18 +69,18 @@ function CardComponent() {
         Authorization: `Bearer ${token}`
       }
     })
-    .then((response) => {
-      setClientCards(response.data)
-      console.log(response.data)
-    })
-    .catch((error) => {
-      console.log(error.response.data)
-      let errorMessage = error.response.data
-      if (errorMessage.includes("YOU DONT'T HAVE CARDS")) {
-        setMessageNoCards(errorMessage)
-        setShowDivNoCards('')
-      }
-    })
+      .then((response) => {
+        setClientCards(response.data)
+        console.log(response.data)
+      })
+      .catch((error) => {
+        console.log(error.response.data)
+        let errorMessage = error.response.data
+        if (errorMessage.includes("YOU DONT'T HAVE CARDS")) {
+          setMessageNoCards(errorMessage)
+          setShowDivNoCards('')
+        }
+      })
   }, [])
 
   // Filtrando las tarjetas de tipo DEBIT
@@ -119,17 +124,17 @@ function CardComponent() {
                 }
                 return (
                   <CardDebitCredit
-                  key={debitCard.id}
-                  backGroundCard={color}
-                  typeSubBackGround={blur}
-                  typeCard="Debit Card"
-                  numbers={debitCard.number}
-                  fromDate={debitCard.fromDate.slice(0, 7)} //con slice indico cuantas letras quiero que se vea de un string, en este caso quiero que se lea las primeras 7
-                  thruDate={debitCard.thruDate.slice(0, 7)}
-                  fullName={debitCard.cardHolader}
-                  cvv={debitCard.cvv}
-                />
-              )
+                    key={debitCard.id}
+                    backGroundCard={color}
+                    typeSubBackGround={blur}
+                    typeCard="Debit Card"
+                    numbers={debitCard.number}
+                    fromDate={debitCard.fromDate.slice(0, 7)} //con slice indico cuantas letras quiero que se vea de un string, en este caso quiero que se lea las primeras 7
+                    thruDate={debitCard.thruDate.slice(0, 7)}
+                    fullName={debitCard.cardHolader}
+                    cvv={debitCard.cvv}
+                  />
+                )
               })}
             </div>
 
@@ -171,10 +176,10 @@ function CardComponent() {
         </div>
       </div>
       <div className={`${showConfirmationPopUpAlert}`}>
-        <ConfirmationPopUpAlert message={"ARE YOU SURE YOU WANT TO APPLY FOR A NEW CARD?"} link={link} handleOnClickAccept={handelOnClickConfirmation} handleOnClickCancel={handelOnClickCancel}/>
+        <ConfirmationPopUpAlert message={"ARE YOU SURE YOU WANT TO APPLY FOR A NEW CARD?"} link={link} handleOnClickAccept={handelOnClickConfirmation} handleOnClickCancel={handelOnClickCancel} />
       </div>
       <div className={`${showPopUpAlert}`}>
-        <PopUpAlert gif={gif} message={messageShowPopUpAlert} handleOnClick={handleOnClickPopAupAlert}/>
+        <PopUpAlert gif={gif} message={messageShowPopUpAlert} handleOnClick={handleOnClickPopAupAlert} />
       </div>
     </div>
   )

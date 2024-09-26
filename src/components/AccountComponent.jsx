@@ -20,7 +20,7 @@ function AccountComponent() {
   // Definir estado para almacenar los datos de clients
   const [clientAccounts, setClientAccounts] = useState([]);
   let [upDate, setUpDate] = useState(0);
-  const [showConfirmationPopUpAlert, setShowConfirmationPopUpAlert] =useState("hidden");
+  const [showConfirmationPopUpAlert, setShowConfirmationPopUpAlert] = useState("hidden");
   const [showPopUpAlert, setShowPopUpAlert] = useState('hidden')
   const [messageShowPopUpAlert, setMessageShowPopUpAlert] = useState('')
   const [gif, setGif] = useState('')
@@ -29,10 +29,10 @@ function AccountComponent() {
   console.log(token);
   const getAccounts = () => {
     axios.get("http://localhost:8080/api/clients/current/accounts", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => {
         setClientAccounts(response.data); // Actualiza el estado con los datos recibidos
         console.log(response.data); // Para verificar
@@ -50,16 +50,16 @@ function AccountComponent() {
   const handelOnClickConfirmation = (e) => {
     setShowConfirmationPopUpAlert("hidden");
     console.log("Click on confirmation");
-      const token = user.token;
-      axios.post(
-        "http://localhost:8080/api/clients/current/accounts",
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+    const token = user.token;
+    axios.post(
+      "http://localhost:8080/api/clients/current/accounts",
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
       .then((response) => {
         console.log(response.data)
         setMessageShowPopUpAlert(<><span className="font-extrabold">{response.data}</span></>)
@@ -74,10 +74,10 @@ function AccountComponent() {
         setGif(xGif)
       })
 
-      // Incrementa el estado de upDate para forzar el efecto
-      setUpDate((prevUpDate) => prevUpDate + 1); // Usa el valor anterior y lo incrementa
+    // Incrementa el estado de upDate para forzar el efecto
+    setUpDate((prevUpDate) => prevUpDate + 1); // Usa el valor anterior y lo incrementa
   }
-  
+
   const handelOnClickCancel = (e) => {
     setShowConfirmationPopUpAlert('hidden');
   }
@@ -87,19 +87,12 @@ function AccountComponent() {
   const handelOnClick = async (e) => {
     console.log("Hice click en el boton");
     setShowConfirmationPopUpAlert("");
+    // Desplazar hasta el principio de la página
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // Desplazamiento suave
+    });
   };
-
- // Dentro de tu componente:
-const [showIsLoged, setShowIsLoged] = useState('hidden');
-
-// Usa un useEffect para actualizar el estado cuando `user.isLoggedIn` cambie.
-useEffect(() => {
-  if (user.isLoggedIn) {
-    setShowIsLoged(''); // Si el usuario está logueado, mostrar el texto
-  } else {
-    setShowIsLoged('hidden'); // Si no, ocultarlo
-  }
-}, [user.isLoggedIn]); // Este efecto depende de `user.isLoggedIn`
 
 
 
@@ -141,11 +134,6 @@ useEffect(() => {
                     path=""
                   />
                 </div>
-                
-
-                <div className={`${showIsLoged}`}>
-                 <p className="text-[30px] font-extrabold">ESTAMOS LOGEADOS</p>
-                </div>
 
 
               </div>
@@ -154,10 +142,10 @@ useEffect(() => {
         </div>
       </div>
       <div className={`${showConfirmationPopUpAlert}`}>
-        <ConfirmationPopUpAlert message={"ARE YOU SURE YOU WANT TO CREATE A NEW ACCOUNT?"} handleOnClickAccept={handelOnClickConfirmation} handleOnClickCancel={handelOnClickCancel}/>
+        <ConfirmationPopUpAlert message={"ARE YOU SURE YOU WANT TO CREATE A NEW ACCOUNT?"} handleOnClickAccept={handelOnClickConfirmation} handleOnClickCancel={handelOnClickCancel} />
       </div>
       <div className={`${showPopUpAlert}`}>
-        <PopUpAlert gif={gif} message={messageShowPopUpAlert} handleOnClick={handleOnClickPopAupAlert}/>
+        <PopUpAlert gif={gif} message={messageShowPopUpAlert} handleOnClick={handleOnClickPopAupAlert} />
       </div>
     </div>
   );

@@ -8,6 +8,7 @@ import MoneyDisplay from '../components/MoneyDisplay'
 import TableRowAccountView from '../components/TableRowAccountView'
 import { useSelector } from 'react-redux'
 import store from '../redux/store'
+import "./Account.css"
 
 
 
@@ -19,6 +20,9 @@ function Account() {
   // useState es un hook que me permite añadir un estado a un componente. En este caso inicializo el estado "account" y digo que inicialmente su valor es un array vacio
   // Este estado va a controlar que el componente se vuelva a renderizar cada vez que se llama a la funcion "setAccount" para actualizar el estado 
   const [account, setAccount] = useState([])
+  const [accountTransactions, setAccountTransactions] = useState([])
+  const [showTable, setShowTable] = useState('hidden')
+  const [showMessajeNoTransactions, setShowMessajeNoTransactions] = useState('')
 
   // useState es un hook que me permite añadir un estado a un componente. Este estado va a controlar que el componente se renderice cada vez que se actualice account 
   // Aca tengo un estado, y defino que ese estado inicialmente va a tener como valor un objeto vacio. El nombre de ese estado va a ser "account", y va a tener un metodo 
@@ -38,14 +42,23 @@ function Account() {
       .then(response => {
         // Si la respuesta es exitosa actualiza el estado de "account" con los datos que me trae la peticion 
         setAccount(response.data)
-
+        console.log(response.data)
+        console.log(response.data.transactions)
+        setShowMessajeNoTransactions('')
+        setShowTable('hidden')
+        if (response.data.transactions[0].amount > 10) {
+          console.log("entra?")
+          let sortedItems = response.data.transactions.sort((a, b) => b.id - a.id);
+        setAccountTransactions(sortedItems)
+        console.log(sortedItems)
+        setShowMessajeNoTransactions('hidden')
+        setShowTable('')
+        }
       })
       .catch(error => {
         console.error("Error fetching account:", error);
       });
   }
-
-  console.log("holaaaaaaaaaaaaa"+account)
 
   // useEffect es un hook que me permite gestionar efectos secundarios. se ejecuta cuando el componente se monta (por primera vez) y cada vez que el array de dependencia cambia, el id 
   // En este caso va a renderizar ejecutar la funcion "requesAccountById()" el cual hace la solicitud http y me va a mostrar por consola la id que obtine de la ruta
@@ -63,6 +76,7 @@ function Account() {
     };
 
   }, [id])
+
 
   return (
     <div>
@@ -87,19 +101,19 @@ function Account() {
                 <div className='h-full flex flex-col justify-center'>
                   <div>
                     <h1 className='text-[38px] font-bold mb-[15px]'>Transactions Resume:</h1>
-                    <div>
-                      <table className='border  border-[#000000ad]  text-[33px] bg-slate-200'>
+                    <div id='divTable' className={`${showTable} p-[15px] rounded-[20px]`}>
+                      <table id='table' className='text-[30px] bg-slate-200 rounded-[20px]'>
                         <thead>
-                          <tr className=''>
-                            <th className='border border-[#000000ad] p-[10px]'>TYPE</th>
-                            <th className='border border-[#000000ad] p-[10px]'>AMOUNT</th>
-                            <th className='border border-[#000000ad] p-[10px]'>DATE</th>
-                            <th className='border border-[#000000ad] p-[10px]'>HOUR</th>
-                            <th className='border border-[#000000ad] p-[10px]'>DESCRIPTION</th>
+                          <tr className='text-left'>
+                            <th className='pt-[10px] pl-[15px] rounded-[20px]'>TYPE</th>
+                            <th className='pt-[10px] pl-[15px]'>AMOUNT</th>
+                            <th className='pt-[10px] pl-[25px]'>DATE</th>
+                            <th className='pt-[10px] pl-[25px]'>HOUR</th>
+                            <th className='pt-[10px] pl-[25px]'>DESCRIPTION</th>
                           </tr>
                         </thead>
-                        <tbody>
-                          {account && account.transactions ? (account.transactions.map((transaction) => {
+                        <tbody className=' rounded-[20px]'>
+                          {account && account.transactions ? (accountTransactions.map((transaction) => {
                             let colorType = ""
                             let colorAmount = ""
                             if (transaction.type == "CREDIT") {
@@ -110,16 +124,23 @@ function Account() {
                               colorAmount = "text-[red]"
                             }
                             return (
-                              <TableRowAccountView key={transaction.id} 
-                              type={transaction.type} typeColor={colorType} 
-                              amount={<MoneyDisplay amount={transaction.amount}/>} amountColor={colorAmount}
-                              date={transaction.dateTime.slice(0,10)} 
-                              hour={transaction.dateTime.slice(11,19)} 
-                              description={transaction.description}/>
+                              <TableRowAccountView key={transaction.id}
+                                type={transaction.type} typeColor={colorType}
+                                amount={<MoneyDisplay amount={transaction.amount} />} amountColor={colorAmount}
+                                date={transaction.dateTime.slice(0, 10)}
+                                hour={transaction.dateTime.slice(11, 19)}
+                                description={transaction.description} />
                             )
-                          })):(<tr><td colSpan="5">Loading transactions...</td></tr>)}
+                          })) : (<tr><td colSpan="5">Loading transactions...</td></tr>)}
                         </tbody>
                       </table>
+                    </div>
+                    <div>
+                      <div className={`${showMessajeNoTransactions} w-full flex flex-col items-center mb-[30px]`}>
+                        <div id='divNoLoans' className={`${""} mt-[40px] p-[15px] rounded-[30px] w-[600px]`}>
+                          <h1 id='h1NoCards' className='text-center text-[30px] p-[10px] font-extrabold rounded-[25px] text-[#e64848]'>{"YOU DON'T HAVE TRANSACTIONS"}</h1>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

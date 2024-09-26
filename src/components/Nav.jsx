@@ -3,8 +3,9 @@ import ButtonNav from './ButtonNav'
 import LogOutArrow from "../assets/LogOutArrow.png";
 import "./Nav.css"
 import { Link, useLocation, useParams } from 'react-router-dom'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import store from '../redux/store';
+import { logoutAction } from '../redux/actions/authenticationAction';
 
 function Nav() {
 
@@ -13,6 +14,11 @@ function Nav() {
   const { id } = useParams();
   const isLoggedIn = useSelector(store => store.authenticationReducer.isLoggedIn)
 
+  const dispatch = useDispatch()
+  const handleClick = () => {
+    dispatch(logoutAction())
+  }
+
   return (
     <div>
       {
@@ -20,16 +26,16 @@ function Nav() {
         <div id="containerLogo-Buttons-LogoLeave" className="w-full h-[105px] flex flex-row">
           <div id="contenedor-logo" className="w-[20%] h-full flex flex-row justify-center items-center">
             <div>
-              <Link to="/"> <div id="logo" className=""></div> </Link>
+              <Link to="/accounts"> <div id="logo" className=""></div> </Link>
 
             </div>
             <h1 className='ml-[12px]'>BANK OF <br /><span className='text-[green]'>AMERICA</span></h1>
           </div>
           <div className='w-[60%] h-full flex flex-col justify-center'>
             <div className='flex flex-row w-full justify-between flex-wrap'>
-              <div className={`${isActive("/") ? "border-t-[1px] border-[#07d611]" : ""}`}>
+              {/* <div className={`${isActive("/") ? "border-t-[1px] border-[#07d611]" : ""}`}>
                 <ButtonNav path="/" title="Home" />
-              </div>
+              </div> */}
               <div className={`${isActive("/accounts") ? "border-t-[1px] border-[#07d611]" : `${isActive("/account/" + id) ? "border-t-[1px] border-[#07d611]" : ""}`}`}>
                 <ButtonNav path="/accounts" title="Accounts" />
               </div>
@@ -47,7 +53,7 @@ function Nav() {
 
           <div id="contenedor-logOut" className="w-[20%] flex flex-row justify-center items-center">
             <div>
-              <Link to="/login"> <div id="logOut" className=""> <img id="arrow" className="w-[66px] h-[66px] relative top-[-1px] left-2" src={LogOutArrow} alt="" /> </div> </Link>
+              <Link onClick={handleClick} to="/login"> <div id="logOut" className=""> <img id="arrow" className="w-[66px] h-[66px] relative top-[-1px] left-2" src={LogOutArrow} alt="" /> </div> </Link>
             </div>
           </div>
         </div>
