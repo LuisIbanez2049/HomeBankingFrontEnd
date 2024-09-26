@@ -219,12 +219,12 @@ function Register() {
                 <img
                   id="spinImg"
                   src={SpinOrbit}
-                  className="absolute w-[591px] left-[490px] bottom-[31px] z-0"
+                  className="absolute w-[591px] left-[490px] bottom-[60px] z-0"
                   alt=""
                 />
                 <img
                   src={SpinCenter}
-                  className="absolute w-[390px] left-[635px] bottom-[130px] z-0"
+                  className="absolute w-[390px] left-[635px] bottom-[160px] z-0"
                   alt=""
                 />
               </div>
