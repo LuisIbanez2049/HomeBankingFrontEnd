@@ -61,6 +61,7 @@ function Loan() {
     });
     formRef.current.reset(); // Resetea el formulario
     setDestinyAccount('')
+    setSelectedLoanName('')
     setShowElement('hidden')
     setSelectedInstallments(0)
     setAmmount(1000)
