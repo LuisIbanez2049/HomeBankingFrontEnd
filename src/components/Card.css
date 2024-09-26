@@ -28,3 +28,6 @@
                  0 3px 20px rgb(0, 0, 0);
     color: #fff;
 }
+#shadowAmount{
+    text-shadow: 0px 0px 1px black;
+}

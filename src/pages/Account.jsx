@@ -105,7 +105,7 @@ function Account() {
                       <table id='table' className='text-[30px] bg-slate-200 rounded-[20px]'>
                         <thead>
                           <tr className='text-left'>
-                            <th className='pt-[10px] pl-[15px] rounded-[20px]'>TYPE</th>
+                            <th className='pt-[10px] pl-[30px] rounded-[20px]'>TYPE</th>
                             <th className='pt-[10px] pl-[15px]'>AMOUNT</th>
                             <th className='pt-[10px] pl-[25px]'>DATE</th>
                             <th className='pt-[10px] pl-[25px]'>HOUR</th>
