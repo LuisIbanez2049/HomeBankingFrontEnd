@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import MoneyDisplay from "../components/MoneyDisplay";
 import PopUpAlert from "../components/PopUpAlert";
 import checkGif from "../assets/checkGif.gif"
+import { Link } from "react-router-dom";
 
 function Transaction() {
   const user = useSelector((store) => store.authenticationReducer);
@@ -194,11 +195,11 @@ function Transaction() {
         >
           <div
             id="containerTransactionForm-Background"
-            className="w-[85%] border-b-4 border-[#07d611] flex flex-row justify-between flex-wrap mt-[30px]"
+            className="w-[85%] border-b-4 border-[#07d611] flex flex-row justify-between flex-wrap mt-[30px] mb-[90px]"
           >
             <div
               id="containerTransactionTitle-Form-Button"
-              className="w-[700px] h-[840px]"
+              className="w-[700px] h-[880px]"
             >
               <div id="containerTransactionTitle" className="w-full mb-[20px]">
                 <h1 className="text-[45px]">
@@ -211,7 +212,7 @@ function Transaction() {
 
               <div
                 id="containerFormTransaction"
-                className="w-full flex flex-row justify-center h-[740px]"
+                className="w-full flex flex-row justify-center h-[795px]"
               >
                 <div
                   id="divFormTransaction"
@@ -408,6 +409,11 @@ function Transaction() {
 
                       <div id="buttonSubmitTransaction" className="mt-[60px]">
                         <ButtonRegisterForm title="Submit" />
+                      </div>
+                      <div className="w-full mt-[70px] flex flex-row justify-center">
+                        <Link to={"/accounts"}>
+                          <h1 className="text-[23px] inline-block font-bold text-[red] hover:scale-[110%] ">CANCEL</h1>
+                        </Link>
                       </div>
                     </form>
                   </div>

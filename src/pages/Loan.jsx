@@ -12,6 +12,7 @@ import PopUpAlert from "../components/PopUpAlert";
 import checkGif from "../assets/checkGif.gif"
 import xGif from "../assets/xGif.gif"
 import CardLoans from "../components/CardLoans";
+import { Link } from "react-router-dom";
 
 function Loan() {
   const [clientAccounts, setClientAccounts] = useState([])
@@ -107,15 +108,15 @@ function Loan() {
       setColorErrorInputPayment('')
       console.error(error.response ? error.response.data : error.message);
       let errorMessage = error.response ? error.response.data : error.message
-      if (errorMessage.includes('Loan not')) {
-        setMessageErrorInput('Please select one element of the list.')
-        setShowInputLoan('')
-        setColorErrorInputLoan('border-2  border-[red]')
-      }
       if (errorMessage.includes('Destiny account')) {
         setMessageErrorInput('Please select an account.')
         setShowInputOriginAccount('')
         setColorErrorInputOriginAccount('border-2  border-[red]')
+      }
+      if (errorMessage.includes('Loan not')) {
+        setMessageErrorInput('Please select one element of the list.')
+        setShowInputLoan('')
+        setColorErrorInputLoan('border-2  border-[red]')
       }
       if (errorMessage.includes('Installments')) {
         setMessageErrorInput(errorMessage + '.')
@@ -188,6 +189,8 @@ function Loan() {
       setShowElement('')
     } else {
       setShowElement('hidden')
+      setId(0)
+      setDestinyAccount('')
     }
     setSelectedLoanName(loanName);
     console.log('-----------------' + selectedLoanName)
@@ -229,7 +232,7 @@ function Loan() {
         >
           <div
             id="containerLoanForm-BackGround"
-            className="w-[85%] border-b-4 border-[#07d611] flex flex-row justify-between flex-wrap mt-[30px]"
+            className="w-[85%] h-[830px] border-b-4 border-[#07d611] flex flex-row justify-between flex-wrap mt-[10px]"
           >
             <div
               id="containerLoanTitle-Form-Button"
@@ -244,7 +247,7 @@ function Loan() {
 
               <div
                 id="containerFormLoan"
-                className="w-full flex flex-row justify-center h-[680px]"
+                className="w-full flex flex-row justify-center h-[745px]"
               >
                 <div
                   id="divFormLoan"
@@ -280,7 +283,7 @@ function Loan() {
                         <p className={`${showInputLoan} text-[red] text-[17px] bg-white inline-block rounded-[10px] px-[8px] mt-[5px]`}>&#10071;{messageErrorInput}</p>
                       </div>
 
-                      <div className="mb-4">
+                      <div className={` mb-4`}>
                         <label
                           htmlFor="sourceAccount"
                           className="block text-white font-bold mb-2"
@@ -321,7 +324,7 @@ function Loan() {
                         <InputTypeRange maxAmount={maxAmount} amount={amount} onChange={setAmmount} />
                       </div>
 
-                      <div className="mb-4">
+                      <div className={` mb-4`}>
                         <label
                           htmlFor="payment"
                           className="block text-white font-bold mb-2"
@@ -355,6 +358,11 @@ function Loan() {
                       </div>
                       <div id="buttonSubmitLoan" className="mt-[60px]">
                         <ButtonRegisterForm title="Submit" />
+                      </div>
+                      <div className="w-full mt-[70px] flex flex-row justify-center">
+                        <Link to={"/accounts"}>
+                          <h1 className="text-[23px] inline-block font-bold text-[red] hover:scale-[110%] ">CANCEL</h1>
+                        </Link>
                       </div>
                     </form>
                   </div>
