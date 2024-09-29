@@ -81,16 +81,16 @@ function Transaction() {
       setLink('/accounts')
     } catch (error) {
       setMessageErrorInput('')
-        setColorErrorInputAmount('')
-        setShowInputAmount('hidden')
-        setColorErrorInputDescription('')
-        setShowInputDescription('hidden')
-        setColorErrorInputDestinyAccountSelect('')
-        setShowInputDestinyAccountSelect('hidden')
-        setColorErrorInputDestinyAccountText('')
-        setShowInputDestinyAccountText('hidden')
-        setColorErrorInputSourceAccount('')
-        setShowInputOriginAccount('hidden')
+      setColorErrorInputAmount('')
+      setShowInputAmount('hidden')
+      setColorErrorInputDescription('')
+      setShowInputDescription('hidden')
+      setColorErrorInputDestinyAccountSelect('')
+      setShowInputDestinyAccountSelect('hidden')
+      setColorErrorInputDestinyAccountText('')
+      setShowInputDestinyAccountText('hidden')
+      setColorErrorInputSourceAccount('')
+      setShowInputOriginAccount('hidden')
       if (amount == "" && sourceAccount != "" && destinyAccount != "") {
         setMessageErrorInput("Please enter an amount.")
         setColorErrorInputAmount("border-2  border-[red]")
@@ -98,8 +98,13 @@ function Transaction() {
       }
       console.error(error.response ? error.response.data : error.message);
       let errorMessage = error.response ? error.response.data : error.message;
+      if (errorMessage.includes("Source account")) {
+        setMessageErrorInput(errorMessage)
+        setShowInputOriginAccount('')
+        setColorErrorInputSourceAccount('border-2  border-[red]')
+      }
       if (errorMessage.includes("Destiny account") && selectedTransactionType == "Own") {
-        
+
         setMessageErrorInput(errorMessage)
         setShowInputDestinyAccountSelect('')
         setColorErrorInputDestinyAccountSelect('border-2  border-[red]')
@@ -111,12 +116,7 @@ function Transaction() {
           setColorErrorInputDestinyAccountText('border-2  border-[red]')
           setShowInputAmount('hidden')
           setColorErrorInputAmount('')
-        } 
-      }
-      if (errorMessage.includes("Source account")) {
-        setMessageErrorInput(errorMessage)
-        setShowInputOriginAccount('')
-        setColorErrorInputSourceAccount('border-2  border-[red]')
+        }
       }
       if (errorMessage.includes("Amount") || errorMessage.includes("enough funds")) {
         setMessageErrorInput(errorMessage)
@@ -186,6 +186,14 @@ function Transaction() {
     }
   };
 
+  const handleCancelButton = () => {
+    console.log("hice click en cancelar")
+    setSourceAccount('')
+    setDestinyAccount('')
+    setAmount('')
+    setDescription('')
+  }
+
   return (
     <div>
       <div id="bodyTransaction" className="flex flex-col min-h-screen">
@@ -220,6 +228,42 @@ function Transaction() {
                 >
                   <div className="w-full h-full flex flex-col justify-center">
                     <form onSubmit={handleMakeATransactionForm}>
+
+
+                      <div className="mb-4 mt-[30px]">
+                        <label
+                          htmlFor="originAccount"
+                          className="block text-white font-bold mb-2"
+                        >
+                          Origin Account
+                        </label>
+                        <select
+                          id="originAccount"
+                          value={sourceAccount}
+                          onChange={(e) => {
+                            setSourceAccount(e.target.value)
+                            setColorErrorInputSourceAccount('')
+                            setShowInputOriginAccount('hidden')
+                          }}
+                          className={`w-full px-3 py-2 ${colorErrorInputSourceAccount} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                        >
+                          <option value="">Select an account</option>
+                          {/* You can add more options here if needed */}
+                          {disponibleAccounts.length > 0 &&
+                            disponibleAccounts.map((account) => {
+                              // console.log(account.number)
+                              return (
+                                <OptionInputSelect
+                                  key={account.id}
+                                  optionName={account.number}
+                                />
+                              );
+                            })}
+                        </select>
+                        <p className={`${showInputOriginAccount} text-[red] text-[17px] bg-white inline-block rounded-[10px] px-[8px] mt-[5px]`}>&#10071;{messageErrorInput}</p>
+                      </div>
+
+
                       <div className="mb-4">
                         <label
                           htmlFor="transactionType"
@@ -267,7 +311,7 @@ function Transaction() {
                             className={`w-full px-3 py-2 ${colorErrorInputDestinyAccountSelect} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                             value={selectedAccountNumber} // Valor controlado
                             onChange={handleAccountChange} // Manejador de cambio
-                            
+
                           >
                             <option value="">Select destiny account</option>
                             {/* You can add more options here if needed */}
@@ -314,39 +358,6 @@ function Transaction() {
                         </div>
                       )}
 
-                      <div className="mb-4 mt-[30px]">
-                        <label
-                          htmlFor="originAccount"
-                          className="block text-white font-bold mb-2"
-                        >
-                          Origin Account
-                        </label>
-                        <select
-                          id="originAccount"
-                          value={sourceAccount}
-                          onChange={(e) => {
-                            setSourceAccount(e.target.value)
-                            setColorErrorInputSourceAccount('')
-                            setShowInputOriginAccount('hidden')
-                          }}
-                          className={`w-full px-3 py-2 ${colorErrorInputSourceAccount} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                        >
-                          <option value="">Select an account</option>
-                          {/* You can add more options here if needed */}
-                          {disponibleAccounts.length > 0 &&
-                            disponibleAccounts.map((account) => {
-                              // console.log(account.number)
-                              return (
-                                <OptionInputSelect
-                                  key={account.id}
-                                  optionName={account.number}
-                                />
-                              );
-                            })}
-                        </select>
-                        <p className={`${showInputOriginAccount} text-[red] text-[17px] bg-white inline-block rounded-[10px] px-[8px] mt-[5px]`}>&#10071;{messageErrorInput}</p>
-                      </div>
-
                       <div className="mb-1 flex flex-row flex-wrap">
                         <label
                           htmlFor="amount"
@@ -360,9 +371,9 @@ function Transaction() {
                           value={amount}
                           onChange={(e) => {
                             setAmount(e.target.value)
-                            if(e.target.value != 0) {
+                            if (e.target.value != 0) {
                               setShowElement('')
-                            }else{
+                            } else {
                               setShowElement('hidden')
                             }
                             setColorErrorInputAmount('')
@@ -371,14 +382,14 @@ function Transaction() {
                           }}
                           className={`w-[200px] px-3 py-2 ${colorErrorInputAmount} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                           placeholder="$ 0.00"
-                         
-                              // setMessageErrorInput("Please enter an amount. border-2  border-[red]")
-                              // setColorErrorInputAmount("border-2  border-[red]")
-                              // setShowInputAmount('')
+
+                        // setMessageErrorInput("Please enter an amount. border-2  border-[red]")
+                        // setColorErrorInputAmount("border-2  border-[red]")
+                        // setShowInputAmount('')
                         />
                         <span className={`text-white text-[30px] px-[15px] ${showElement}`}><i className="fa-solid fa-right-long"></i></span>
                         <div className={`w-[250px] px-3 py-2 border border-gray-300 rounded-md bg-white ${showElement}`}>
-                          <MoneyDisplay amount={amount}/>
+                          <MoneyDisplay amount={amount} />
                         </div>
                       </div>
                       <p className={`${showInputAmount} text-[red] text-[17px] bg-white inline-block rounded-[10px] px-[8px] mt-[5px]`}>&#10071;{messageErrorInput}</p>
@@ -402,7 +413,7 @@ function Transaction() {
                           }}
                           className={`w-full h-[70px] px-3 py-2 ${colorErrorInputDescription} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                           placeholder="Enter a brief description (max. 70 characters)"
-                          
+
                         />
                         <p className={`${showInputDescription} text-[red] text-[17px] bg-white inline-block rounded-[10px] px-[8px] mt-[5px]`}>&#10071;{messageErrorInput}</p>
                       </div>
@@ -412,7 +423,7 @@ function Transaction() {
                       </div>
                       <div className="w-full mt-[70px] flex flex-row justify-center">
                         <Link to={"/accounts"}>
-                          <h1 className="text-[23px] inline-block font-bold text-[red] hover:scale-[110%] ">CANCEL</h1>
+                          <h1 onClick={handleCancelButton} className="text-[23px] inline-block font-bold text-[red] hover:scale-[110%] ">CANCEL</h1>
                         </Link>
                       </div>
                     </form>
@@ -426,7 +437,7 @@ function Transaction() {
         </div>
       </div>
       <div className={`${showPopUpAlert}`}>
-        <PopUpAlert gif={gif} message={messageShowPopUpAlert} link={link} handleOnClick={handleOnClickPopAupAlert}/>
+        <PopUpAlert gif={gif} message={messageShowPopUpAlert} link={link} handleOnClick={handleOnClickPopAupAlert} />
       </div>
     </div>
   );

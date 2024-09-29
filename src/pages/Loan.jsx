@@ -288,7 +288,7 @@ function Loan() {
                           htmlFor="sourceAccount"
                           className="block text-white font-bold mb-2"
                         >
-                          Origin Account
+                          Destiny Account
                         </label>
                         <select
                           id="sourceAccount"

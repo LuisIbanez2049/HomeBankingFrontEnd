@@ -86,7 +86,16 @@ function AccountComponent() {
   }
   const handelOnClick = async (e) => {
     console.log("Hice click en el boton");
-    setShowConfirmationPopUpAlert("");
+    if (clientAccounts.length < 3) {
+      setShowConfirmationPopUpAlert("");
+    } else {
+      const messageCantHasMoreThan3accounts = "YOU CAN'T HAVE MORE THAN 3 ACCOUNTS"
+      setMessageShowPopUpAlert(<><span className="font-extrabold">{messageCantHasMoreThan3accounts}</span></>)
+      setShowPopUpAlert('')
+      setGif(xGif)
+    }
+
+
     // Desplazar hasta el principio de la página
     window.scrollTo({
       top: 0,
