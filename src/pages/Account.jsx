@@ -100,7 +100,7 @@ function Account() {
               <div id='divFormAccount' className='w-full flex flex-row justify-center mb-[80px]'>
                 <div className='h-full flex flex-col justify-center'>
                   <div>
-                    <h1 className='text-[38px] font-bold mb-[15px]'>Transactions Resume:</h1>
+                    <h1 className='text-[38px] font-bold mb-[15px] text-center'>Transaction Summary</h1>
                     <div id='divTable' className={`${showTable} p-[15px] rounded-[20px]`}>
                       <table id='table' className='text-[30px] bg-slate-200 rounded-[20px]'>
                         <thead>

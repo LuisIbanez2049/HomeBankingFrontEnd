@@ -43,6 +43,9 @@ function Transaction() {
 
   const [messageErrorInput, setMessageErrorInput] = useState('')
 
+  const [balanceClient, setBalanceClient] = useState(0)
+  const [showBalanceClient, setShowBalanceClient] = useState('hidden')
+
 
   const handleOnClickPopAupAlert = (e) => {
     setShowPopUpAlert('hidden')
@@ -168,22 +171,30 @@ function Transaction() {
 
   // Manejador para el cambio de selección de préstamo
   const handleAccountChange = (event) => {
+    if (!event.target.value) {
+      setDestinyAccount('')
+    }
     setColorErrorInputDestinyAccountSelect('')
     setShowInputDestinyAccountSelect('hidden')
     const accountNumber = event.target.value;
     console.log(accountNumber);
     setSelectedAccountNumber(accountNumber);
     setDestinyAccount(accountNumber);
-    // Filtrar el préstamo seleccionado
-    const selectedAccount = clientAccounts.filter(
-      (account) => account.number !== accountNumber
-    );
-    if (selectedAccount) {
-      setDisponibleAccounts(selectedAccount);
-      console.log(selectedAccount); // Actualizar el maxAmount basado en la selección
-    } else {
-      setDisponibleAccounts([]);
-    }
+    // const accountNumber = event.target.value;
+    // console.log(accountNumber);
+    // setSelectedAccountNumber(accountNumber);
+    // setDestinyAccount(accountNumber);
+    // // Filtrar el préstamo seleccionado
+    // const selectedAccount = clientAccounts.filter(
+    //   (account) => account.number !== accountNumber
+    // );
+    // if (selectedAccount) {
+    //   setDisponibleAccounts(selectedAccount);
+    //   console.log(selectedAccount); // Actualizar el maxAmount basado en la selección
+    // } else {
+    //   setDisponibleAccounts([]);
+    // }
+
   };
 
   const handleCancelButton = () => {
@@ -207,7 +218,7 @@ function Transaction() {
           >
             <div
               id="containerTransactionTitle-Form-Button"
-              className="w-[700px] h-[880px]"
+              className="w-[700px] h-[910px]"
             >
               <div id="containerTransactionTitle" className="w-full mb-[20px]">
                 <h1 className="text-[45px]">
@@ -220,7 +231,7 @@ function Transaction() {
 
               <div
                 id="containerFormTransaction"
-                className="w-full flex flex-row justify-center h-[795px]"
+                className="w-full flex flex-row justify-center h-[835px]"
               >
                 <div
                   id="divFormTransaction"
@@ -230,10 +241,10 @@ function Transaction() {
                     <form onSubmit={handleMakeATransactionForm}>
 
 
-                      <div className="mb-4 mt-[30px]">
+                      <div className=" flex flex-row flex-wrap mt-[30px]">
                         <label
                           htmlFor="originAccount"
-                          className="block text-white font-bold mb-2"
+                          className="block text-white font-bold mb-2 mr-[250px]"
                         >
                           Origin Account
                         </label>
@@ -244,13 +255,43 @@ function Transaction() {
                             setSourceAccount(e.target.value)
                             setColorErrorInputSourceAccount('')
                             setShowInputOriginAccount('hidden')
+                            setDestinyAccount('')
+                            setSelectedAccountNumber('')
+
+                            if (!e.target.value) {
+                              setShowBalanceClient('hidden')
+                            } else {
+                              setShowBalanceClient('')
+                            }
+                            const accountNumber = e.target.value;
+                            console.log(accountNumber);
+                            
+                            // Filtrar el préstamo seleccionado
+                            const selectedAccount = clientAccounts.filter(
+                              (account) => account.number !== accountNumber
+                            );
+                            console.log(selectedAccount)
+                            if (selectedAccount) {
+                              setDisponibleAccounts(selectedAccount);
+                              console.log(selectedAccount); // Actualizar el maxAmount basado en la selección
+                            } else {
+                              setDisponibleAccounts([]);
+                            }
+
+                            console.log(accountNumber)
+                            const balanceAccountClient = clientAccounts.filter((account) => account.number === accountNumber)
+                            balanceAccountClient && balanceAccountClient.length > 0 && setBalanceClient(balanceAccountClient[0].balance) && console.log("veeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeer" + balanceAccountClient[0].balance) &&
+                            setBalanceClient(balanceAccountClient[0].balance) &&
+                            setShowBalanceClient('')
+                            console.log(balanceClient)
+
                           }}
-                          className={`w-full px-3 py-2 ${colorErrorInputSourceAccount} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                          className={`w-full px-3 py-2 ${colorErrorInputSourceAccount} w-[210px] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                         >
                           <option value="">Select an account</option>
                           {/* You can add more options here if needed */}
-                          {disponibleAccounts.length > 0 &&
-                            disponibleAccounts.map((account) => {
+                          {clientAccounts.length > 0 &&
+                            clientAccounts.map((account) => {
                               // console.log(account.number)
                               return (
                                 <OptionInputSelect
@@ -260,11 +301,18 @@ function Transaction() {
                               );
                             })}
                         </select>
-                        <p className={`${showInputOriginAccount} text-[red] text-[17px] bg-white inline-block rounded-[10px] px-[8px] mt-[5px]`}>&#10071;{messageErrorInput}</p>
+                        <span className={`text-white text-[30px] px-[15px] ${showBalanceClient}`}><i className="fa-solid fa-right-long"></i></span>
+                        <div className={`w-[262px] px-3 py-2 border  border-gray-300 rounded-md bg-white ${showBalanceClient}`}>
+                        <span className=" mr-[10px] font-bold text-[15px]  text-[#07d611]">BALANCE:</span>
+                          <MoneyDisplay amount={balanceClient} />
+                        </div>
+                        
                       </div>
+                      <p className={`${showInputOriginAccount} text-[red] text-[17px] bg-white inline-block rounded-[10px] px-[8px] mt-[5px]`}>&#10071;{messageErrorInput}</p>
+                      
 
 
-                      <div className="mb-4">
+                      <div className="mb-4 mt-[10px]">
                         <label
                           htmlFor="transactionType"
                           className="block text-white font-bold mb-2 text-[22px]"
@@ -315,9 +363,9 @@ function Transaction() {
                           >
                             <option value="">Select destiny account</option>
                             {/* You can add more options here if needed */}
-                            {clientAccounts &&
-                              clientAccounts.length > 0 &&
-                              clientAccounts.map((account) => {
+                            {disponibleAccounts &&
+                              disponibleAccounts.length > 0 &&
+                              disponibleAccounts.map((account) => {
                                 // console.log(account.number)
                                 return (
                                   <OptionInputSelect

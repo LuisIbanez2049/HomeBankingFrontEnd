@@ -41,8 +41,13 @@ function CardComponent() {
       top: 0,
       behavior: 'smooth' // Desplazamiento suave
     });
-    setShowConfirmationPopUpAlert('')
-    if (debitCards.length == 3 && creditCards.length == 3) {
+    
+    console.log(debitCards.length)
+    console.log(creditCards.length)
+    if (debitCards.length < 3 || creditCards.length < 3) {
+      setShowConfirmationPopUpAlert('')
+    } else {
+      setShowPopUpAlert('')
       setMessageShowPopUpAlert(<><span className=' font-extrabold text-[25px]'>YOU CAN NOT HAVE MORE CARDS</span> <br /> <span className='text-[15px]'>YOU CAN ONLY HAVE 3 CREDIT CARDS AND 3 DEBIT CARDS</span></>)
       setGif(xGif)
       setLink('')
