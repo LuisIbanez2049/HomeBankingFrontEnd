@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import store from "../redux/store";
 import PopUpAlert from "../components/PopUpAlert";
 import checkGif from "../assets/checkGif.gif"
+import checkGif2 from "../assets/checkGif2.gif"
 import xGif from "../assets/xGif.gif"
 import CardLoans from "../components/CardLoans";
 import { Link } from "react-router-dom";
@@ -96,7 +97,7 @@ function Loan() {
       });
       console.log(response.data)
       setMessageShowPopUpAlert(<><span className="font-semibold">{response.data}</span></>)
-      setGif(checkGif)
+      setGif(checkGif2)
       setShowPopUpAlert('')
     } catch (error) {
       setMessageErrorInput('')

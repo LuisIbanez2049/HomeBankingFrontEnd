@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import MoneyDisplay from "../components/MoneyDisplay";
 import PopUpAlert from "../components/PopUpAlert";
 import checkGif from "../assets/checkGif.gif"
+import checkGif2 from "../assets/checkGif2.gif"
 import { Link } from "react-router-dom";
 
 function Transaction() {
@@ -80,7 +81,7 @@ function Transaction() {
       console.log((await response).data);
       setMessageShowPopUpAlert((await response).data)
       setShowPopUpAlert('')
-      setGif(checkGif)
+      setGif(checkGif2)
       setLink('/accounts')
     } catch (error) {
       setMessageErrorInput('')

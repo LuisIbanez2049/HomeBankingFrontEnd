@@ -12,6 +12,7 @@ import store from "../redux/store";
 import ConfirmationPopUpAlert from "./ConfirmationPopUpAlert";
 import PopUpAlert from "./PopUpAlert";
 import checkGif from "../assets/checkGif.gif"
+import checkGif2 from "../assets/checkGif2.gif"
 import xGif from "../assets/xGif.gif"
 
 function AccountComponent() {
@@ -63,7 +64,7 @@ function AccountComponent() {
       .then((response) => {
         console.log(response.data)
         setMessageShowPopUpAlert(<><span className="font-extrabold">{response.data}</span></>)
-        setGif(checkGif)
+        setGif(checkGif2)
         setShowPopUpAlert('')
         getAccounts();
       })

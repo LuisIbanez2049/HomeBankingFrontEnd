@@ -96,6 +96,11 @@ function Account() {
                     />) : (<p>Loading account details...</p>)
                   }
                 </div>
+                <div className={`${account.balance > 0 ? 'hidden' : 'show'}`}>
+                  <button>
+                    <h1 className='text-[25px] font-bold px-[8px] py-[3px] bg-red-600 rounded-[15px] text-[#f1f1f1] mt-[15px]'>DISABLE ACCOUNT</h1>
+                  </button>
+                </div>
               </div>
               <div id='divFormAccount' className='w-full flex flex-row justify-center mb-[80px]'>
                 <div className='h-full flex flex-col justify-center'>

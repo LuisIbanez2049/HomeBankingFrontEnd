@@ -9,6 +9,7 @@ import axios from "axios";
 import PopUpAlert from "../components/PopUpAlert";
 import checkGif from "../assets/checkGif.gif";
 import xGif from "../assets/xGif.gif";
+import checkGif2 from "../assets/checkGif2.gif"
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -59,7 +60,7 @@ function Login() {
           </span>
         </>
       );
-      setGif(checkGif);
+      setGif(checkGif2);
       setShowPopUpAlert("");
       setLink("/accounts");
     } catch (error) {

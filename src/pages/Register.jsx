@@ -8,6 +8,7 @@ import SpinCenter from "../assets/SpinCenter.png";
 import axios from "axios";
 import PopUpAlert from "../components/PopUpAlert";
 import checkGif from "../assets/checkGif.gif"
+import checkGif2 from "../assets/checkGif2.gif"
 
 function Register() {
   const [firstName, setFirstName] = useState("");
@@ -57,7 +58,7 @@ function Register() {
       );
       console.log(response.data);
       setMessageShowPopUpAlert(response.data)
-      setGif(checkGif)
+      setGif(checkGif2)
       setShowPopUpAlert('')
       setLink('/login')
     } catch (error) {
@@ -120,7 +121,7 @@ function Register() {
 
               <div
                 id="containerRegisterForm"
-                className="w-full flex flex-row justify-center "
+                className="w-full relative flex flex-row justify-center "
               >
                 <div
                   id="divFormRegister"
@@ -219,12 +220,12 @@ function Register() {
                 <img
                   id="spinImg"
                   src={SpinOrbit}
-                  className="absolute w-[591px] left-[490px] bottom-[60px] z-0"
+                  className="absolute w-[85%] left-[50%] bottom-[8%] z-0"
                   alt=""
                 />
                 <img
                   src={SpinCenter}
-                  className="absolute w-[390px] left-[635px] bottom-[160px] z-0"
+                  className="absolute w-[55%] left-[70%] bottom-[25%] z-0"
                   alt=""
                 />
               </div>
