@@ -10,6 +10,7 @@ import PopUpAlert from "../components/PopUpAlert";
 import checkGif from "../assets/checkGif.gif";
 import xGif from "../assets/xGif.gif";
 import checkGif2 from "../assets/checkGif2.gif"
+import { DotLoader } from "react-spinners";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -28,6 +29,7 @@ function Login() {
   const [colorErrorInputPassword, setColorErrorInputPassword] = useState("");
 
   const [messageErrorInput, setMessageErrorInput] = useState("");
+  const [loading, setLoading] = useState(false)
 
   const handleOnClickPopAupAlert = (e) => {
     setShowPopUpAlert("hidden");
@@ -36,6 +38,8 @@ function Login() {
   // Manejar el envío del formulario
   const handleLogin = async (event) => {
     event.preventDefault(); // Evita que la página se recargue
+
+    setLoading(true)
 
     const user = {
       email: email,
@@ -60,10 +64,12 @@ function Login() {
           </span>
         </>
       );
+      setLoading(false)
       setGif(checkGif2);
       setShowPopUpAlert("");
       setLink("/accounts");
     } catch (error) {
+      setLoading(false)
       console.error(error.response ? error.response.data : error.message);
       let erroMessage = error.response ? error.response.data : error.message;
       if (erroMessage.includes("invalid")) {
@@ -96,6 +102,20 @@ function Login() {
   return (
     <div>
       <div id="bodyLogin" className="flex flex-col min-h-screen">
+    
+    <div className={`${loading ? 'show' : 'hidden'} absolute w-full h-full flex flex-row justify-center items-center bg-[#4948484f] z-30`}>
+      <div className=" p-[15px] bg-white rounded-[20px]">
+      <DotLoader className=""
+        color={`#07d611`}
+        loading={loading}
+        size={100}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
+      </div>
+    
+    </div>
+        
         <div id="containerAll" className="w-full flex flex-row justify-center">
           <div
             id="containerLoginForm-backGround"
