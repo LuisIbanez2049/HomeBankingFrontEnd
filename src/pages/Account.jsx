@@ -98,7 +98,8 @@ function Account() {
       id: account.id
     }
     console.log(body)
-    axios.delete("http://localhost:8080/api/clients/currentAccount/delete", body, {
+    // axios.delete("http://localhost:8080/api/clients/currentAccount/delete", body, {
+      axios.delete("https://homebanking-luisibanez-deply-back.onrender.com/api/clients/currentAccount/delete", body, {
       headers: {
         Authorization: `Bearer ${token}`
       }
