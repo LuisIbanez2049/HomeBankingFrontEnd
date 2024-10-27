@@ -28,6 +28,7 @@ function AccountComponent() {
 
   const token = user.token;
   console.log(token);
+  
   const getAccounts = () => {
     axios.get("https://homebanking-luisibanez-deply-back.onrender.com/api/clients/current/accounts", {
       headers: {
