@@ -94,12 +94,8 @@ function Account() {
     setShowConfirmationPopUpAlert("hidden");
     console.log("Click on confirmation");
     const token = user.token;
-    const body = {
-      id: account.id
-    }
-    console.log(body)
-    // axios.delete("http://localhost:8080/api/clients/currentAccount/delete", body, {
-      axios.delete("https://homebanking-luisibanez-deply-back.onrender.com/api/clients/currentAccount/delete", body, {
+    // axios.delete(`http://localhost:8080/api/clients/currentAccount/delete/${id}`,{
+      axios.delete(`https://homebanking-luisibanez-deply-back.onrender.com/api/clients/currentAccount/delete/${id}`,{
       headers: {
         Authorization: `Bearer ${token}`
       }
