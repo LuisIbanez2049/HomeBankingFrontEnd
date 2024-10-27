@@ -102,20 +102,20 @@ function Login() {
   return (
     <div>
       <div id="bodyLogin" className="flex flex-col min-h-screen">
-    
-    <div className={`${loading ? 'show' : 'hidden'} absolute w-full h-full flex flex-row justify-center items-center bg-[#4948484f] z-30`}>
-      <div className=" p-[15px] bg-white rounded-[20px]">
-      <DotLoader className=""
-        color={`#07d611`}
-        loading={loading}
-        size={100}
-        aria-label="Loading Spinner"
-        data-testid="loader"
-      />
-      </div>
-    
-    </div>
-        
+
+        <div className={`${loading ? 'show' : 'hidden'} absolute w-full h-full flex flex-row justify-center items-center bg-[#4948484f] z-30`}>
+          <div className=" p-[15px] bg-white rounded-[20px]">
+            <DotLoader className=""
+              color={`#07d611`}
+              loading={loading}
+              size={100}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          </div>
+
+        </div>
+
         <div id="containerAll" className="w-full flex flex-row justify-center">
           <div
             id="containerLoginForm-backGround"

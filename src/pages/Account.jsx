@@ -9,7 +9,9 @@ import TableRowAccountView from '../components/TableRowAccountView'
 import { useSelector } from 'react-redux'
 import store from '../redux/store'
 import "./Account.css"
-
+import checkGif2 from "../assets/checkGif2.gif"
+import ConfirmationPopUpAlert from "../components/ConfirmationPopUpAlert";
+import PopUpAlert from "../components/PopUpAlert";
 
 
 function Account() {
@@ -29,6 +31,11 @@ function Account() {
   // que me permite actualizar ese estado. Cada vez que se llama a ese estado React vuelve a renderizar el componente con el estado actualizado 
 
   const user = useSelector(store => store.authenticationReducer)
+
+  const [showConfirmationPopUpAlert, setShowConfirmationPopUpAlert] = useState("hidden");
+  const [showPopUpAlert, setShowPopUpAlert] = useState('hidden')
+  const [messageShowPopUpAlert, setMessageShowPopUpAlert] = useState('')
+  const [gif, setGif] = useState('')
 
 
   // Me diante axios hago una peticion GET a la API que desarrollé con intellij 
@@ -77,6 +84,47 @@ function Account() {
 
   }, [id])
 
+  const handleDesableAccountButtom = () => {
+    setShowConfirmationPopUpAlert('')
+  }
+
+
+
+  const handelOnClickConfirmation = (e) => {
+    setShowConfirmationPopUpAlert("hidden");
+    console.log("Click on confirmation");
+    const token = user.token;
+    const body = {
+      id: account.id
+    }
+    console.log(body)
+    axios.delete("http://localhost:8080/api/clients/currentAccount/delete", body, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .then((response) => {
+        console.log(response.data)
+        setMessageShowPopUpAlert(<><span className="font-extrabold">{response.data}</span></>)
+        setGif(checkGif2)
+        setShowPopUpAlert('')
+       
+      })
+      .catch((error) => {
+        console.log(error.response.data)
+        setMessageShowPopUpAlert(<><span className="font-extrabold">{error.response.data}</span></>)
+        setShowPopUpAlert('')
+        
+      })
+  }
+
+  const handelOnClickCancel = (e) => {
+    setShowConfirmationPopUpAlert('hidden');
+  }
+  const handleOnClickPopAupAlert = (e) => {
+    setShowPopUpAlert('hidden')
+  }
+
 
   return (
     <div>
@@ -96,11 +144,15 @@ function Account() {
                     />) : (<p>Loading account details...</p>)
                   }
                 </div>
-                <div className={`${account.balance > 0 ? 'hidden' : 'show'}`}>
-                  <button>
-                    <h1 className='text-[25px] font-bold px-[8px] py-[3px] bg-red-600 rounded-[15px] text-[#f1f1f1] mt-[15px]'>DISABLE ACCOUNT</h1>
+
+
+                <div className={`scaleeffect ${account && account.balance > 0 ? 'hidden' : 'show'} mt-[15px]`}>
+                  <button onClick={handleDesableAccountButtom}>
+                    <h1 className='text-[25px] font-bold px-[8px] py-[3px] bg-red-600 rounded-[15px] text-[#f1f1f1]'>DISABLE ACCOUNT</h1>
                   </button>
                 </div>
+
+
               </div>
               <div id='divFormAccount' className='w-full flex flex-row justify-center mb-[80px]'>
                 <div className='h-full flex flex-col justify-center'>
@@ -154,6 +206,16 @@ function Account() {
           </div>
         </div>
       </div>
+
+
+      <div className={`${showConfirmationPopUpAlert}`}>
+        <ConfirmationPopUpAlert message={"ARE YOU SURE YOU WANT TO DISABLE THIS ACCOUNT?"} handleOnClickAccept={handelOnClickConfirmation} handleOnClickCancel={handelOnClickCancel} />
+      </div>
+      <div className={`${showPopUpAlert}`}>
+        <PopUpAlert gif={gif} message={messageShowPopUpAlert} handleOnClick={handleOnClickPopAupAlert} link={'/accounts'} />
+      </div>
+
+
     </div>
   )
 }

@@ -4,3 +4,11 @@
 #divTable{
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.651);
 }
+
+.scaleeffect {
+    transition: transform 0.3s ease;
+}
+
+.scaleeffect:hover {
+    transform: scale(1.1);
+}
