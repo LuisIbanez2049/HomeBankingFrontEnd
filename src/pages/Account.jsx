@@ -12,6 +12,7 @@ import "./Account.css"
 import checkGif2 from "../assets/checkGif2.gif"
 import ConfirmationPopUpAlert from "../components/ConfirmationPopUpAlert";
 import PopUpAlert from "../components/PopUpAlert";
+import PdfGenerator from '../components/PdfGenerator'
 
 
 function Account() {
@@ -149,8 +150,9 @@ function Account() {
                   </button>
                 </div>
 
-
               </div>
+              {account && <PdfGenerator account={account && account}/>}
+              
               <div id='divFormAccount' className='w-full flex flex-row justify-center mb-[80px]'>
                 <div className='h-full flex flex-col justify-center'>
                   <div>
