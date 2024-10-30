@@ -5,8 +5,9 @@ import { CreditCard, DollarSign, PieChart, ArrowUpRight, ArrowDownRight } from "
 import html2pdf from "html2pdf.js";
 import PdfGeneratorRow from "./PdfGeneratorRow";
 import MoneyDisplay from "./MoneyDisplay";
+import { useSelector } from "react-redux";
 
-const PdfGenerator = ({ account }) => {
+const PdfGenerator = ({ account, onClickClose }) => {
     const generatePDF = () => {
 
         const element = document.getElementById("pdfContent");
@@ -24,35 +25,46 @@ const PdfGenerator = ({ account }) => {
         html2pdf().set(options).from(element).save();
     };
 
-  
+
     function suma(array) {
         let total = 0;
         array.map(transaction => total += transaction.amount)
         return total
     }
- 
-        let ingresos = account?.transactions?.filter(transaction => transaction.type === 'CREDIT') || [];
-        console.log(ingresos)
-        
-        let gastos = account?.transactions?.filter(transaction => transaction.type === 'DEBIT') || [];
-        console.log(gastos)
-     
-  
+
+    let ingresos = account?.transactions?.filter(transaction => transaction.type === 'CREDIT') || [];
+    console.log(ingresos)
+
+    let gastos = account?.transactions?.filter(transaction => transaction.type === 'DEBIT') || [];
+    console.log(gastos)
+
+    const user = useSelector((store) => store.authenticationReducer);
+
+
 
 
     return (
         <div>
-            <div >
-                <div id="pdfContent" className=" bg-green-50 flex items-center justify-center p-4">
-                    <div className="bg-white rounded-xl shadow-xl w-[75%] ">
+            <div className="w-full flex flex-col items-center">
+                <div className="w-[80%] relative">
+                    <div className=" absolute top-[25px] right-[30px]">
+                        <button onClick={onClickClose}>
+                            <h1 className="text-black text-[30px] transform transition-transform duration-300 ease-in-out hover:scale-125">
+                                <i class="fa-solid fa-circle-xmark"></i>
+                            </h1>
+                        </button>
+                    </div>
+                </div>
+                <div id="pdfContent" className=" w-full  bg-green-50 flex flex-col items-center justify-center p-4">
+                    <div className="w-[350px] lg:w-[80%] bg-white shadow-xl">
                         <div className="bg-green-600 p-6 text-white">
-                            <h2 className="text-2xl font-bold">Resumen de Cuenta</h2>
-                            <p className="text-green-100">Bienvenido de vuelta, Ana</p>
+                            <h2 className="text-2xl font-bold">Account Summary</h2>
+                            <p className="text-green-100">{user.name}</p>
                         </div>
                         <div className="p-6 space-y-6">
                             <div className="flex justify-between items-center">
                                 <div>
-                                    <p className="text-sm text-gray-500">Saldo Disponible</p>
+                                    <p className="text-sm text-gray-500">Balance</p>
                                     <p className="text-3xl font-bold text-gray-800">{account && <MoneyDisplay amount={account.balance} />}</p>
                                 </div>
                                 <CreditCard className="text-green-600 w-10 h-10" />
@@ -60,17 +72,17 @@ const PdfGenerator = ({ account }) => {
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="bg-green-100 rounded-lg p-4">
                                     <DollarSign className="text-green-600 w-8 h-8 mb-2" />
-                                    <p className="text-sm text-green-800">Ingresos</p>
-                                    <p className="text-lg font-semibold text-green-900">{ingresos && <MoneyDisplay amount={suma(ingresos)}/>}</p>
+                                    <p className="text-sm text-green-800">Income</p>
+                                    <p className="text-lg font-semibold text-green-900">{ingresos && <MoneyDisplay amount={suma(ingresos)} />}</p>
                                 </div>
                                 <div className="bg-red-100 rounded-lg p-4">
                                     <PieChart className="text-red-600 w-8 h-8 mb-2" />
-                                    <p className="text-sm text-red-800">Gastos</p>
-                                    <p className="text-lg font-semibold text-red-900">{gastos && <MoneyDisplay amount={suma(gastos)}/>}</p>
+                                    <p className="text-sm text-red-800">Expenses</p>
+                                    <p className="text-lg font-semibold text-red-900">{gastos && <MoneyDisplay amount={suma(gastos)} />}</p>
                                 </div>
                             </div>
                             <div className="space-y-4">
-                                <h3 className="text-lg font-semibold text-gray-800">Últimas Transacciones</h3>
+                                <h3 className="text-lg font-semibold text-gray-800">Latest Transactions</h3>
                                 <div className="space-y-3">
                                     {/* <div className="flex justify-between items-center">
                                         <div className="flex items-center space-x-3">
@@ -109,14 +121,14 @@ const PdfGenerator = ({ account }) => {
 
                                 </div>
                             </div>
-                            <div className="w-full bg-green-600 text-white py-2 px-4 rounded-lg font-semibold text-center">
-                                BANK OF AMERICA
-                            </div>
                         </div>
+                    </div>
+                    <div className="w-[80%] bg-green-600 text-white py-2 px-4 rounded-b-lg font-semibold text-center">
+                        BANK OF AMERICA
                     </div>
                 </div>
                 <div className="w-full flex flex-row justify-center">
-                    <button className="w-[50%] bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition duration-300" onClick={generatePDF}>Descargar PDF</button>
+                    <button className="w-[50%] bg-green-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-green-700 transition duration-300" onClick={generatePDF}>Download PDF</button>
                 </div>
             </div>
 

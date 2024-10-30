@@ -113,7 +113,6 @@ function Login() {
               data-testid="loader"
             />
           </div>
-
         </div>
 
         <div id="containerAll" className="w-full flex flex-row justify-center">

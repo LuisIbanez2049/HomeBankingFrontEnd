@@ -9,6 +9,7 @@ import axios from "axios";
 import PopUpAlert from "../components/PopUpAlert";
 import checkGif from "../assets/checkGif.gif"
 import checkGif2 from "../assets/checkGif2.gif"
+import { DotLoader } from "react-spinners";
 
 function Register() {
   const [firstName, setFirstName] = useState("");
@@ -32,12 +33,14 @@ function Register() {
   const [colorErrorInputPassword, setColorErrorInputPassword] = useState('')
 
   const [messageErrorInput, setMessageErrorInput] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const handleOnClickPopAupAlert = (e) => {
     setShowPopUpAlert('hidden')
   }
 
   const handleRegister = async (event) => {
+    setLoading(true)
     event.preventDefault();
     const user = {
       firstName: firstName,
@@ -58,10 +61,12 @@ function Register() {
       );
       console.log(response.data);
       setMessageShowPopUpAlert(response.data)
+      setLoading(false)
       setGif(checkGif2)
       setShowPopUpAlert('')
       setLink('/login')
     } catch (error) {
+      setLoading(false)
       setMessageErrorInput('')
       setShowInputFirstName('hidden')
       setColorErrorInputFirstName('')
@@ -98,6 +103,22 @@ function Register() {
   return (
     <div>
       <div id="bodyRegister" className="flex flex-col min-h-screen">
+
+
+      <div className={`${loading ? 'show' : 'hidden'} absolute w-full h-full flex flex-row justify-center items-center bg-[#4948484f] z-30`}>
+          <div className=" p-[15px] bg-white rounded-[20px]">
+            <DotLoader className=""
+              color={`#07d611`}
+              loading={loading}
+              size={100}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          </div>
+        </div>
+
+
+
         <div
           id="containerAllRegister"
           className="w-full flex flex-row justify-center"

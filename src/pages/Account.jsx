@@ -37,6 +37,7 @@ function Account() {
   const [showPopUpAlert, setShowPopUpAlert] = useState('hidden')
   const [messageShowPopUpAlert, setMessageShowPopUpAlert] = useState('')
   const [gif, setGif] = useState('')
+  const [showPDF, setShowPDF] = useState('hidden')
 
 
   // Me diante axios hago una peticion GET a la API que desarrollé con intellij 
@@ -57,10 +58,10 @@ function Account() {
         if (response.data.transactions[0].amount > 10) {
           console.log("entra?")
           let sortedItems = response.data.transactions.sort((a, b) => b.id - a.id);
-        setAccountTransactions(sortedItems)
-        console.log(sortedItems)
-        setShowMessajeNoTransactions('hidden')
-        setShowTable('')
+          setAccountTransactions(sortedItems)
+          console.log(sortedItems)
+          setShowMessajeNoTransactions('hidden')
+          setShowTable('')
         }
       })
       .catch(error => {
@@ -96,7 +97,7 @@ function Account() {
     console.log("Click on confirmation");
     const token = user.token;
     // axios.delete(`http://localhost:8080/api/clients/currentAccount/delete/${id}`,{
-      axios.delete(`https://homebanking-luisibanez-deply-back.onrender.com/api/clients/currentAccount/delete/${id}`,{
+    axios.delete(`https://homebanking-luisibanez-deply-back.onrender.com/api/clients/currentAccount/delete/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -106,13 +107,13 @@ function Account() {
         setMessageShowPopUpAlert(<><span className="font-extrabold">{response.data}</span></>)
         setGif(checkGif2)
         setShowPopUpAlert('')
-       
+
       })
       .catch((error) => {
         console.log(error.response.data)
         setMessageShowPopUpAlert(<><span className="font-extrabold">{error.response.data}</span></>)
         setShowPopUpAlert('')
-        
+
       })
   }
 
@@ -122,6 +123,11 @@ function Account() {
   const handleOnClickPopAupAlert = (e) => {
     setShowPopUpAlert('hidden')
   }
+
+  const onclickButtonClose = () => {
+    setShowPDF('hidden')
+  }
+
 
 
   return (
@@ -151,12 +157,21 @@ function Account() {
                 </div>
 
               </div>
-              {account && <PdfGenerator account={account && account}/>}
-              
+              <div id='viewPDF' className = {`${showPDF}`}>
+                {account && <PdfGenerator account={account && account} onClickClose={onclickButtonClose}/>}
+              </div>
+
               <div id='divFormAccount' className='w-full flex flex-row justify-center mb-[80px]'>
                 <div className='h-full flex flex-col justify-center'>
                   <div>
                     <h1 className='text-[38px] font-bold mb-[15px] text-center'>Transaction Summary</h1>
+                    <div className='w-full flex flex-row justify-center mb-[20px] '>
+                      <a href="#viewPDF">
+                        <button onClick={() => {setShowPDF('show')}}>
+                          <h1 className='py-2 px-4 text-[25px] font-bold bg-green-500 rounded-xl transform transition-transform duration-300 ease-in-out hover:scale-110'>PDF</h1>
+                        </button>
+                      </a>
+                    </div>
                     <div id='divTable' className={`${showTable} p-[15px] rounded-[20px]`}>
                       <table id='table' className='text-[30px] bg-slate-200 rounded-[20px]'>
                         <thead>
