@@ -118,9 +118,10 @@ function Login() {
         <div id="containerAll" className="w-full flex flex-row justify-center">
           <div
             id="containerLoginForm-backGround"
-            className="w-[85%] border-b-4 border-[#07d611] flex flex-row justify-between flex-wrap mt-[30px]"
+            className="w-[95%] lg:w-[85%] border-b-4 border-[#07d611] flex flex-row justify-center flex-wrap mt-[30px]"
           >
-            <div id="containerLogo-Form-Button" className="w-[700px] h-[800px]">
+            {/* <div id="containerLogo-Form-Button" className="w-[700px] h-[800px] border border-black"> */}
+            <div id="containerLogo-Form-Button" className="w-full  h-[800px] lg:w-[700px] lg:h-[800px]">
               <div
                 id="containerLogo"
                 className="w-full flex flex-row justify-center items-center mb-[20px]"

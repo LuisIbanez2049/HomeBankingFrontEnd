@@ -125,7 +125,7 @@ function Register() {
         >
           <div
             id="containerRegisterForm-BackGround"
-            className="w-[85%] border-b-4 border-[#07d611] flex flex-row justify-between flex-wrap mt-[40px]"
+            className="w-[95%] lg:w-[85%] border-b-4 border-[#07d611] flex flex-row justify-between flex-wrap mt-[40px]"
           >
             <div id="containerRegisterLogo-Form-Button" className="w-[700px]">
               <div
@@ -146,7 +146,7 @@ function Register() {
               >
                 <div
                   id="divFormRegister"
-                  className="w-[600px] p-8 rounded-lg text-[20px] relative z-10 mb-[30px]"
+                  className="w-full lg:w-[600px] p-8 rounded-lg text-[20px] relative z-10 mb-[30px]"
                 >
                   <form onSubmit={handleRegister}>
                     <div className="mb-4">
@@ -241,12 +241,12 @@ function Register() {
                 <img
                   id="spinImg"
                   src={SpinOrbit}
-                  className="absolute w-[85%] left-[50%] bottom-[8%] z-0"
+                  className="absolute w-[0px] lg:w-[85%] left-[50%] bottom-[8%] z-0"
                   alt=""
                 />
                 <img
                   src={SpinCenter}
-                  className="absolute w-[55%] left-[70%] bottom-[25%] z-0"
+                  className="absolute w-[0px] lg:w-[55%] left-[70%] bottom-[25%] z-0"
                   alt=""
                 />
               </div>
