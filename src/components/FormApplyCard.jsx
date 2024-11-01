@@ -8,6 +8,7 @@ import PopUpAlert from "./PopUpAlert";
 import checkGif from "../assets/checkGif.gif"
 import checkGif2 from "../assets/checkGif2.gif"
 import xGif from "../assets/xGif.gif"
+import { DotLoader } from "react-spinners";
 
 function FormApplyCard() {
   // Obtenemos el token del usuario logueado
@@ -28,8 +29,11 @@ function FormApplyCard() {
 
   const [messageErrorInput, setMessageErrorInput] = useState('')
 
+  const [loading, setLoading] = useState(false)
+
   // Manejamos el envío del formulario
   const handleApplyCard = async (event) => {
+    setLoading(true)
     event.preventDefault(); // Evita la recarga de la página
 
     const applyCardForm = {
@@ -37,18 +41,19 @@ function FormApplyCard() {
       color: colorCard,
     };
 
-      const token = user.token;
-      const response = await axios.post(
-        'https://homebanking-luisibanez-deply-back.onrender.com/api/clients/current/cards',
-        applyCardForm,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`, // Enviar token en el header
-          },
-        }
-      )
+    const token = user.token;
+    const response = await axios.post(
+      'https://homebanking-luisibanez-deply-back.onrender.com/api/clients/current/cards',
+      applyCardForm,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // Enviar token en el header
+        },
+      }
+    )
       .then((response) => {
         console.log(response.data)
+        setLoading(false)
         setMessageShowPopUpAlert(<><span className="font-extrabold">{response.data}</span></>)
         setGif(checkGif2)
         setShowUpAlert('')
@@ -56,6 +61,7 @@ function FormApplyCard() {
 
       })
       .catch((error) => {
+        setLoading(false)
         setMessageErrorInput('')
         setShowInputCardType('hidden')
         setColorErrorInputCardType('')
@@ -66,12 +72,12 @@ function FormApplyCard() {
         if (errorMessage.includes("THAN 3")) {
           setMessageShowPopUpAlert(<><span className="font-extrabold">{error.response.data}</span></>)
           setGif(xGif)
-          setShowUpAlert('') 
+          setShowUpAlert('')
         }
         if (errorMessage.includes('YOU ALREADY HAVE A')) {
           setMessageShowPopUpAlert(<><span className="font-extrabold">{error.response.data}</span></>)
           setGif(xGif)
-          setShowUpAlert('') 
+          setShowUpAlert('')
         }
         if (errorMessage.includes('Card TYPE')) {
           setMessageErrorInput(errorMessage)
@@ -94,7 +100,21 @@ function FormApplyCard() {
 
   return (
     <div>
-      <div id="divForm" className="p-6 rounded-lg w-[600px] h-[600px] text-[30px] relative">
+      <div id="divForm" className="p-6 rounded-lg w-[365px]  h-[500px] lg:w-[600px] lg:h-[600px] text-[20px] lg:text-[30px] relative">
+
+        <div className={`${loading ? 'show' : 'hidden'} absolute w-full h-full flex flex-row justify-center items-center bg-[#4948484f] z-30`}>
+          <div className=" p-[15px] bg-white rounded-[20px]">
+            <DotLoader className=""
+              color={`#07d611`}
+              loading={loading}
+              size={100}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          </div>
+        </div>
+
+
         <form onSubmit={handleApplyCard}>
           <div className="flex flex-col justify-center">
             <div className="mt-[40px] mb-[15px]">
@@ -159,10 +179,10 @@ function FormApplyCard() {
         </form>
       </div>
       <div className={`${showPopUpAlert}`}>
-        <PopUpAlert gif={gif} message={messageShowPopUpAlert} handleOnClick={handleOnClickPopAupAlert} link={link}/>
+        <PopUpAlert gif={gif} message={messageShowPopUpAlert} handleOnClick={handleOnClickPopAupAlert} link={link} />
       </div>
     </div>
-    
+
   );
 }
 

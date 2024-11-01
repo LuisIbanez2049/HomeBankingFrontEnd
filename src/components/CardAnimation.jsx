@@ -6,10 +6,10 @@ import CardAnimation1 from "../assets/CardAnimation1.png";
 function CardAnimation() {
   return (
     <div>
-        <div id="levitating-image" className="relative z-20 w-[590px]">
+        <div id="levitating-image" className="relative z-20 w-[0px] lg:w-[590px]">
           <img src={CardAnimation2} alt="" />
         </div>
-        <img id="cardBlack" className="z-10 w-[610px]" src={CardAnimation1} alt="" />
+        <img id="cardBlack" className="z-10 w-[0px] lg:w-[610px]" src={CardAnimation1} alt="" />
     </div>
   );
 }

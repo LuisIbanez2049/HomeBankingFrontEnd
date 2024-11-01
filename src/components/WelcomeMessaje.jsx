@@ -2,7 +2,7 @@ import React from 'react'
 
 function WelcomeMessaje(props) {
   return (
-    <h1 className="text-[29px] lg:text-[40px] ml-0 lg:ml-8">Welcome, <span className="font-semibold text-[#72cb10]">{props.userName}</span>!</h1>
+    <h1 className="text-[29px] lg:text-[40px] text-center ml-0 lg:ml-8">Welcome, <span className="font-semibold text-[#72cb10]">{props.userName}</span>!</h1>
   )
 }
 

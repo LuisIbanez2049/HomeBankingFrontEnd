@@ -14,6 +14,7 @@ import checkGif2 from "../assets/checkGif2.gif"
 import xGif from "../assets/xGif.gif"
 import CardLoans from "../components/CardLoans";
 import { Link } from "react-router-dom";
+import { DotLoader } from "react-spinners";
 
 function Loan() {
   const [clientAccounts, setClientAccounts] = useState([])
@@ -54,6 +55,8 @@ function Loan() {
 
   const formRef = useRef(null)
 
+  const [loading, setLoading] = useState(false)
+
   const handleOnClickPopAupAlert = () => {
     setShowPopUpAlert('hidden')
     // Desplazar hasta el final de la página
@@ -73,6 +76,7 @@ function Loan() {
   }
 
   const handleApplyLoanForm = async (event) => {
+    setLoading(true)
     console.log("click on button submit" + loans)
     event.preventDefault();
     const applyLoanForm = {
@@ -96,10 +100,12 @@ function Loan() {
         },
       });
       console.log(response.data)
+      setLoading(false)
       setMessageShowPopUpAlert(<><span className="font-semibold">{response.data}</span></>)
       setGif(checkGif2)
       setShowPopUpAlert('')
     } catch (error) {
+      setLoading(false)
       setMessageErrorInput('')
       setShowInputLoan('hidden')
       setColorErrorInputLoan('')
@@ -218,6 +224,18 @@ function Loan() {
     <div>
       <div id="bodyLoan" className="flex flex-col min-h-screen">
 
+        <div className={`${loading ? 'show' : 'hidden'} absolute w-full h-full flex flex-row justify-center items-center bg-[#4948484f] z-30`}>
+          <div className=" p-[15px] bg-white rounded-[20px]">
+            <DotLoader className=""
+              color={`#07d611`}
+              loading={loading}
+              size={100}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          </div>
+        </div>
+
 
         <div className={`${showMessageErrorNoLoans} w-full flex flex-col items-center mb-[30px]`}>
           {/* <h1 className="text-[30px] font-extrabold">{"HOLA"}</h1> */}
@@ -233,14 +251,14 @@ function Loan() {
         >
           <div
             id="containerLoanForm-BackGround"
-            className="w-[85%] h-[830px] border-b-4 border-[#07d611] flex flex-row justify-between flex-wrap mt-[10px]"
+            className="w-[95%] lg:w-[85%] h-[830px] border-b-4 border-[#07d611] flex flex-row justify-between flex-wrap mt-[10px]"
           >
             <div
               id="containerLoanTitle-Form-Button"
-              className="w-[700px] h-[800px]"
+              className="w-full lg:w-[700px] h-[800px]"
             >
               <div id="containerTitleLoan" className="w-full mb-[20px]">
-                <h1 className="text-[45px]">
+                <h1 className="text-[40px] lg:text-[45px] text-center">
                   Apply for a{" "}
                   <span className="text-[#07d611] font-semibold">LOAN</span>
                 </h1>
@@ -377,12 +395,12 @@ function Loan() {
 
 
         <div className="w-full flex flex-row justify-center mb-[80px] mt-[30px]">
-          <div className="w-[85%]">
-            <h1 className="text-[45px] font-semibold">Your <span className="text-[#07d611]">LOANS</span></h1>
+          <div className="w-[95%] lg:w-[85%]">
+            <h1 className="text-[40px] lg:text-[45px] font-semibold">Your <span className="text-[#07d611]">LOANS</span></h1>
             <div>
               <div className={`${showMessageNoLoansApplied} w-full flex flex-col items-center mb-[30px]`}>
-                <div id='divNoLoans' className={`${""} mt-[40px] p-[15px] rounded-[30px] w-[1500px]`}>
-                  <h1 id='h1NoCards' className='text-center text-[30px] p-[10px] font-extrabold rounded-[25px] text-[#e64848]'>{messageErrorNoLoans}</h1>
+                <div id='divNoLoans' className={`${""} mt-[40px] p-[15px] rounded-[30px] w-full lg:w-[1500px]`}>
+                  <h1 id='h1NoCards' className='text-center text-[20px] lg:text-[30px] p-[10px] font-extrabold rounded-[25px] text-[#e64848]'>{messageErrorNoLoans}</h1>
                 </div>
               </div>
             </div>

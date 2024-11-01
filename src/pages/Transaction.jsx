@@ -10,6 +10,7 @@ import PopUpAlert from "../components/PopUpAlert";
 import checkGif from "../assets/checkGif.gif"
 import checkGif2 from "../assets/checkGif2.gif"
 import { Link } from "react-router-dom";
+import { DotLoader } from "react-spinners";
 
 function Transaction() {
   const user = useSelector((store) => store.authenticationReducer);
@@ -47,12 +48,15 @@ function Transaction() {
   const [balanceClient, setBalanceClient] = useState(0)
   const [showBalanceClient, setShowBalanceClient] = useState('hidden')
 
+  const [loading, setLoading] = useState(false)
+
 
   const handleOnClickPopAupAlert = (e) => {
     setShowPopUpAlert('hidden')
   }
 
   const handleMakeATransactionForm = async (event) => {
+    setLoading(true)
     console.log("Click on button submit");
     event.preventDefault();
     const transactionForm = {
@@ -79,11 +83,13 @@ function Transaction() {
         }
       );
       console.log((await response).data);
+      setLoading(false)
       setMessageShowPopUpAlert((await response).data)
       setShowPopUpAlert('')
       setGif(checkGif2)
       setLink('/accounts')
     } catch (error) {
+      setLoading(false)
       setMessageErrorInput('')
       setColorErrorInputAmount('')
       setShowInputAmount('hidden')
@@ -107,7 +113,7 @@ function Transaction() {
         setShowInputOriginAccount('')
         setColorErrorInputSourceAccount('border-2  border-[red]')
       }
-      if (errorMessage.includes("Destiny account") && selectedTransactionType == "Own") {
+      if (errorMessage.includes("Destiny account") || errorMessage.includes("same") && selectedTransactionType == "Own") {
 
         setMessageErrorInput(errorMessage)
         setShowInputDestinyAccountSelect('')
@@ -181,20 +187,6 @@ function Transaction() {
     console.log(accountNumber);
     setSelectedAccountNumber(accountNumber);
     setDestinyAccount(accountNumber);
-    // const accountNumber = event.target.value;
-    // console.log(accountNumber);
-    // setSelectedAccountNumber(accountNumber);
-    // setDestinyAccount(accountNumber);
-    // // Filtrar el préstamo seleccionado
-    // const selectedAccount = clientAccounts.filter(
-    //   (account) => account.number !== accountNumber
-    // );
-    // if (selectedAccount) {
-    //   setDisponibleAccounts(selectedAccount);
-    //   console.log(selectedAccount); // Actualizar el maxAmount basado en la selección
-    // } else {
-    //   setDisponibleAccounts([]);
-    // }
 
   };
 
@@ -209,20 +201,36 @@ function Transaction() {
   return (
     <div>
       <div id="bodyTransaction" className="flex flex-col min-h-screen">
+
+
+        <div className={`${loading ? 'show' : 'hidden'} absolute w-full h-full flex flex-row justify-center items-center bg-[#4948484f] z-30`}>
+          <div className=" p-[15px] bg-white rounded-[20px]">
+            <DotLoader className=""
+              color={`#07d611`}
+              loading={loading}
+              size={100}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          </div>
+        </div>
+
+
+
         <div
           id="containerAllTransaction"
           className="w-full flex flex-row justify-center"
         >
           <div
             id="containerTransactionForm-Background"
-            className="w-[85%] border-b-4 border-[#07d611] flex flex-row justify-between flex-wrap mt-[30px] mb-[90px]"
+            className="w-[95%] lg:w-[85%] border-b-4 border-[#07d611] flex flex-row justify-between flex-wrap mt-[30px] mb-[90px]"
           >
             <div
               id="containerTransactionTitle-Form-Button"
-              className="w-[700px] h-[910px]"
+              className="w-full lg:w-[700px] h-[910px]"
             >
               <div id="containerTransactionTitle" className="w-full mb-[20px]">
-                <h1 className="text-[45px]">
+                <h1 className="text-[33px] lg:text-[45px] text-center">
                   Make a{" "}
                   <span className="text-[#07d611] font-semibold">
                     TRANSACTION
@@ -236,9 +244,9 @@ function Transaction() {
               >
                 <div
                   id="divFormTransaction"
-                  className="w-[600px] p-8 rounded-lg text-[20px] relative  mb-[30px]"
+                  className="w-full lg:w-[600px] p-1 lg:p-8 rounded-lg text-[15px] lg:text-[20px] relative  mb-[30px]"
                 >
-                  <div className="w-full h-full flex flex-col justify-center">
+                  <div className="w-full h-full flex flex-col justify-center ">
                     <form onSubmit={handleMakeATransactionForm}>
 
 
@@ -266,7 +274,7 @@ function Transaction() {
                             }
                             const accountNumber = e.target.value;
                             console.log(accountNumber);
-                            
+
                             // Filtrar el préstamo seleccionado
                             const selectedAccount = clientAccounts.filter(
                               (account) => account.number !== accountNumber
@@ -281,13 +289,13 @@ function Transaction() {
 
                             console.log(accountNumber)
                             const balanceAccountClient = clientAccounts.filter((account) => account.number === accountNumber)
-                            balanceAccountClient && balanceAccountClient.length > 0 && setBalanceClient(balanceAccountClient[0].balance) && console.log("veeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeer" + balanceAccountClient[0].balance) &&
-                            setBalanceClient(balanceAccountClient[0].balance) &&
-                            setShowBalanceClient('')
+                            balanceAccountClient && balanceAccountClient.length > 0 && setBalanceClient(balanceAccountClient[0].balance) &&
+                              setBalanceClient(balanceAccountClient[0].balance) &&
+                              setShowBalanceClient('')
                             console.log(balanceClient)
 
                           }}
-                          className={`w-full px-3 py-2 ${colorErrorInputSourceAccount} w-[210px] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                          className={`w-full px-1 lg:px-3 py-2 ${colorErrorInputSourceAccount} w-[150px] lg:w-[210px] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                         >
                           <option value="">Select an account</option>
                           {/* You can add more options here if needed */}
@@ -302,15 +310,15 @@ function Transaction() {
                               );
                             })}
                         </select>
-                        <span className={`text-white text-[30px] px-[15px] ${showBalanceClient}`}><i className="fa-solid fa-right-long"></i></span>
-                        <div className={`w-[262px] px-3 py-2 border  border-gray-300 rounded-md bg-white ${showBalanceClient}`}>
-                        <span className=" mr-[10px] font-bold text-[15px]  text-[#07d611]">BALANCE:</span>
+                        <span className={`text-white text-[20px] lg:text-[30px] px-[8px] lg:px-[15px] ${showBalanceClient}`}><i className="fa-solid fa-right-long"></i></span>
+                        <div className={`w-[170px] lg:w-[262px] px-1 lg:px-3 py-2 border  border-gray-300 rounded-md bg-white ${showBalanceClient}`}>
+                          <span className=" mr-[10px] font-bold text-[12px] lg:text-[15px]  text-[#07d611]">BALANCE:</span>
                           <MoneyDisplay amount={balanceClient} />
                         </div>
-                        
+
                       </div>
                       <p className={`${showInputOriginAccount} text-[red] text-[17px] bg-white inline-block rounded-[10px] px-[8px] mt-[5px]`}>&#10071;{messageErrorInput}</p>
-                      
+
 
 
                       <div className="mb-4 mt-[10px]">
@@ -429,15 +437,15 @@ function Transaction() {
                             setShowInputAmount('hidden')
                             setMessageErrorInput('')
                           }}
-                          className={`w-[200px] px-3 py-2 ${colorErrorInputAmount} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                          className={`w-[140px] lg:w-[200px] px-3 py-2 ${colorErrorInputAmount} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                           placeholder="$ 0.00"
 
                         // setMessageErrorInput("Please enter an amount. border-2  border-[red]")
                         // setColorErrorInputAmount("border-2  border-[red]")
                         // setShowInputAmount('')
                         />
-                        <span className={`text-white text-[30px] px-[15px] ${showElement}`}><i className="fa-solid fa-right-long"></i></span>
-                        <div className={`w-[250px] px-3 py-2 border border-gray-300 rounded-md bg-white ${showElement}`}>
+                        <span className={`text-white text-[20px] lg:text-[30px] px-[10px] lg:px-[15px] ${showElement}`}><i className="fa-solid fa-right-long"></i></span>
+                        <div className={`w-[160px] lg:w-[250px] px-3 py-2 border border-gray-300 rounded-md bg-white ${showElement}`}>
                           <MoneyDisplay amount={amount} />
                         </div>
                       </div>

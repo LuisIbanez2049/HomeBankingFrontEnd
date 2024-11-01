@@ -134,11 +134,11 @@ function Account() {
     <div className=' min-h-screen'>
       <div id="body" className="flex flex-col min-h-screen">
         <div id='containerAllAccount' className='w-full flex flex-row justify-center'>
-          <div id='containerH1&div' className='w-[95%] lg:w-[80%] mt-[40px] border border-red-600'> 
+          <div id='containerH1&div' className='w-[95%] lg:w-[80%] mt-[40px]'> 
             <h1 className="text-[32px] lg:text-[45px] text-center">Your selected <span className="text-[#07d611] font-semibold">ACCOUNT</span></h1>
             <div id='containerDivCard&&DivForm' className='w-full flex flex-col border-t-4 border-[#07d611] flex-wrap'>
               <div id='divCard' className='w-full h-[350px] flex flex-col justify-center items-center'>
-                <div className='w-full lg:w-auto border border-red-600'>
+                <div className='w-full lg:w-auto'>
                   {account && account.creationDate ? (
                     <Card
                       id={account.id}
