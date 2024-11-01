@@ -58,7 +58,7 @@ function Nav() {
               </div>
               <span className='text-[40px] text-[#07d611] m-auto' onClick={() => { setIsOpen(true) }}> <i className="fa-solid fa-bars"></i> </span>
 
-              <div className={`${isOpen ? '' : 'hidden'} absolute w-full flex flex-row justify-center bg-[#ffffff] pb-4 z-30 border border-blue-500`}>
+              <div className={`${isOpen ? '' : 'hidden'} absolute w-full flex flex-row justify-center bg-[#ffffff] pb-4 z-30`}>
                 <div className=' w-[190px] mt-[20px]' onClick={() => { setIsOpen(false) }}>
                   <div className={`${isActive("/accounts") ? "border-[1px] border-[#07d611]" : `${isActive("/account/" + id) ? "border-t-[1px] border-[#07d611]" : ""}`}`}>
                     <ButtonNav path="/accounts" title="Accounts" />

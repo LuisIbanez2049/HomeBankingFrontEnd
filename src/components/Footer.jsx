@@ -14,7 +14,7 @@ function Footer() {
          <a className='mx-[15px]' href="https://www.facebook.com/" target='blank'><i id="facebook" className="fa-brands fa-square-facebook"></i></a>
         </div>
         <div className="w-full flex flex-row justify-center mt-2">
-          <small className="text-[15px] lg:text-[19px]"><span className='mr-[10px]'><i className="fa-regular fa-copyright"></i> - All rights reserved</span> | 
+          <small className="text-[14px] lg:text-[19px]"><span className='mr-[10px]'><i className="fa-regular fa-copyright"></i> - All rights reserved</span> | 
           <a className='mx-[10px] hover:text-[#1e92f1]' href="https://www.linkedin.com/" target='_blank'>Luis Ibañez <span><i class="fa-brands fa-linkedin"></i></span></a> | 
           <a className='mx-[10px] hover:text-[#1e92f1]' href="https://github.com/LuisIbanez2049/HomeBankingFrontEnd.git" target='_blank'>
            GitHub <i class="fa-brands fa-github"></i></a></small>

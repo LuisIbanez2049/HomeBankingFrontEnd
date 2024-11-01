@@ -131,14 +131,14 @@ function Account() {
 
 
   return (
-    <div>
+    <div className=' min-h-screen'>
       <div id="body" className="flex flex-col min-h-screen">
         <div id='containerAllAccount' className='w-full flex flex-row justify-center'>
-          <div id='containerH1&div' className='w-[80%] mt-[40px]'>
-            <h1 className="text-[45px] text-center">Your selected <span className="text-[#07d611] font-semibold">ACCOUNT</span></h1>
+          <div id='containerH1&div' className='w-[95%] lg:w-[80%] mt-[40px] border border-red-600'> 
+            <h1 className="text-[32px] lg:text-[45px] text-center">Your selected <span className="text-[#07d611] font-semibold">ACCOUNT</span></h1>
             <div id='containerDivCard&&DivForm' className='w-full flex flex-col border-t-4 border-[#07d611] flex-wrap'>
               <div id='divCard' className='w-full h-[350px] flex flex-col justify-center items-center'>
-                <div id='card'>
+                <div className='w-full lg:w-auto border border-red-600'>
                   {account && account.creationDate ? (
                     <Card
                       id={account.id}
@@ -164,7 +164,7 @@ function Account() {
               <div id='divFormAccount' className='w-full flex flex-row justify-center mb-[80px]'>
                 <div className='h-full flex flex-col justify-center'>
                   <div>
-                    <h1 className='text-[38px] font-bold mb-[15px] text-center'>Transaction Summary</h1>
+                    <h1 className='text-[34px] lg:text-[38px] font-bold mb-[15px] text-center'>Transaction Summary</h1>
                     <div className='w-full flex flex-row justify-center mb-[20px] '>
                       <a href="#viewPDF">
                         <button onClick={() => {setShowPDF('show')}}>
@@ -172,15 +172,15 @@ function Account() {
                         </button>
                       </a>
                     </div>
-                    <div id='divTable' className={`${showTable} p-[15px] rounded-[20px]`}>
-                      <table id='table' className='text-[30px] bg-slate-200 rounded-[20px]'>
+                    <div id='divTable' className={`${showTable} p-[8px] lg:p-[15px] rounded-[20px]`}>
+                      <table id='table' className='text-[12px] lg:text-[30px] bg-slate-200 rounded-[20px]'>
                         <thead>
                           <tr className='text-left'>
-                            <th className='pt-[10px] pl-[30px] rounded-[20px]'>TYPE</th>
-                            <th className='pt-[10px] pl-[15px]'>AMOUNT</th>
-                            <th className='pt-[10px] pl-[25px]'>DATE</th>
-                            <th className='pt-[10px] pl-[25px]'>HOUR</th>
-                            <th className='pt-[10px] pl-[25px]'>DESCRIPTION</th>
+                            <th className='pt-[10px] pl-[15px] lg:pl-[30px] rounded-[20px]'>TYPE</th>
+                            <th className='pt-[10px] pl-[10px] lg:pl-[15px]'>AMOUNT</th>
+                            <th className='pt-[10px] pl-[30px] lg:pl-[25px]'>DATE</th>
+                            <th className='pt-[10px] pl-[20px] lg:pl-[25px]'>HOUR</th>
+                            <th className='pt-[10px] pl-[10px] lg:pl-[25px]'>DESCRIPTION</th>
                           </tr>
                         </thead>
                         <tbody className=' rounded-[20px]'>
@@ -199,7 +199,7 @@ function Account() {
                                 type={transaction.type} typeColor={colorType}
                                 amount={<MoneyDisplay amount={transaction.amount} />} amountColor={colorAmount}
                                 date={transaction.dateTime.slice(0, 10)}
-                                hour={transaction.dateTime.slice(11, 19)}
+                                hour={transaction.dateTime.slice(11, 16)}
                                 description={transaction.description} />
                             )
                           })) : (<tr><td colSpan="5">Loading transactions...</td></tr>)}
@@ -208,8 +208,8 @@ function Account() {
                     </div>
                     <div>
                       <div className={`${showMessajeNoTransactions} w-full flex flex-col items-center mb-[30px]`}>
-                        <div id='divNoLoans' className={`${""} mt-[40px] p-[15px] rounded-[30px] w-[600px]`}>
-                          <h1 id='h1NoCards' className='text-center text-[30px] p-[10px] font-extrabold rounded-[25px] text-[#e64848]'>{"YOU DON'T HAVE TRANSACTIONS"}</h1>
+                        <div id='divNoLoans' className={`${""} mt-[40px] p-[15px] rounded-[30px] w-full lg:w-[600px]`}>
+                          <h1 id='h1NoCards' className='text-center text-[18px] lg:text-[30px] p-[10px] font-extrabold rounded-[25px] text-[#e64848]'>{"YOU DON'T HAVE TRANSACTIONS"}</h1>
                         </div>
                       </div>
                     </div>

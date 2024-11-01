@@ -96,19 +96,19 @@ function CardComponent() {
   console.log(creditCards);
 
   // Determinando si mostrar u ocultar el título
-  const showOrHideTitleDebit = debitCards.length === 0 ? "text-[0px]" : "text-[45px]";
-  const showOrHideTitleCredit = creditCards.length === 0 ? "text-[0px]" : "text-[45px]";
+  const showOrHideTitleDebit = debitCards.length === 0 ? "text-[0px]" : "text-[35px] lg:text-[45px]";
+  const showOrHideTitleCredit = creditCards.length === 0 ? "text-[0px]" : "text-[35px] lg:text-[45px]";
 
 
 
   return (
     <div>
       <div id="body" className="flex flex-col min-h-screen">
-        <h1 className="text-[45px] text-center">Your <span className="text-[#07d611] font-semibold">CARDS</span></h1>
+        <h1 className="text-[40px] lg:text-[45px] text-center">Your <span className="text-[#07d611] font-semibold">CARDS</span></h1>
         <div className="w-full flex flex-row justify-center">
-          <div className="border-t-4 border-[#72cb10] w-[70%]">
+          <div className="border-t-4 border-[#72cb10] w-[95%] lg:w-[70%]">
             <div id='divNoCards' className={`${showDivNoCards} mt-[40px] p-[17px] rounded-[30px]`}>
-              <h1 id='h1NoCards' className='text-center text-[45px] font-extrabold rounded-[25px]'>{messageNoCards}</h1>
+              <h1 id='h1NoCards' className='text-center text-[25px] lg:text-[45px] font-extrabold rounded-[25px]'>{messageNoCards}</h1>
             </div>
             <h1 className={showOrHideTitleDebit}>DEBIT</h1>
             <div id='containerDebitCards' className='w-full flex flex-row flex-wrap justify-between'>

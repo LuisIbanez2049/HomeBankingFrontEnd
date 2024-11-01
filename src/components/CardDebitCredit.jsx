@@ -18,20 +18,20 @@ function CardDebitCredit(props) {
       */}
       <div className='card'>
         <div className='card-front'>
-          <div id={props.backGroundCard} className='w-[480px] h-[290px] flex flex-row justify-center items-center rounded-[30px]'>  {/* pasar por parametro la id ------------------*/}
+          <div id={props.backGroundCard} className='w-full h-[240px] lg:w-[480px] lg:h-[290px] flex flex-row justify-center items-center rounded-[30px]'>  {/* pasar por parametro la id ------------------*/}
             <div id='subcontainerAll' className='w-[92%] h-[88%] relative z-20 p-[4px]'>
               <div className='w-full flex flex-row justify-between mb-[25px]'>
 
                 <div>
-                  <img id='chip' className='w-[75px] rounded-[8px] mt-[5px]' src={ChipCard} alt="" />
+                  <img id='chip' className='w-[60px] lg:w-[75px] rounded-[8px] mt-[5px]' src={ChipCard} alt="" />
                 </div>
                 <div >
 
                   {/* pasar por parametro el titulo tipo de tarjeta-------------------*/}
                   {/* <h1><Text3D textSize="text-[32px]" title={props.typeCard}/></h1>  */}
-                  <h1 id='white' className='text-[35px]'> {props.typeCard} </h1>
+                  <h1 id='white' className='text-[27px] lg:text-[35px]'> {props.typeCard} </h1>
                   <div className='w-full flex flex-row justify-end'>
-                    <div id='holograma' className='w-[90px] h-[45px] rounded-[50px]'> </div>
+                    <div id='holograma' className='w-[70px] h-[40px] lg:w-[90px] lg:h-[45px] rounded-[50px]'> </div>
                   </div>
 
                 </div>
@@ -40,7 +40,7 @@ function CardDebitCredit(props) {
 
               {/* pasar por parametro el titulo numero de 16 digitos de la tarjeta---------------*/}
               {/* <h1><Text3D textSize="text-[34px]" title={props.numbers}/></h1>  */}
-              <h1 id='whiteNumbers' className='text-[36px]'> {props.numbers} </h1>
+              <h1 id='whiteNumbers' className='text-[27px] lg:text-[36px]'> {props.numbers} </h1>
               <div id='containerDateFromAndTo' className=' flex flex-row'>
 
                 <div id='containerFROM' className='flex flex-row mr-[35px]'>
@@ -50,7 +50,7 @@ function CardDebitCredit(props) {
 
                   {/* pasar por parametro el titulo date From */}
                   {/* <h1> <Text3D textSize="text-[18px]" title={props.fromDate}/> </h1>  */}
-                  <h1 id='white' className='text-[23px]'> {props.fromDate} </h1>
+                  <h1 id='white' className='text-[20px]'> {props.fromDate} </h1>
                 </div>
 
                 <div id='containerTHRU' className='flex flex-row'>
@@ -61,7 +61,7 @@ function CardDebitCredit(props) {
 
                   {/* pasar por parametro el titulo date Thru*/}
                   {/* <h1> <Text3D textSize="text-[18px]" title={props.thruDate}/> </h1>  */}
-                  <h1 id='white' className='text-[23px]'> {props.thruDate} </h1>
+                  <h1 id='white' className='text-[20px]'> {props.thruDate} </h1>
                 </div>
 
               </div>
@@ -71,21 +71,21 @@ function CardDebitCredit(props) {
                 <div>
                   {/* pasar por parametro el titulo NAME------------------*/}
                   {/* <h1 className=' inline-block'> <Text3D textSize="text-[26px]" title={props.fullName}/> </h1>  serif*/}
-                  <h1 id='white' className='text-[27px]'> {props.fullName} </h1>
+                  <h1 id='white' className='text-[25px] lg:text-[27px]'> {props.fullName} </h1>
                 </div>
               </div>
             </div>
 
-            <div id={props.typeSubBackGround} className='w-[454px] h-[258px]  absolute z-10 rounded-[10px]'>  </div> {/* pasar por parametro la id TIPO DE BACKGROUND------------------*/}
+            {/* <div id={props.typeSubBackGround} className='w-[350px] h-[220px] lg:w-[454px] lg:h-[258px]  absolute z-10 rounded-[10px]'>  </div> pasar por parametro la id TIPO DE BACKGROUND------------------ */}
 
           </div>
         </div>
 
         <div className='card-back'>
-          <div id={props.backGroundCard} className='w-[480px] h-[290px] flex flex-col items-center rounded-[30px] pt-[35px]'>
-            <div id='blackBackGround' className='w-full h-[80px] mb-[30px]'></div>
-            <div id='whiteBackGround' className='w-[350px] h-[60px]  flex justify-center items-center'>
-              <Text3D textSize="text-[45px]" title={`cvv ${props.cvv}`} />  {/* pasar por parametro el titulo NUMERO DE 3 DIGITOS------------------*/}
+          <div id={props.backGroundCard} className='w-full h-[240px] lg:w-[480px] lg:h-[290px] flex flex-col items-center rounded-[30px] pt-[35px]'>
+            <div id='blackBackGround' className='w-full h-[60px] lg:h-[80px] mb-[30px]'></div>
+            <div id='whiteBackGround' className='w-[350px] h-[50px] lg:h-[60px]  flex justify-center items-center'>
+              <Text3D textSize="text-[36px] lg:text-[45px]" title={`cvv ${props.cvv}`} />  {/* pasar por parametro el titulo NUMERO DE 3 DIGITOS------------------*/}
             </div>
           </div>
         </div>

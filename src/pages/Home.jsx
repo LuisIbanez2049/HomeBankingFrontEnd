@@ -48,7 +48,7 @@ function Home() {
                 <div id='bg2div' className='w-[83vw]  lg:w-[0px] h-[280PX] absolute z-10'>
                 </div>
               </div>
-              {/* <div className='w-full h-[200px] lg:h-[300px] rounded-bl-[100px] rounded-tr-[100px] lg:rounded-bl-[300px] lg:rounded-tr-[300px] flex flex-row bg-[#19cf19] mb-[250px] relative z-20'> */}
+
               <div className='w-full h-[200px] lg:h-[300px]  rounded-br-[100px] rounded-tl-[100px] lg:rounded-br-[300px] lg:rounded-tl-[300px] flex justify-end mb-[250px] bg-white relative z-20'>
                 <div className='h-full flex flex-col justify-center'>
                   <div className='mr-[20px] lg:mr-[40px]'>
@@ -61,21 +61,6 @@ function Home() {
               </div>
             </div>
 
-
-
-
-
-            {/* <div id='contentDiv3' className='w-0 h-[0px] lg:w-full lg:h-[300px] rounded-bl-[300px] rounded-tr-[300px] flex flex-row bg-[#19cf19e3] mb-[250px]'>
-              <div id='bg3div' className=' w-[30%] h-[440PX] relative bottom-[140px] rounded-bl-[300px]'>
-
-              </div>
-              <div className='h-full flex flex-col justify-center'>
-                <div className='ml-[40px]'>
-                  <h1 id='textGray' className='text-[70px] font-bold'>Flexible Loans</h1>
-                  <p className='text-[30px] text-[#000000d7] mt-[20px]' >Get the funds you need with our flexible loan <br /> options designed to meet your financial needs <br /> and circumstances</p>
-                </div>
-              </div>
-            </div> */}
 
             <div id='contentDiv3' className='rounded-bl-[100px] rounded-tr-[100px] lg:rounded-bl-[300px] lg:rounded-tr-[300px]'>
               <div id='bg3div' className=' w-[330px] lg:w-[0px] h-[280PX] absolute z-10 top-[-165px] rounded-bl-[300px] '>
@@ -93,17 +78,7 @@ function Home() {
                 </div>
               </div>
             </div>
-
-            {/* <div id='contentDiv4' className='lg:w-full h-[300px] rounded-br-[300px] rounded-tl-[300px] flex justify-end'>
-              <div className='h-full flex flex-col justify-center'>
-                <div className='mr-[30px]'>
-                  <h1 id='textGreen' className='text-[70px] font-bold'>Your Safety, Our Priority</h1>
-                  <p className='text-[30px] text-end text-[#000000d7] mt-[20px]'>We prioritize your safety with cutting-edge security<br /> measures,  ensuring your data and transactions are <br /> always protected</p>
-                </div>
-              </div>
-              <div id='bg4div' className=' w-[30%] h-[440PX] relative bottom-[140px] rounded-br-[300px]'>
-              </div>
-            </div> */}
+            
 
             <div id='contentDiv4' className='rounded-br-[100px] rounded-tl-[100px] lg:rounded-br-[300px] lg:rounded-tl-[300px]'>
               <div className='relative top-[-160px] flex flex-row justify-center '>
@@ -111,7 +86,6 @@ function Home() {
                 </div>
               </div>
 
-              {/* <div className='w-full h-[200px] lg:h-[300px] rounded-bl-[100px] rounded-tr-[100px] lg:rounded-bl-[300px] lg:rounded-tr-[300px] flex flex-row bg-[#19cf19] mb-[250px] relative z-20'> */}
               <div className='w-full h-[200px] lg:h-[300px]  rounded-br-[100px] rounded-tl-[100px] lg:rounded-br-[300px] lg:rounded-tl-[300px] flex justify-end mb-[250px] bg-white relative z-20'>
                 <div className='h-full flex flex-col justify-center'>
                   <div className='mr-[30px] lg:mr-[40px]'>
@@ -124,16 +98,6 @@ function Home() {
               </div>
             </div>
 
-            {/* <div id='contentDiv5' className='w-full h-[300px] rounded-bl-[300px] rounded-tr-[300px] flex flex-row bg-[#19cf19e3] mt-[250px] mb-[200px]'>
-              <div id='bg5div' className=' w-[30%] h-[440PX] relative bottom-[140px] rounded-bl-[300px]'>
-              </div>
-              <div className='h-full flex flex-col justify-center'>
-                <div className='ml-[40px]'>
-                  <h1 id='textGray' className='text-[70px] font-bold'>Always Here to Help</h1>
-                  <p className='text-[30px] text-[#000000d7] mt-[20px]'>Our dedicated support team is available 24/7 to assist you <br /> with any questions or concerns you may have</p>
-                </div>
-              </div>
-            </div> */}
 
             <div id='contentDiv5' className='rounded-bl-[100px] rounded-tr-[100px] lg:rounded-bl-[300px] lg:rounded-tr-[300px]'>
               <div id='bg5div' className=' w-[330px] lg:w-[0px] h-[280PX] absolute z-10 top-[-165px] rounded-bl-[300px] '>

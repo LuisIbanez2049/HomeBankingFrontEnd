@@ -46,7 +46,7 @@ const PdfGenerator = ({ account, onClickClose }) => {
     return (
         <div>
             <div className="w-full flex flex-col items-center">
-                <div className="w-[80%] relative">
+                <div className="w-full lg:w-[80%] relative">
                     <div className=" absolute top-[25px] right-[30px]">
                         <button onClick={onClickClose}>
                             <h1 className="text-black text-[30px] transform transition-transform duration-300 ease-in-out hover:scale-125">
@@ -56,7 +56,7 @@ const PdfGenerator = ({ account, onClickClose }) => {
                     </div>
                 </div>
                 <div id="pdfContent" className=" w-full  bg-green-50 flex flex-col items-center justify-center p-4">
-                    <div className="w-[350px] lg:w-[80%] bg-white shadow-xl">
+                    <div className="w-full lg:w-[80%] bg-white shadow-xl">
                         <div className="bg-green-600 p-6 text-white">
                             <h2 className="text-2xl font-bold">Account Summary</h2>
                             <p className="text-green-100">{user.name}</p>
@@ -123,7 +123,7 @@ const PdfGenerator = ({ account, onClickClose }) => {
                             </div>
                         </div>
                     </div>
-                    <div className="w-[80%] bg-green-600 text-white py-2 px-4 rounded-b-lg font-semibold text-center">
+                    <div className="w-full lg:w-[80%] bg-green-600 text-white py-2 px-4 rounded-b-lg font-semibold text-center">
                         BANK OF AMERICA
                     </div>
                 </div>

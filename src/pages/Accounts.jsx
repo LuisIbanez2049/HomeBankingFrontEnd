@@ -8,7 +8,7 @@ import ConfirmationPopUpAlert from "../components/ConfirmationPopUpAlert";
 
 function Accounts() {
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
         <AccountComponent/>
     </div>
   )

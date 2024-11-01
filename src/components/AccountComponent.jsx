@@ -112,7 +112,7 @@ function AccountComponent() {
       <div id="body" className="flex flex-col min-h-screen">
         <div id="main" className="relative flex-1">
           <img
-            className="w-[900px] absolute right-[5%] top-[56px] z-10"
+            className="w-[0px] lg:w-[900px] absolute right-[5%] top-[56px] z-10"
             src={Finance}
             alt=""
           />
@@ -122,8 +122,8 @@ function AccountComponent() {
             )}
           </div>
           <div className="w-full flex flex-row justify-center relative z-20">
-            <div className="border-t-4 border-[#72cb10] w-[70%] flex flex-col">
-              <div className="w-full flex flex-col mt-[30px] ml-[25px]">
+            <div className="border-t-4 border-[#72cb10] w-[95%] lg:w-[70%] flex flex-col">
+              <div className="w-full flex flex-col mt-[30px] ml-[0px] lg:ml-[25px]">
                 {clientAccounts &&
                   clientAccounts.length > 0 &&
                   clientAccounts.map((account) => {
